@@ -1,0 +1,9 @@
+{
+  "name": "uxsarvesh",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Sarvesh Sawardekar - Lead Product Designer & Design Systems Portfolio",
+  "scripts": {
+    "build": "node build.js"
+  }
+}
