@@ -3,6 +3,20 @@
  * Core Controller: Case Study Modals, Dubai Live Clock, Interactive Ruler, Theme Engine, Cursor
  */
 
+// --- VERCEL SPEED INSIGHTS INITIALIZATION ---
+(function initVercelSpeedInsights() {
+  if (typeof window === 'undefined') return;
+  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+  if (!document.querySelector('script[src*="/_vercel/speed-insights/script.js"]')) {
+    const script = document.createElement('script');
+    script.src = '/_vercel/speed-insights/script.js';
+    script.defer = true;
+    script.dataset.sdkn = '@vercel/speed-insights';
+    script.dataset.sdkv = '2.0.0';
+    document.head.appendChild(script);
+  }
+})();
+
 // --- 1. CASE STUDY AUTHENTIC DATA STORE ---
 const CASE_STUDIES = [
   {
