@@ -3,17 +3,21 @@
  * Core Controller: Case Study Modals, Dubai Live Clock, Interactive Ruler, Theme Engine, Cursor
  */
 
-// --- VERCEL SPEED INSIGHTS INITIALIZATION ---
-(function initVercelSpeedInsights() {
+// --- VERCEL TELEMETRY INITIALIZATION (SPEED INSIGHTS & WEB ANALYTICS) ---
+(function initVercelTelemetry() {
   if (typeof window === 'undefined') return;
   window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
-  if (!document.querySelector('script[src*="/_vercel/speed-insights/script.js"]')) {
-    const script = document.createElement('script');
-    script.src = '/_vercel/speed-insights/script.js';
-    script.defer = true;
-    script.dataset.sdkn = '@vercel/speed-insights';
-    script.dataset.sdkv = '2.0.0';
-    document.head.appendChild(script);
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+
+  // Guarantee SDK attributes exist on the Speed Insights script tag
+  const siScript = document.querySelector('script[src*="/_vercel/speed-insights/script.js"]');
+  if (siScript) {
+    if (!siScript.getAttribute('data-sdkn')) siScript.setAttribute('data-sdkn', '@vercel/speed-insights');
+    if (!siScript.getAttribute('data-sdkv')) siScript.setAttribute('data-sdkv', '2.0.0');
+    if (!siScript.getAttribute('data-route')) {
+      const cleanPath = window.location.pathname.replace(/\.html$/, '') || '/';
+      siScript.setAttribute('data-route', cleanPath);
+    }
   }
 })();
 
