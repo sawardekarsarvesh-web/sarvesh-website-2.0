@@ -575,7 +575,7 @@ button, a {
   justify-content: space-between;
   min-height: 220px;
   position: relative;
-  overflow: visible;
+  overflow: hidden !important;
 }
 
 .card-avatar .label {
@@ -1729,11 +1729,11 @@ button, a {
   .orbit-node[data-index="3"] { transform: rotate(216deg) translateX(var(--orbit-radius, 175px)) rotate(-216deg) !important; }
   .orbit-node[data-index="4"] { transform: rotate(288deg) translateX(var(--orbit-radius, 175px)) rotate(-288deg) !important; }
 
-  .orbit-system-wrapper.mini .orbit-node[data-index="0"] { transform: rotate(0deg) translateX(56px) rotate(0deg) !important; }
-  .orbit-system-wrapper.mini .orbit-node[data-index="1"] { transform: rotate(72deg) translateX(56px) rotate(-72deg) !important; }
-  .orbit-system-wrapper.mini .orbit-node[data-index="2"] { transform: rotate(144deg) translateX(56px) rotate(-144deg) !important; }
-  .orbit-system-wrapper.mini .orbit-node[data-index="3"] { transform: rotate(216deg) translateX(56px) rotate(-216deg) !important; }
-  .orbit-system-wrapper.mini .orbit-node[data-index="4"] { transform: rotate(288deg) translateX(56px) rotate(-288deg) !important; }
+  .orbit-system-wrapper.mini .orbit-node[data-index="0"] { transform: rotate(0deg) translateX(42px) rotate(0deg) !important; }
+  .orbit-system-wrapper.mini .orbit-node[data-index="1"] { transform: rotate(72deg) translateX(42px) rotate(-72deg) !important; }
+  .orbit-system-wrapper.mini .orbit-node[data-index="2"] { transform: rotate(144deg) translateX(42px) rotate(-144deg) !important; }
+  .orbit-system-wrapper.mini .orbit-node[data-index="3"] { transform: rotate(216deg) translateX(42px) rotate(-216deg) !important; }
+  .orbit-system-wrapper.mini .orbit-node[data-index="4"] { transform: rotate(288deg) translateX(42px) rotate(-288deg) !important; }
 
   /* Pattern 2: Stationary plane appears at destination on hover without path-tracing */
   .route-plane {
@@ -2213,8 +2213,8 @@ button, a {
 /* --- 15B. HOMEPAGE COMPACT ORBITING ICONS COMPONENT --- */
 .orbit-system-wrapper.mini {
   position: relative;
-  width: 140px;
-  height: 140px;
+  width: 116px;
+  height: 116px;
   max-width: 100%;
   margin: 4px auto;
   display: flex;
@@ -2223,43 +2223,43 @@ button, a {
 }
 
 .orbit-system-wrapper.mini .orbit-center-avatar {
-  width: 60px;
-  height: 60px;
-  padding: 2.5px;
+  width: 52px;
+  height: 52px;
+  padding: 2px;
   border-width: 2px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
 }
 
 .orbit-system-wrapper.mini .orbit-concentric-ring.inner {
-  width: 82px;
-  height: 82px;
+  width: 68px;
+  height: 68px;
   opacity: 0.3;
 }
 
 .orbit-system-wrapper.mini .orbit-concentric-ring.outer {
-  width: 114px;
-  height: 114px;
-  opacity: 0.5;
+  width: 88px;
+  height: 88px;
+  opacity: 0.45;
 }
 
 .orbit-system-wrapper.mini .orbit-track {
-  width: 114px;
-  height: 114px;
-  margin-top: -57px;
-  margin-left: -57px;
+  width: 88px;
+  height: 88px;
+  margin-top: -44px;
+  margin-left: -44px;
 }
 
 .orbit-system-wrapper.mini .orbit-node {
-  width: 26px;
-  height: 26px;
-  margin-top: -13px;
-  margin-left: -13px;
+  width: 24px;
+  height: 24px;
+  margin-top: -12px;
+  margin-left: -12px;
 }
 
 .orbit-system-wrapper.mini .orbit-chip {
-  width: 26px;
-  height: 26px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  width: 24px;
+  height: 24px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 .orbit-system-wrapper.mini .orbit-chip svg {
@@ -2439,7 +2439,9 @@ button, a {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 190px;
+  min-height: 220px;
+  height: auto;
+  overflow: hidden !important;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease;
 }
 
