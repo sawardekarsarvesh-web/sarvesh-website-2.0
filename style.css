@@ -689,17 +689,28 @@ button, a {
   font-weight: 500;
 }
 
-/* Hero Main Card */
+/* Hero Main (Uncarded Bio) */
 .card-hero-main {
-  padding: 36px 32px;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 12px 4px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
+}
+
+.card-hero-main:hover {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  transform: none !important;
 }
 
 .hero-brandmark {
   width: 44px;
   height: 32px;
+  color: var(--text-primary);
 }
 
 .hero-brandmark svg {
@@ -1614,7 +1625,7 @@ button, a {
   }
 
   .card-hero-main {
-    padding: 28px 20px;
+    padding: 12px 0;
   }
   
   .card-aura-gold .card-media-wrapper,
