@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HalaPark 2.0 — Case Study &amp; Design System | Sarvesh Sawardekar</title>
+  
+  <meta name="description" content="Case study & design system: redesigning the parking discovery and booking experience for HalaPark — from live geospatial discovery to seamless 1-tap booking." />
+  <meta property="og:title" content="HalaPark 2.0 — Case Study &amp; Design System | Sarvesh Sawardekar" />
+  <meta property="og:description" content="Redesigning parking discovery and booking with a 4-stage scalable design system." />
+  <meta property="og:type" content="website" />
+
+  <!-- Fonts & Stylesheet -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="style.css?v=3" />
+</head>
+<body>
+
+  <div class="page-container">
+
+    <!-- ==================== UNIVERSAL FLOATING GLASS NAVBAR ==================== -->
+    <header class="site-nav-header" role="banner">
+      <div class="nav-header-inner">
+        <a href="index.html" class="nav-brand" aria-label="Sarvesh Sawardekar Homepage">
+          <div class="nav-brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 44 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 8C0 3.58172 3.58172 0 8 0H18C22.4183 0 26 3.58172 26 8V12H8C3.58172 12 0 15.5817 0 20V8Z" fill="currentColor" />
+              <path d="M18 20C18 15.5817 21.5817 12 26 12H36C40.4183 12 44 15.5817 44 20V24C44 28.4183 40.4183 32 36 32H26C21.5817 32 18 28.4183 18 24V20Z" fill="currentColor" fill-opacity="0.75" />
+            </svg>
+          </div>
+          <span class="nav-brand-text">Sarvesh Sawardekar</span>
+        </a>
+
+        <nav class="nav-menu" aria-label="Main Navigation">
+          <a href="index.html#work" class="nav-link active">Work</a>
+          <a href="about.html" class="nav-link">About</a>
+          <a href="resume.html" class="nav-link">Resume</a>
+          <a href="contact.html" class="nav-link">Contact</a>
+        </nav>
+
+        <div class="nav-actions">
+          <a href="resume.html" class="nav-resume-btn" aria-label="View Resume">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+            <span>Resume</span>
+          </a>
+          <button id="navThemeToggle" class="nav-theme-btn" aria-label="Toggle dark/light theme" title="Toggle theme">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+          <button id="navMobileToggle" class="nav-mobile-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Dropdown Drawer -->
+      <div id="navMobileDrawer" class="nav-mobile-drawer" role="region" aria-label="Mobile Navigation Drawer">
+        <a href="index.html#work" class="nav-mobile-link active">
+          <span>Selected Work</span>
+          <span class="drawer-arrow">↓</span>
+        </a>
+        <a href="about.html" class="nav-mobile-link">
+          <span>About &amp; Journey</span>
+          <span class="drawer-arrow">→</span>
+        </a>
+        <a href="resume.html" class="nav-mobile-link">
+          <span>Resume &amp; Experience</span>
+          <span class="drawer-arrow">→</span>
+        </a>
+        <a href="contact.html" class="nav-mobile-link">
+          <span>Contact &amp; Connect</span>
+          <span class="drawer-arrow">→</span>
+        </a>
+      </div>
+    </header>
+
+    <main style="display: flex; flex-direction: column; gap: 24px;">
+
+      <!-- ==================== 01 HERO BENTO BLOCK ==================== -->
+      <section class="bento-card stagger-in" style="padding: 40px 44px; --stagger-idx: 0;">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 16px;">
+          <span class="status-badge shipped" style="position: static; padding: 4px 12px; font-size: 12px;">
+            <span class="dot"></span> Shipped Product
+          </span>
+          <span style="font-size: 12.5px; font-weight: 600; color: var(--accent); letter-spacing: 0.04em; text-transform: uppercase;">
+            Mobile Ecosystem · UX/UI · Design System
+          </span>
+        </div>
+
+        <h1 style="font-size: clamp(32px, 4.5vw, 52px); font-weight: 700; letter-spacing: -0.03em; color: var(--text-primary); line-height: 1.1; margin-bottom: 16px;">
+          HalaPark 2.0
+        </h1>
+
+        <p style="font-size: clamp(17px, 1.8vw, 20px); color: var(--text-secondary); line-height: 1.5; max-width: 58ch; margin-bottom: 24px;">
+          Redesigning the parking experience from discovery to payment — a mobile experience designed to make finding, booking, and managing parking simpler, clearer, and more predictable.
+        </p>
+
+        <!-- Metadata Grid -->
+        <div class="cs-meta-grid">
+          <div class="cs-meta-item">
+            <strong>Role</strong>
+            <span>Lead Product Designer</span>
+          </div>
+          <div class="cs-meta-item">
+            <strong>Platform</strong>
+            <span>Mobile App (iOS &amp; Android)</span>
+          </div>
+          <div class="cs-meta-item">
+            <strong>Scope</strong>
+            <span>UX Research, UI Design, Design System, Prototyping</span>
+          </div>
+          <div class="cs-meta-item">
+            <strong>Tools</strong>
+            <span>Figma, FigJam, Tokens Studio</span>
+          </div>
+          <div class="cs-meta-item">
+            <strong>Timeline</strong>
+            <span>8 Weeks · 2025–2026</span>
+          </div>
+        </div>
+
+        <!-- Hero Dual Mockups Visual -->
+        <div class="cs-full-visual" style="margin-top: 32px;">
+          <img src="assets/halapark/hero-devices.png" alt="HalaPark 2.0 dual mobile phone mockups showing Map Discovery with dynamic price pins and Parking Details view with spot availability" />
+        </div>
+      </section>
+
+      <!-- ==================== 02 THE CHALLENGE & BASELINE AUDIT ==================== -->
+      <section class="bento-card stagger-in reveal-on-scroll" style="padding: 40px 44px; --stagger-idx: 1;">
+        <span class="offering-badge blue" style="margin-bottom: 12px; display: inline-block;">The Challenge</span>
+        <h2 style="font-size: clamp(24px, 3vw, 34px); font-weight: 700; color: var(--text-primary); letter-spacing: -0.02em; margin-bottom: 12px;">
+          Parking should be simple — finding and paying shouldn't add stress to driving.
+        </h2>
+        <p style="font-size: 16px; color: var(--text-secondary); line-height: 1.6; max-width: 68ch;">
+          Finding the right parking shouldn't require navigating through a complicated, heavy interface when you're already in a high-stress driving environment. In the baseline product, drivers struggled with competing map overlays and dense interfaces, while the journey from search to payment was fragmented.
+        </p>
+
+        <!-- 6 Core Pain Points -->
+        <div class="cs-challenge-grid">
+          <div class="cs-challenge-card">
+            <span class="challenge-num">01 · Cognitive Overload</span>
+            <h4>Map Pin Clutter</h4>
+            <p>Too much competing information on screen made critical driving actions harder to identify and react to in time.</p>
+          </div>
+          <div class="cs-challenge-card">
+            <span class="challenge-num">02 · Dense Interfaces</span>
+            <h4>Competing Visual Layers</h4>
+            <p>Parking metadata, action buttons, and complex map layers competed heavily for limited mobile viewport real estate.</p>
+          </div>
+          <div class="cs-challenge-card">
+            <span class="challenge-num">03 · Weak Hierarchy</span>
+            <h4>Poor Reachability</h4>
+            <p>Primary action targets lacked sufficient visual priority, making one-handed reachability difficult during transit.</p>
+          </div>
+          <div class="cs-challenge-card">
+            <span class="challenge-num">04 · Navigation Friction</span>
+            <h4>Excess Modal Hops</h4>
+            <p>The path from discovering nearby spots to actively securing a space involved unnecessary modal hops and confirmations.</p>
+          </div>
+          <div class="cs-challenge-card">
+            <span class="challenge-num">05 · Inconsistent Patterns</span>
+            <h4>Pattern Fragmentation</h4>
+            <p>Repeated user actions across discovery, filters, and checkout lacked a predictable, unified visual and behavioral language.</p>
+          </div>
+          <div class="cs-challenge-card">
+            <span class="challenge-num">06 · Booking Complexity</span>
+            <h4>Opaque Pricing &amp; Fees</h4>
+            <p>The transition from selecting a parking zone to reviewing RTA fees and completing payment felt fragmented and intimidating.</p>
+          </div>
+        </div>
+
+        <!-- Baseline Audit Visual -->
+        <div class="cs-baseline-box">
+          <img src="assets/halapark/baseline-screens.png" alt="Baseline app audit showing original legacy screens" loading="lazy" />
+          <div class="cs-baseline-caption">
+            <strong>Baseline Assessment:</strong> Audit of legacy product friction points — mandatory auth barriers, congested map markers with overlapping labels, nested modal dialogues, multi-parameter filter toggles, separate RTA fee schedules, and disjointed payment summaries.
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 03 STEP-BY-STEP WORKFLOW ==================== -->
+      <section class="bento-card stagger-in reveal-on-scroll" style="padding: 40px 44px; --stagger-idx: 2;">
+        <span class="offering-badge green" style="margin-bottom: 12px; display: inline-block;">Core Experience</span>
+        <h2 style="font-size: clamp(24px, 3vw, 34px); font-weight: 700; color: var(--text-primary); letter-spacing: -0.02em; margin-bottom: 12px;">
+          4-Step Driver &amp; Operator Workflow
+        </h2>
+        <p style="font-size: 16px; color: var(--text-secondary); line-height: 1.6; max-width: 68ch;">
+          Re-architected around swift cognitive glanceability and zero-friction spot reservation.
+        </p>
+
+        <div class="cs-step-grid">
+          <!-- Step 1 -->
+          <div class="cs-step-card">
+            <div class="cs-step-media">
+              <img src="assets/halapark/screen-discover.png" alt="HalaPark Step 1: Discover & Map View" loading="lazy" />
+            </div>
+            <div>
+              <span class="challenge-num">Step 01</span>
+              <h4 style="font-size: 17px; font-weight: 600; color: var(--text-primary); margin: 4px 0;">Map Discovery &amp; Live Pins</h4>
+              <p style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.5;">
+                Vector map view highlighting open zones with real-time rate chips (e.g. AED 4/hr) and walking distance radius.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="cs-step-card">
+            <div class="cs-step-media">
+              <img src="assets/halapark/screen-details.png" alt="HalaPark Step 2: Parking Details View" loading="lazy" />
+            </div>
+            <div>
+              <span class="challenge-num">Step 02</span>
+              <h4 style="font-size: 17px; font-weight: 600; color: var(--text-primary); margin: 4px 0;">Spot Availability &amp; Details</h4>
+              <p style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.5;">
+                Clear glanceable breakdown of remaining spots, EV charging bays, covered parking, and progressive hourly pricing.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="cs-step-card">
+            <div class="cs-step-media">
+              <img src="assets/halapark/screen-booking.png" alt="HalaPark Step 3: Fast Booking View" loading="lazy" />
+            </div>
+            <div>
+              <span class="challenge-num">Step 03</span>
+              <h4 style="font-size: 17px; font-weight: 600; color: var(--text-primary); margin: 4px 0;">1-Tap Booking &amp; Live Timer</h4>
+              <p style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.5;">
+                Instant checkout sheet with saved vehicle profile and interactive post-booking session widget with countdown.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="cs-step-card">
+            <div class="cs-step-media">
+              <img src="assets/halapark/screen-operator.png" alt="HalaPark Step 4: Operator Dashboard" loading="lazy" />
+            </div>
+            <div>
+              <span class="challenge-num">Step 04</span>
+              <h4 style="font-size: 17px; font-weight: 600; color: var(--text-primary); margin: 4px 0;">Operator Management Hub</h4>
+              <p style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.5;">
+                Enterprise dashboard for commercial parking operators displaying sector occupancy, contract values, and slot yields.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 04 DESIGN SYSTEM SECTION ==================== -->
+      <section class="bento-card stagger-in reveal-on-scroll" style="padding: 40px 44px; --stagger-idx: 3;">
+        <span class="offering-badge" style="margin-bottom: 12px; display: inline-block; background: rgba(229, 88, 38, 0.12); color: var(--accent);">
+          Design System Architecture
+        </span>
+        <h2 style="font-size: clamp(24px, 3vw, 34px); font-weight: 700; color: var(--text-primary); letter-spacing: -0.02em; margin-bottom: 12px;">
+          From individual screens to a scalable product language.
+        </h2>
+        <p style="font-size: 16px; color: var(--text-secondary); line-height: 1.6; max-width: 68ch;">
+          HalaPark's component architecture was designed around strict modularity — scaling from core foundation tokens into reusable interaction primitives, patterns, and full screens.
+        </p>
+
+        <!-- Authentic Design System Tiles -->
+        <div class="system-grid">
+          
+          <!-- Tile 1: Color Tokens -->
+          <div class="system-item">
+            <div style="padding: 20px; display: flex; flex-direction: column; gap: 10px; background: var(--surface); flex: 1;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="width: 36px; height: 36px; border-radius: 8px; background: #007AFF; box-shadow: 0 2px 8px rgba(0, 122, 255, 0.35);"></div>
+                <div><strong style="font-size: 13.5px; color: var(--text-primary); display: block;">Primary Blue</strong><code style="font-size: 11px; color: var(--text-tertiary);">#007AFF · labelAccent</code></div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="width: 36px; height: 36px; border-radius: 8px; background: #FFFFFF; border: 1px solid var(--border);"></div>
+                <div><strong style="font-size: 13.5px; color: var(--text-primary); display: block;">Base Background</strong><code style="font-size: 11px; color: var(--text-tertiary);">#FFFFFF · backgroundBase</code></div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="width: 36px; height: 36px; border-radius: 8px; background: #2A9F47; box-shadow: 0 2px 8px rgba(42, 159, 71, 0.35);"></div>
+                <div><strong style="font-size: 13.5px; color: var(--text-primary); display: block;">Success Green</strong><code style="font-size: 11px; color: var(--text-tertiary);">#2A9F47 · semanticSuccess</code></div>
+              </div>
+            </div>
+            <div class="sys-label">Color Token Hierarchy</div>
+          </div>
+
+          <!-- Tile 2: Typography Tokens -->
+          <div class="system-item">
+            <div style="padding: 20px; background: var(--surface); display: flex; flex-direction: column; gap: 12px; justify-content: center; flex: 1;">
+              <div>
+                <div style="font-size: 22px; font-weight: 700; letter-spacing: -0.03em; color: var(--text-primary); line-height: 1.15;">Display &amp; Title</div>
+                <span style="font-size: 11.5px; color: var(--text-tertiary); font-family: monospace;">Open Runde · 28px / -0.6px</span>
+              </div>
+              <div>
+                <div style="font-size: 15px; font-weight: 600; letter-spacing: -0.01em; color: var(--text-primary);">Subhead &amp; Body</div>
+                <span style="font-size: 11.5px; color: var(--text-tertiary); font-family: monospace;">Open Runde · 18px / -0.4px</span>
+              </div>
+              <div>
+                <div style="font-size: 13px; font-weight: 400; color: var(--text-secondary);">Narrative &amp; Metadata</div>
+                <span style="font-size: 11.5px; color: var(--text-tertiary); font-family: monospace;">Open Runde · 14px / -0.2px</span>
+              </div>
+            </div>
+            <div class="sys-label">Typography &amp; Tracking Specs</div>
+          </div>
+
+          <!-- Tile 3: Component Showroom -->
+          <div class="system-item">
+            <div style="padding: 20px; background: var(--surface); display: flex; flex-direction: column; gap: 12px; justify-content: center; flex: 1;">
+              <div style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: #007AFF; color: #FFF; padding: 8px 16px; border-radius: var(--radius-pill); font-size: 12px; font-weight: 600;">
+                <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; border: 2px solid #FFF;"></span> Book Spot
+              </div>
+              <div style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--surface-hover); color: var(--text-primary); border: 1px solid var(--border); padding: 8px 16px; border-radius: var(--radius-pill); font-size: 12px; font-weight: 500;">
+                <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid currentColor;"></span> Extend Session
+              </div>
+              <div style="display: flex; gap: 8px; align-items: center;">
+                <span style="background: #007AFF; color: #FFF; font-size: 10px; font-weight: 700; padding: 4px 10px; border-radius: 12px; letter-spacing: 0.04em;">ACTIVE</span>
+                <span style="background: rgba(42, 159, 71, 0.15); color: #2A9F47; font-size: 10px; font-weight: 700; padding: 4px 10px; border-radius: 12px; letter-spacing: 0.04em;">AVAILABLE</span>
+              </div>
+            </div>
+            <div class="sys-label">Component Showroom Primitives</div>
+          </div>
+
+          <!-- Tile 4: 4-Stage Architecture -->
+          <div class="system-item">
+            <div style="padding: 20px; background: var(--surface); display: flex; flex-direction: column; gap: 10px; justify-content: center; flex: 1;">
+              <div style="font-size: 13px; color: var(--text-secondary);"><strong style="color: var(--accent);">STAGE 01</strong> · Foundation Tokens</div>
+              <div style="font-size: 13px; color: var(--text-secondary);"><strong style="color: var(--accent);">STAGE 02</strong> · Interactive Primitives</div>
+              <div style="font-size: 13px; color: var(--text-secondary);"><strong style="color: var(--accent);">STAGE 03</strong> · Transaction Patterns</div>
+              <div style="font-size: 13px; color: var(--text-secondary);"><strong style="color: var(--accent);">STAGE 04</strong> · Adaptive Mobile Screens</div>
+            </div>
+            <div class="sys-label">4-Stage Architecture</div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==================== 05 OUTCOMES & IMPACT ==================== -->
+      <section class="bento-card stagger-in reveal-on-scroll" style="padding: 40px 44px; --stagger-idx: 4;">
+        <span class="offering-badge" style="margin-bottom: 12px; display: inline-block;">Outcome &amp; Measurable Impact</span>
+        <h2 style="font-size: clamp(24px, 3vw, 34px); font-weight: 700; color: var(--text-primary); letter-spacing: -0.02em; margin-bottom: 12px;">
+          A simpler, more confident parking journey from start to finish.
+        </h2>
+
+        <div class="cs-challenge-grid">
+          <div class="cs-challenge-card">
+            <span class="challenge-num">Impact 01</span>
+            <h4>Simpler Navigation</h4>
+            <p>Cleaner, uncluttered architecture makes the primary journey from map to spot discovery effortless.</p>
+          </div>
+          <div class="cs-challenge-card">
+            <span class="challenge-num">Impact 02</span>
+            <h4>Clearer Hierarchy</h4>
+            <p>Important spot information and key driving actions receive stronger visual priority and reachability.</p>
+          </div>
+          <div class="cs-challenge-card">
+            <span class="challenge-num">Impact 03</span>
+            <h4>Fewer Cognitive Steps</h4>
+            <p>Booking journey structured around the driver's immediate goal, removing unnecessary intermediate modals.</p>
+          </div>
+          <div class="cs-challenge-card">
+            <span class="challenge-num">Impact 04</span>
+            <h4>Consistent UI Language</h4>
+            <p>Predictable component patterns build instant user familiarity and confidence across every interaction.</p>
+          </div>
+          <div class="cs-challenge-card">
+            <span class="challenge-num">Impact 05</span>
+            <h4>Scalable Design System</h4>
+            <p>Tokenized design foundation readily supports future commercial and valet product expansion.</p>
+          </div>
+        </div>
+
+        <div class="cs-quote-block">
+          <p>"HalaPark 2.0 wasn't just a visual redesign. It was an exercise in simplifying a complex parking journey into a product experience that feels predictable, fast and trustworthy."</p>
+          <span>— Core Product Takeaway · HalaPark UX Redesign &amp; Design System</span>
+        </div>
+      </section>
+
+      <!-- ==================== 06 NEXT CASE STUDIES NAVIGATION ==================== -->
+      <section class="bento-card stagger-in reveal-on-scroll" style="padding: 36px 44px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px; --stagger-idx: 5;">
+        <div>
+          <span style="font-size: 13px; font-weight: 600; text-transform: uppercase; color: var(--text-tertiary); letter-spacing: 0.05em; display: block; margin-bottom: 4px;">
+            Next Project
+          </span>
+          <h3 style="font-size: 24px; font-weight: 700; color: var(--text-primary); letter-spacing: -0.01em;">
+            Intelli — Enterprise Design System
+          </h3>
+          <p style="font-size: 14.5px; color: var(--text-secondary); margin-top: 4px;">
+            Scalable design tokens and multi-tenant banking platforms for tier-1 institutions.
+          </p>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: center;">
+          <a href="index.html#intelli" class="btn-pill" style="text-decoration: none;">
+            View Intelli Case Study →
+          </a>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer style="margin-top: 40px; padding: 24px 0 40px 0; display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--text-tertiary); flex-wrap: wrap; gap: 12px;">
+      <span>© 2026 Sarvesh Sawardekar · Senior UI/UX &amp; Product Designer</span>
+      <div style="display: flex; gap: 16px;">
+        <a href="index.html" style="color: var(--text-secondary); text-decoration: none;">Work</a>
+        <a href="about.html" style="color: var(--text-secondary); text-decoration: none;">About</a>
+        <a href="https://drive.google.com/file/d/1fY6GRR8NsKzngpr4MEa7XUej1_S_3bxf/view?usp=sharing" target="_blank" rel="noopener" style="color: var(--text-secondary); text-decoration: none;">Resume ↗</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
