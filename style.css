@@ -1830,13 +1830,7 @@ button, a {
 }
 
 .nav-menu {
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  background: var(--bg-subtle);
-  padding: 3px;
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--border-subtle);
+  display: none !important;
 }
 
 .nav-link {
