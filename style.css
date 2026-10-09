@@ -344,8 +344,8 @@ button, a {
 /* Live Radar Beacon Micro-Demo (Pattern 3: HalaPark 2.0) */
 .map-radar-beacon {
   position: absolute;
-  top: 32%;
-  left: 31%;
+  top: 45%;
+  left: 52%;
   width: 32px;
   height: 32px;
   display: flex;
