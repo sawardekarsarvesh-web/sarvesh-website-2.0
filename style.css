@@ -1759,6 +1759,7 @@ button, a {
 
 /* --- 14. UNIVERSAL FLOATING GLASS NAVIGATION HEADER --- */
 .site-nav-header {
+  display: none !important;
   position: sticky;
   top: 14px;
   z-index: 900;
