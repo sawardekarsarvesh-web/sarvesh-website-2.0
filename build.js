@@ -7,7 +7,7 @@ if (fs.existsSync(dist)) {
 }
 fs.mkdirSync(dist, { recursive: true });
 
-const ignore = new Set(['dist', 'node_modules', '.git', '.vercel', 'build.js']);
+const ignore = new Set(['dist', 'node_modules', '.git', '.vercel', 'build.js', 'server.js']);
 const entries = fs.readdirSync(__dirname);
 
 for (const entry of entries) {

@@ -247,6 +247,10 @@
           <!-- Route / Relocation Card: BOM -> DXB (Pattern 2: Hover-Triggered Journey Indicator) -->
           <div class="bento-card card-route stagger-in reveal-on-scroll" style="--stagger-idx: 1;" tabindex="0"
             role="region" aria-label="Flight route: Mumbai to Dubai">
+            <div class="route-top-row">
+              <span class="label">Relocation</span>
+              <span class="route-status-pill">Direct</span>
+            </div>
             <div class="route-display">
               <span class="airport-code">BOM</span>
               <div class="route-arc">
@@ -314,14 +318,7 @@
           </div>
 
           <!-- Action Buttons (Recruiter CTA Hierarchy) -->
-          <div class="hero-actions-row" style="margin-top: 20px;">
-            <a href="#work" class="btn-pill btn-primary-cta" id="heroViewWorkBtn" aria-label="View Selected Work">
-              <span>View My Work</span>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 5v14M19 12l-7 7-7-7" />
-              </svg>
-            </a>
+          <div class="hero-actions-row" style="margin-top: 18px;">
             <a href="contact.html" class="btn-pill" id="heroConnectBtn" aria-label="Contact Sarvesh">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
@@ -353,26 +350,9 @@
           </a>
         </div>
 
-        <!-- Offerings Slot 2: Scalable Design Systems -->
-        <div class="bento-card card-offering stagger-in reveal-on-scroll" style="--stagger-idx: 4;">
-          <div class="offering-content">
-            <span class="offering-badge blue">Enterprise</span>
-            <h3 class="offering-title">Enterprise Design Systems</h3>
-            <p class="offering-desc">Atomic tokens · Multi-tenant architecture · WCAG 2.1 AA</p>
-          </div>
-          <button class="btn-offering-action" onclick="openCaseStudy('intelli')">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polygon points="12 2 2 7 12 12 22 7 12 2" />
-              <polyline points="2 17 12 22 22 17" />
-              <polyline points="2 12 12 17 22 12" />
-            </svg>
-            Explore
-          </button>
-        </div>
-
-        <!-- Architecture Showcase Card (Clean Replacement for E-Book Commerce Slot) -->
-        <div class="bento-card card-architecture-showcase stagger-in reveal-on-scroll" style="--stagger-idx: 5;"
-          onclick="openCaseStudy('intelli')" style="cursor: pointer;">
+        <!-- Architecture Showcase Card (Moved Up) -->
+        <div class="bento-card card-architecture-showcase stagger-in reveal-on-scroll" style="--stagger-idx: 4; cursor: pointer;"
+          onclick="openCaseStudy('intelli')">
           <div class="architecture-thumb">
             <img src="assets/images/card-architecture.jpg" alt="Design Systems Architecture Cover" />
           </div>
@@ -384,6 +364,46 @@
               <span>Read Architecture</span>
               <span class="action-arrow">↗</span>
             </div>
+          </div>
+        </div>
+
+        <!-- Live Analog & Digital Dubai Clock Card (Placed Below Architecture) -->
+        <div class="bento-card card-dubai-clock stagger-in reveal-on-scroll" style="--stagger-idx: 5;">
+          <div class="clock-analog-wrapper">
+            <svg class="clock-analog-svg" viewBox="0 0 100 100">
+              <!-- Dial face -->
+              <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-opacity="0.15" />
+              <!-- Dial Hour Ticks -->
+              <g stroke="currentColor" stroke-width="2" stroke-opacity="0.4" stroke-linecap="round">
+                <line x1="50" y1="8" x2="50" y2="13" />
+                <line x1="92" y1="50" x2="87" y2="50" />
+                <line x1="50" y1="92" x2="50" y2="87" />
+                <line x1="8" y1="50" x2="13" y2="50" />
+              </g>
+              <!-- Dial Numbers -->
+              <text x="50" y="22" font-size="8" font-weight="600" text-anchor="middle" fill="currentColor"
+                opacity="0.6">12</text>
+              <text x="82" y="53" font-size="8" font-weight="600" text-anchor="middle" fill="currentColor"
+                opacity="0.6">3</text>
+              <text x="50" y="84" font-size="8" font-weight="600" text-anchor="middle" fill="currentColor"
+                opacity="0.6">6</text>
+              <text x="18" y="53" font-size="8" font-weight="600" text-anchor="middle" fill="currentColor"
+                opacity="0.6">9</text>
+              <!-- Hands -->
+              <line id="analogHourHand" x1="50" y1="50" x2="50" y2="28" stroke="currentColor" stroke-width="3"
+                stroke-linecap="round" />
+              <line id="analogMinuteHand" x1="50" y1="50" x2="50" y2="18" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" />
+              <line id="analogSecondHand" x1="50" y1="56" x2="50" y2="14" stroke="var(--accent)" stroke-width="1.5"
+                stroke-linecap="round" />
+              <circle cx="50" cy="50" r="3" fill="var(--accent)" />
+            </svg>
+          </div>
+          <div class="clock-info-col">
+            <span class="clock-zone-badge">TIME ZONE · GST</span>
+            <span class="clock-city-name">Time in Dubai</span>
+            <div id="dubaiDigitalTime" class="clock-digital-time">00:00:00</div>
           </div>
         </div>
 
@@ -512,46 +532,6 @@
               <span>Explore case study</span>
               <span class="action-arrow">↗</span>
             </div>
-          </div>
-        </div>
-
-        <!-- Live Analog & Digital Dubai Clock Card -->
-        <div class="bento-card card-dubai-clock stagger-in reveal-on-scroll" style="--stagger-idx: 5;">
-          <div class="clock-analog-wrapper">
-            <svg class="clock-analog-svg" viewBox="0 0 100 100">
-              <!-- Dial face -->
-              <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="1.5"
-                stroke-opacity="0.15" />
-              <!-- Dial Hour Ticks -->
-              <g stroke="currentColor" stroke-width="2" stroke-opacity="0.4" stroke-linecap="round">
-                <line x1="50" y1="8" x2="50" y2="13" />
-                <line x1="92" y1="50" x2="87" y2="50" />
-                <line x1="50" y1="92" x2="50" y2="87" />
-                <line x1="8" y1="50" x2="13" y2="50" />
-              </g>
-              <!-- Dial Numbers -->
-              <text x="50" y="22" font-size="8" font-weight="600" text-anchor="middle" fill="currentColor"
-                opacity="0.6">12</text>
-              <text x="82" y="53" font-size="8" font-weight="600" text-anchor="middle" fill="currentColor"
-                opacity="0.6">3</text>
-              <text x="50" y="84" font-size="8" font-weight="600" text-anchor="middle" fill="currentColor"
-                opacity="0.6">6</text>
-              <text x="18" y="53" font-size="8" font-weight="600" text-anchor="middle" fill="currentColor"
-                opacity="0.6">9</text>
-              <!-- Hands -->
-              <line id="analogHourHand" x1="50" y1="50" x2="50" y2="28" stroke="currentColor" stroke-width="3"
-                stroke-linecap="round" />
-              <line id="analogMinuteHand" x1="50" y1="50" x2="50" y2="18" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" />
-              <line id="analogSecondHand" x1="50" y1="56" x2="50" y2="14" stroke="var(--accent)" stroke-width="1.5"
-                stroke-linecap="round" />
-              <circle cx="50" cy="50" r="3" fill="var(--accent)" />
-            </svg>
-          </div>
-          <div class="clock-info-col">
-            <span class="clock-zone-badge">TIME ZONE · GST</span>
-            <span class="clock-city-name">Time in Dubai</span>
-            <div id="dubaiDigitalTime" class="clock-digital-time">00:00:00</div>
           </div>
         </div>
 

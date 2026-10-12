@@ -593,6 +593,38 @@ button, a {
   cursor: pointer;
 }
 
+.route-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.route-top-row .label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.route-status-pill {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--green-status-bg);
+  color: var(--green-status);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.route-status-pill::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
 .route-display {
   display: flex;
   align-items: center;
@@ -664,9 +696,10 @@ button, a {
   height: 13px;
 }
 
-/* Hover-triggered flight motion (Pattern 2) */
+/* Hover & tap-triggered flight motion (Pattern 2) */
 .card-route:hover .route-plane,
-.card-route:focus-within .route-plane {
+.card-route:focus-within .route-plane,
+.card-route.is-flying .route-plane {
   opacity: 1;
   animation: flyAlongRoute 1.5s cubic-bezier(0.35, 0, 0.25, 1) forwards;
   box-shadow: 0 4px 14px rgba(229, 88, 38, 0.35);
@@ -1175,6 +1208,14 @@ button, a {
   margin-top: 4px;
 }
 
+#analogHourHand,
+#analogMinuteHand,
+#analogSecondHand {
+  transform-origin: 50px 50px;
+  transition: none !important;
+  will-change: transform;
+}
+
 /* --- 8. FOOTER SECTION --- */
 .site-footer {
   margin-top: 20px;
@@ -1580,15 +1621,24 @@ button, a {
   
   .bento-col-center {
     order: -1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  
+  .card-hero-main {
+    order: -2 !important;
+  }
+
+  .split-cards-row {
+    order: -1 !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 16px !important;
   }
   
   .bento-col-right {
     display: flex !important;
     flex-direction: column !important;
-  }
-
-  .split-cards-row {
-    grid-template-columns: 1fr 1fr;
   }
 
   .card-aura-gold, .card-invusprop, .card-halapark, .card-icici, .card-intelli {
@@ -1615,19 +1665,224 @@ button, a {
   body {
     padding: 16px 12px;
   }
-  
-  .split-cards-row {
-    grid-template-columns: 1fr;
-  }
-  
-  .hero-headline {
-    font-size: 28px;
+
+  .bento-grid {
+    gap: 16px !important;
   }
 
+  /* 1. HERO NAME & BIO FIRST AT TOP */
   .card-hero-main {
-    padding: 12px 0;
+    order: -2 !important;
+    padding: 6px 4px 16px 4px !important;
+    gap: 14px !important;
   }
-  
+
+  .hero-brandmark {
+    width: 38px !important;
+    height: 28px !important;
+    margin-bottom: 2px !important;
+  }
+
+  .hero-headline {
+    font-size: 26px !important;
+    line-height: 1.22 !important;
+    letter-spacing: -0.025em !important;
+  }
+
+  .hero-sublead {
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    color: var(--text-secondary) !important;
+  }
+
+  .hero-affiliation-row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 8px !important;
+    font-size: 13px !important;
+  }
+
+  .hero-affiliation-row > span:first-child {
+    font-weight: 600 !important;
+    color: var(--text-tertiary) !important;
+    font-size: 12px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.04em !important;
+  }
+
+  .pill-tag {
+    font-size: 12px !important;
+    padding: 5px 11px !important;
+  }
+
+  /* Apple Mobile CTA Hierarchy */
+  .hero-actions-row {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+    margin-top: 12px !important;
+  }
+
+  .hero-actions-row .btn-pill {
+    justify-content: center !important;
+    height: 44px !important;
+    font-size: 13.5px !important;
+    padding: 0 10px !important;
+    border-radius: var(--radius-pill) !important;
+  }
+
+  .btn-pill:active {
+    transform: scale(0.96) !important;
+    transition: transform 0.12s ease !important;
+  }
+
+  /* 2. TWIN APPLE COMPANION WIDGETS (ABOUT ME + BOM->DXB) */
+  .split-cards-row {
+    order: -1 !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 12px !important;
+    width: 100% !important;
+  }
+
+  .card-avatar,
+  .card-route {
+    min-height: 172px !important;
+    height: 172px !important;
+    padding: 14px 12px !important;
+    border-radius: 24px !important;
+    user-select: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+  }
+
+  .card-avatar:active,
+  .card-route:active {
+    transform: scale(0.96) !important;
+    transition: transform 0.15s cubic-bezier(0.2, 0.9, 0.3, 1) !important;
+  }
+
+  /* About Me Mini Orbit System - Perfectly Centered & Visible */
+  .orbit-system-wrapper.mini {
+    width: 106px !important;
+    height: 106px !important;
+    max-width: 106px !important;
+    margin: 2px auto !important;
+  }
+
+  .orbit-system-wrapper.mini .orbit-center-avatar {
+    width: 48px !important;
+    height: 48px !important;
+    border-width: 2px !important;
+  }
+
+  .orbit-system-wrapper.mini .orbit-concentric-ring.inner {
+    width: 64px !important;
+    height: 64px !important;
+  }
+
+  .orbit-system-wrapper.mini .orbit-concentric-ring.outer {
+    width: 82px !important;
+    height: 82px !important;
+  }
+
+  .orbit-system-wrapper.mini .orbit-track {
+    width: 82px !important;
+    height: 82px !important;
+    margin-top: -41px !important;
+    margin-left: -41px !important;
+  }
+
+  .orbit-system-wrapper.mini .orbit-node {
+    width: 22px !important;
+    height: 22px !important;
+    margin-top: -11px !important;
+    margin-left: -11px !important;
+    --orbit-radius: 41px !important;
+  }
+
+  .orbit-system-wrapper.mini .orbit-chip {
+    width: 22px !important;
+    height: 22px !important;
+  }
+
+  .orbit-system-wrapper.mini .orbit-chip svg {
+    width: 11px !important;
+    height: 11px !important;
+  }
+
+  .card-avatar .avatar-hover-teaser {
+    opacity: 0.8 !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+  }
+
+  /* BOM -> DXB Route Widget (Touch-Friendly Apple Flight Arc) */
+  .card-route .route-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .route-status-pill {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: var(--radius-pill);
+    background: var(--green-status-bg);
+    color: var(--green-status);
+  }
+
+  .route-display {
+    padding: 0 !important;
+    margin: 6px 0 !important;
+  }
+
+  .airport-code {
+    font-size: 19px !important;
+    letter-spacing: -0.02em !important;
+    font-weight: 700 !important;
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+
+  .route-arc {
+    width: 64px !important;
+    height: 26px !important;
+    margin: 0 3px !important;
+  }
+
+  .route-svg {
+    width: 64px !important;
+    height: 26px !important;
+  }
+
+  .route-plane {
+    opacity: 1 !important;
+    offset-path: path("M 4 18 Q 32 3 60 18") !important;
+    offset-distance: 100% !important;
+    width: 22px !important;
+    height: 22px !important;
+    transition: opacity 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .route-plane svg {
+    width: 11px !important;
+    height: 11px !important;
+  }
+
+  .card-route.is-flying .route-plane {
+    animation: mobileFlyRoute 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards !important;
+    box-shadow: 0 4px 14px rgba(229, 88, 38, 0.45) !important;
+  }
+
+  .card-route.is-flying .airport-code:last-of-type {
+    animation: dxbTouchArrival 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 1.15s forwards !important;
+  }
+
+  .city-labels {
+    font-size: 11px !important;
+  }
+
   .card-aura-gold .card-media-wrapper,
   .card-invusprop .card-media-wrapper {
     height: 280px;
@@ -2254,6 +2509,7 @@ button, a {
   height: 24px;
   margin-top: -12px;
   margin-left: -12px;
+  --orbit-radius: 42px !important;
 }
 
 .orbit-system-wrapper.mini .orbit-chip {
@@ -2513,26 +2769,26 @@ button, a {
     padding: 32px 24px;
     gap: 28px;
   }
-  .orbit-system-wrapper {
+  .about-hero-card .orbit-system-wrapper {
     max-width: 340px;
     height: 340px;
   }
-  .orbit-track,
-  .orbit-concentric-ring.outer {
+  .about-hero-card .orbit-track,
+  .about-hero-card .orbit-concentric-ring.outer {
     width: 270px;
     height: 270px;
     margin-top: -135px;
     margin-left: -135px;
   }
-  .orbit-concentric-ring.inner {
+  .about-hero-card .orbit-concentric-ring.inner {
     width: 190px;
     height: 190px;
   }
-  .orbit-center-avatar {
+  .about-hero-card .orbit-center-avatar {
     width: 110px;
     height: 110px;
   }
-  .orbit-node {
+  .about-hero-card .orbit-node {
     --orbit-radius: 135px !important;
   }
   

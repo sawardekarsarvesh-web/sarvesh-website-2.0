@@ -4,6 +4,8 @@
   "private": true,
   "description": "Sarvesh Sawardekar - Lead Product Designer & Design Systems Portfolio",
   "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
     "build": "node build.js"
   },
   "dependencies": {

@@ -470,46 +470,55 @@ if (cursorFollower && window.matchMedia('(pointer: fine)').matches) {
   }
 }
 
-// --- 7. DUBAI ANALOG & DIGITAL LIVE CLOCK ---
-function updateDubaiClock() {
-  // Use Intl to format Dubai time (GST, UTC+4)
-  const now = new Date();
-  const options = { timeZone: 'Asia/Dubai', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
-  const formatter = new Intl.DateTimeFormat([], options);
-  const parts = formatter.formatToParts(now);
-  
-  let hours = 0, minutes = 0, seconds = 0;
-  parts.forEach(p => {
-    if (p.type === 'hour') hours = parseInt(p.value, 10);
-    if (p.type === 'minute') minutes = parseInt(p.value, 10);
-    if (p.type === 'second') seconds = parseInt(p.value, 10);
-  });
-  
-  // Format digital string
-  const hStr = String(hours).padStart(2, '0');
-  const mStr = String(minutes).padStart(2, '0');
-  const sStr = String(seconds).padStart(2, '0');
-  const digitalDisplay = document.getElementById('dubaiDigitalTime');
-  if (digitalDisplay) {
-    digitalDisplay.textContent = `${hStr}:${mStr}:${sStr}`;
-  }
-  
-  // Update analog hands
-  const secondDeg = seconds * 6; // 360 / 60
-  const minuteDeg = (minutes * 6) + (seconds * 0.1);
-  const hourDeg = ((hours % 12) * 30) + (minutes * 0.5);
-  
-  const hourHand = document.getElementById('analogHourHand');
-  const minuteHand = document.getElementById('analogMinuteHand');
-  const secondHand = document.getElementById('analogSecondHand');
-  
-  if (hourHand) hourHand.setAttribute('transform', `rotate(${hourDeg} 50 50)`);
-  if (minuteHand) minuteHand.setAttribute('transform', `rotate(${minuteDeg} 50 50)`);
-  if (secondHand) secondHand.setAttribute('transform', `rotate(${secondDeg} 50 50)`);
-}
+// --- 7. DUBAI ANALOG & DIGITAL LIVE CLOCK (SMOOTH QUARTZ SWEEP MOTION) ---
+(function initDubaiSmoothClock() {
+  const DUBAI_OFFSET_MS = 4 * 60 * 60 * 1000; // Dubai is UTC+4 (GST) year-round
+  let lastSecondStr = '';
 
-setInterval(updateDubaiClock, 1000);
-updateDubaiClock();
+  function renderDubaiClock() {
+    const hourHand = document.getElementById('analogHourHand');
+    const minuteHand = document.getElementById('analogMinuteHand');
+    const secondHand = document.getElementById('analogSecondHand');
+    const digitalDisplay = document.getElementById('dubaiDigitalTime');
+
+    if (!hourHand && !digitalDisplay) {
+      // Not on page with clock
+      return;
+    }
+
+    const now = new Date(Date.now() + DUBAI_OFFSET_MS);
+    const hours = now.getUTCHours();
+    const minutes = now.getUTCMinutes();
+    const seconds = now.getUTCSeconds();
+    const millis = now.getUTCMilliseconds();
+
+    // High-precision fractional second for continuous quartz sweep (no 'tik tik' stepping)
+    const smoothSeconds = seconds + (millis / 1000);
+
+    const secondDeg = smoothSeconds * 6; // 360° / 60s = 6° per sec
+    const minuteDeg = (minutes * 6) + (smoothSeconds * 0.1); // 360° / 3600s = 0.1° per sec
+    const hourDeg = ((hours % 12) * 30) + (minutes * 0.5) + (smoothSeconds * (0.5 / 60));
+
+    if (secondHand) secondHand.setAttribute('transform', `rotate(${secondDeg.toFixed(2)} 50 50)`);
+    if (minuteHand) minuteHand.setAttribute('transform', `rotate(${minuteDeg.toFixed(2)} 50 50)`);
+    if (hourHand) hourHand.setAttribute('transform', `rotate(${hourDeg.toFixed(2)} 50 50)`);
+
+    // Digital time updates only once per whole second for efficiency
+    const sStr = String(seconds).padStart(2, '0');
+    if (sStr !== lastSecondStr) {
+      lastSecondStr = sStr;
+      const hStr = String(hours).padStart(2, '0');
+      const mStr = String(minutes).padStart(2, '0');
+      if (digitalDisplay) {
+        digitalDisplay.textContent = `${hStr}:${mStr}:${sStr}`;
+      }
+    }
+
+    requestAnimationFrame(renderDubaiClock);
+  }
+
+  requestAnimationFrame(renderDubaiClock);
+})();
 
 // --- 8. INTERACTIVE CAREER RULER DIAL (LOCKED STRICTLY TO 8 YEARS) ---
 const RESTING_MILESTONE = {
@@ -811,12 +820,46 @@ function initScrollObserver() {
   });
 }
 
+// --- 13. ROUTE CARD (BOM -> DXB) TOUCH & CLICK FLIGHT MOTION ---
+function initRouteFlightInteraction() {
+  const routeCard = document.querySelector('.card-route');
+  if (!routeCard) return;
+
+  let isFlying = false;
+  const launchFlight = () => {
+    if (isFlying) return;
+    isFlying = true;
+
+    routeCard.classList.remove('is-flying');
+    void routeCard.offsetWidth; // Force reflow to retrigger animation
+    routeCard.classList.add('is-flying');
+
+    if (typeof trackEvent === 'function') {
+      trackEvent('flight_route_tap', { from: 'BOM', to: 'DXB' });
+    }
+
+    setTimeout(() => {
+      isFlying = false;
+    }, 1500);
+  };
+
+  routeCard.addEventListener('click', launchFlight);
+  routeCard.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      launchFlight();
+    }
+  });
+}
+
 // Initialize on DOM ready
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initNavigation();
   initScrollObserver();
   initRecruiterAnalytics();
+  initRouteFlightInteraction();
   resetToRestingMilestone();
 });
+
 
