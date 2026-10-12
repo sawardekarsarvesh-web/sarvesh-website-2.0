@@ -1211,9 +1211,7 @@ button, a {
 #analogHourHand,
 #analogMinuteHand,
 #analogSecondHand {
-  transform-origin: 50px 50px;
   transition: none !important;
-  will-change: transform;
 }
 
 /* --- 8. FOOTER SECTION --- */
