@@ -405,23 +405,36 @@ button, a {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 13px;
+  padding: 6px 14px;
   border-radius: var(--radius-pill);
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--glass-border);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.9);
   z-index: 10;
   pointer-events: none;
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .eq-label {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: var(--text-primary);
+  color: #10141A;
   text-transform: uppercase;
+}
+
+[data-theme="dark"] .card-telemetry-badge {
+  background: rgba(18, 22, 28, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="dark"] .card-telemetry-badge .eq-label {
+  color: #F4F6F9;
 }
 
 .telemetry-equalizer {
@@ -562,10 +575,20 @@ button, a {
 
 /* Split Row: Avatar + Route Cards */
 /* Split Row: Avatar + Route Cards */
+/* Split Row: Avatar + (Route + Dark Mode Stack) */
 .split-cards-row {
   display: grid;
-  grid-template-columns: 1fr 1.35fr;
-  gap: 20px;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: stretch;
+}
+
+/* Right Stack Column: Route Card on Top, Dark Mode Card on Bottom */
+.split-cards-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
 }
 
 /* Avatar Card */
@@ -573,153 +596,193 @@ button, a {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 220px;
+  min-height: 240px;
+  padding: 24px 22px;
   position: relative;
   overflow: hidden !important;
 }
 
 .card-avatar .label {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-secondary);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
 }
 
-/* Route / Relocation Card (Pattern 2: Hover-Triggered Journey) */
+/* Relocation Card (Apple-style Flight Trajectory Indicator) */
 .card-route {
-  min-height: 220px;
+  flex: 1;
+  min-height: 160px;
+  padding: 16px 18px 14px 18px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease;
 }
 
+.card-route:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--card-shadow-hover);
+  border-color: var(--border-strong);
+}
+
+/* Top Row: Relocation & Direct Badge */
 .route-top-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
 }
 
 .route-top-row .label {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-secondary);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
 }
 
 .route-status-pill {
   font-size: 11px;
   font-weight: 600;
-  padding: 3px 8px;
+  padding: 3px 10px;
   border-radius: var(--radius-pill);
-  background: var(--green-status-bg);
-  color: var(--green-status);
+  background: rgba(10, 207, 131, 0.12);
+  color: #0ACF83;
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
+  letter-spacing: 0.01em;
 }
 
-.route-status-pill::before {
-  content: '';
+.route-status-dot {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: currentColor;
+  background: #0ACF83;
+  display: inline-block;
 }
 
-.route-display {
+/* Route Main Display: Perfectly Centered Vertically with Balanced Margins */
+.route-main-display {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  width: 100%;
   margin: auto 0;
-  padding: 0 10px;
+  padding: 2px 0 0 0;
 }
 
-.airport-code {
-  font-size: 28px;
-  font-weight: 700;
+.route-flight-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
+  position: relative;
+}
+
+.route-airport-code {
+  font-size: 26px;
+  font-weight: 800;
   letter-spacing: -0.02em;
   color: var(--text-primary);
+  line-height: 1;
+  flex-shrink: 0;
+  user-select: none;
+  margin-bottom: 2px;
 }
 
-.route-arc {
-  position: relative;
-  width: 100px;
-  height: 36px;
+.route-airport-code.destination-code {
+  text-align: right;
+  /* Simple, clean typography - no color changes or pulses */
+}
+
+/* Flight Arc Stage (SVG container with high soaring trajectory) */
+.route-arc-stage {
+  flex: 1;
+  height: 48px;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   margin: 0 8px;
-  flex-shrink: 0;
+  min-width: 48px;
+  position: relative;
+  overflow: visible;
 }
 
-.route-svg {
-  width: 100px;
-  height: 36px;
+.route-flight-svg {
+  width: 100%;
+  height: 100%;
   overflow: visible;
   display: block;
 }
 
-.route-plane {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 26px;
-  height: 26px;
-  margin: 0;
-  border-radius: 50%;
-  background: var(--surface);
-  border: 1.5px solid var(--border-strong);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.2);
+.route-arc-base {
+  stroke: var(--border-subtle, rgba(140, 140, 140, 0.22));
+  stroke-width: 1.5;
+  stroke-dasharray: 2 4;
+  fill: none;
+}
+
+.route-arc-dashed {
+  stroke: #9CA3AF;
+  stroke-width: 1.8;
+  stroke-dasharray: 4 4;
+  fill: none;
+}
+
+[data-theme="dark"] .route-arc-dashed {
+  stroke: #71717A;
+}
+
+.route-dot.origin {
+  fill: #6B7280;
+  opacity: 0.95;
+}
+
+[data-theme="dark"] .route-dot.origin {
+  fill: #9CA3AF;
+}
+
+/* Plane Node & Badge */
+.route-plane-node {
+  will-change: transform;
+}
+
+.route-plane-disc {
+  fill: #FFFFFF;
+  stroke: rgba(0, 0, 0, 0.05);
+  stroke-width: 1;
+}
+
+[data-theme="dark"] .route-plane-disc {
+  fill: #222224;
+  stroke: rgba(255, 255, 255, 0.16);
+}
+
+.route-plane-glyph {
+  fill: #E55826;
+}
+
+/* Cities Row directly below BOM and DXB with clean spacing */
+.route-cities-row {
   display: flex;
   align-items: center;
-  justify-content: center;
-  color: var(--accent);
-  offset-path: path("M 5 24 Q 50 4 95 24");
-  offset-distance: 0%;
-  offset-rotate: auto;
-  offset-anchor: 50% 50%;
-  offset-position: 0 0;
-  opacity: 0;
-  pointer-events: none;
-  z-index: 10;
-  transition: opacity 0.25s ease, box-shadow 0.25s ease;
-}
-
-[data-theme="dark"] .route-plane {
-  background: var(--surface-elevated);
-  border-color: rgba(255, 255, 255, 0.16);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-}
-
-.route-plane svg {
-  transform: rotate(90deg);
-  width: 13px;
-  height: 13px;
-}
-
-/* Hover & tap-triggered flight motion (Pattern 2) */
-.card-route:hover .route-plane,
-.card-route:focus-within .route-plane,
-.card-route.is-flying .route-plane {
-  opacity: 1;
-  animation: flyAlongRoute 1.5s cubic-bezier(0.35, 0, 0.25, 1) forwards;
-  box-shadow: 0 4px 14px rgba(229, 88, 38, 0.35);
-}
-
-@keyframes flyAlongRoute {
-  from {
-    offset-distance: 0%;
-  }
-  to {
-    offset-distance: 100%;
-  }
-}
-
-.city-labels {
-  display: flex;
   justify-content: space-between;
-  font-size: 12px;
-  color: var(--text-tertiary);
+  width: 100%;
+  margin-top: 10px;
+}
+
+.route-city-name {
+  font-size: 13px;
   font-weight: 500;
+  color: var(--text-tertiary);
+  letter-spacing: -0.01em;
+}
+
+.route-city-name.destination-city {
+  text-align: right;
 }
 
 /* Hero Main (Uncarded Bio) */
@@ -969,12 +1032,14 @@ button, a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 24px;
-  height: 84px;
+  padding: 12px 18px;
+  height: 64px;
+  min-height: 64px;
+  flex-shrink: 0;
 }
 
 .theme-toggle-label {
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 600;
   letter-spacing: -0.01em;
   color: var(--text-primary);
@@ -983,7 +1048,7 @@ button, a {
 .theme-segmented-switch {
   display: inline-flex;
   align-items: center;
-  padding: 4px;
+  padding: 3px;
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
@@ -995,8 +1060,8 @@ button, a {
 }
 
 .theme-switch-btn {
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1005,6 +1070,11 @@ button, a {
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease, color 0.2s ease;
   position: relative;
   z-index: 2;
+}
+
+.theme-switch-btn svg {
+  width: 16px;
+  height: 16px;
 }
 
 .theme-switch-btn:hover:not(.active) {
@@ -1614,29 +1684,67 @@ button, a {
   }
   
   .bento-col {
-    width: 100% !important;
+    display: contents !important;
   }
-  
-  .bento-col-center {
-    order: -1 !important;
-    display: flex !important;
-    flex-direction: column !important;
-  }
-  
+
+  /* Senior UI/UX Mobile & Tablet Narrative Order:
+     1. Personal Brand & Identity Hook (Hero Bio + Quick Action CTAs)
+     2. Visual Identity & Location Readiness (About Me Orbit Card + Relocation BOM -> DXB)
+     3. Seniority & Domain Authority (8+ Years Career Timeline Ruler)
+     4. High-Stakes Institutional Trust (Protected Tier-1 Bank Portfolio Presentation)
+     5. Shipped Case Study 1: ICICI Lombard Revamp (Enterprise Healthcare/Banking, Live Telemetry)
+     6. Shipped Case Study 2: Aura Gold (Fintech Micro-investing Consumer Experience)
+     7. Shipped Case Study 3: HalaPark 2.0 & Design System (Mobility & Scalable Systems)
+     8. Shipped Case Study 4: Invusprop Real Estate App (Proptech Ecosystem)
+     9. Systems Architecture Depth: Scalable Architecture for Global Banking Platforms
+     10. Geographic Context & Timezone: Dubai Analog/Digital Clock
+     11. System Utility & Preferences: Dark Mode Toggle
+  */
   .card-hero-main {
-    order: -2 !important;
+    order: 1 !important;
   }
 
   .split-cards-row {
-    order: -1 !important;
+    order: 2 !important;
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
     gap: 16px !important;
   }
-  
-  .bento-col-right {
-    display: flex !important;
-    flex-direction: column !important;
+
+  .card-career-ruler {
+    order: 3 !important;
+  }
+
+  .card-bank-deck-offering {
+    order: 4 !important;
+  }
+
+  .card-icici {
+    order: 5 !important;
+  }
+
+  .card-aura-gold {
+    order: 6 !important;
+  }
+
+  .card-halapark {
+    order: 7 !important;
+  }
+
+  .card-invusprop {
+    order: 8 !important;
+  }
+
+  .card-architecture-showcase {
+    order: 9 !important;
+  }
+
+  .card-dubai-clock {
+    order: 10 !important;
+  }
+
+  .card-theme-toggle {
+    order: 11 !important;
   }
 
   .card-aura-gold, .card-invusprop, .card-halapark, .card-icici, .card-intelli {
@@ -1670,7 +1778,7 @@ button, a {
 
   /* 1. HERO NAME & BIO FIRST AT TOP */
   .card-hero-main {
-    order: -2 !important;
+    order: 1 !important;
     padding: 6px 4px 16px 4px !important;
     gap: 14px !important;
   }
@@ -1737,21 +1845,44 @@ button, a {
 
   /* 2. TWIN APPLE COMPANION WIDGETS (ABOUT ME + BOM->DXB) */
   .split-cards-row {
-    order: -1 !important;
+    order: 2 !important;
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
     gap: 12px !important;
     width: 100% !important;
   }
 
-  .card-avatar,
-  .card-route {
-    min-height: 172px !important;
-    height: 172px !important;
-    padding: 14px 12px !important;
+  .card-avatar {
+    min-height: 220px !important;
+    height: auto !important;
+    padding: 18px 16px !important;
     border-radius: 24px !important;
     user-select: none !important;
     -webkit-tap-highlight-color: transparent !important;
+  }
+
+  .split-cards-col {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    height: 100% !important;
+  }
+
+  .split-cards-col .card-route {
+    flex: 1 !important;
+    min-height: 148px !important;
+    height: auto !important;
+    padding: 14px 14px 10px 14px !important;
+    border-radius: 20px !important;
+    user-select: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+  }
+
+  .split-cards-col .card-theme-toggle {
+    height: 52px !important;
+    min-height: 52px !important;
+    padding: 6px 14px !important;
+    border-radius: 16px !important;
   }
 
   .card-avatar:active,
@@ -1762,33 +1893,33 @@ button, a {
 
   /* About Me Mini Orbit System - Perfectly Centered & Visible */
   .orbit-system-wrapper.mini {
-    width: 106px !important;
-    height: 106px !important;
-    max-width: 106px !important;
-    margin: 2px auto !important;
+    width: 148px !important;
+    height: 148px !important;
+    max-width: 148px !important;
+    margin: 4px auto !important;
   }
 
   .orbit-system-wrapper.mini .orbit-center-avatar {
-    width: 48px !important;
-    height: 48px !important;
+    width: 58px !important;
+    height: 58px !important;
     border-width: 2px !important;
   }
 
   .orbit-system-wrapper.mini .orbit-concentric-ring.inner {
-    width: 64px !important;
-    height: 64px !important;
+    width: 88px !important;
+    height: 88px !important;
   }
 
   .orbit-system-wrapper.mini .orbit-concentric-ring.outer {
-    width: 82px !important;
-    height: 82px !important;
+    width: 128px !important;
+    height: 128px !important;
   }
 
   .orbit-system-wrapper.mini .orbit-track {
-    width: 82px !important;
-    height: 82px !important;
-    margin-top: -41px !important;
-    margin-left: -41px !important;
+    width: 128px !important;
+    height: 128px !important;
+    margin-top: -64px !important;
+    margin-left: -64px !important;
   }
 
   .orbit-system-wrapper.mini .orbit-node {
@@ -1796,7 +1927,17 @@ button, a {
     height: 22px !important;
     margin-top: -11px !important;
     margin-left: -11px !important;
-    --orbit-radius: 41px !important;
+  }
+
+  .orbit-system-wrapper.mini .orbit-node[data-index="0"],
+  .orbit-system-wrapper.mini .orbit-node[data-index="1"] {
+    --orbit-radius: 44px !important;
+  }
+
+  .orbit-system-wrapper.mini .orbit-node[data-index="2"],
+  .orbit-system-wrapper.mini .orbit-node[data-index="3"],
+  .orbit-system-wrapper.mini .orbit-node[data-index="4"] {
+    --orbit-radius: 64px !important;
   }
 
   .orbit-system-wrapper.mini .orbit-chip {
@@ -1809,75 +1950,59 @@ button, a {
     height: 11px !important;
   }
 
+  .orbit-system-wrapper.mini .orbit-chip img,
+  .orbit-system-wrapper.mini .orbit-icon-img {
+    width: 13px !important;
+    height: 13px !important;
+  }
+
   .card-avatar .avatar-hover-teaser {
-    opacity: 0.8 !important;
-    font-size: 11px !important;
-    font-weight: 500 !important;
+    opacity: 0.9 !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
   }
 
   /* BOM -> DXB Route Widget (Touch-Friendly Apple Flight Arc) */
-  .card-route .route-top-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  .card-route {
+    min-height: 148px !important;
+    padding: 14px 14px 10px 14px !important;
+  }
+
+  .card-route .route-top-row .label {
+    font-size: 13.5px !important;
   }
 
   .route-status-pill {
-    font-size: 10px;
-    font-weight: 600;
-    padding: 2px 7px;
-    border-radius: var(--radius-pill);
-    background: var(--green-status-bg);
-    color: var(--green-status);
+    font-size: 9.5px !important;
+    padding: 2px 6px !important;
   }
 
-  .route-display {
+  .route-main-display {
     padding: 0 !important;
-    margin: 6px 0 !important;
+    margin: auto 0 !important;
   }
 
-  .airport-code {
-    font-size: 19px !important;
+  .route-airport-code {
+    font-size: 22px !important;
     letter-spacing: -0.02em !important;
-    font-weight: 700 !important;
-    transition: transform 0.3s ease, color 0.3s ease;
+    font-weight: 800 !important;
   }
 
-  .route-arc {
-    width: 64px !important;
-    height: 26px !important;
-    margin: 0 3px !important;
+  .route-arc-stage {
+    min-width: 44px !important;
+    height: 38px !important;
+    margin: 0 6px !important;
   }
 
-  .route-svg {
-    width: 64px !important;
-    height: 26px !important;
+  .route-flight-svg {
+    height: 38px !important;
   }
 
-  .route-plane {
-    opacity: 1 !important;
-    offset-path: path("M 4 18 Q 32 3 60 18") !important;
-    offset-distance: 100% !important;
-    width: 22px !important;
-    height: 22px !important;
-    transition: opacity 0.25s ease, box-shadow 0.25s ease;
+  .route-cities-row {
+    margin-top: 16px !important;
   }
 
-  .route-plane svg {
-    width: 11px !important;
-    height: 11px !important;
-  }
-
-  .card-route.is-flying .route-plane {
-    animation: mobileFlyRoute 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards !important;
-    box-shadow: 0 4px 14px rgba(229, 88, 38, 0.45) !important;
-  }
-
-  .card-route.is-flying .airport-code:last-of-type {
-    animation: dxbTouchArrival 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 1.15s forwards !important;
-  }
-
-  .city-labels {
+  .route-city-name {
     font-size: 11px !important;
   }
 
@@ -1976,27 +2101,30 @@ button, a {
   .orbit-chip {
     animation: none !important;
   }
-  .orbit-node[data-index="0"] { transform: rotate(0deg) translateX(var(--orbit-radius, 175px)) rotate(0deg) !important; }
-  .orbit-node[data-index="1"] { transform: rotate(72deg) translateX(var(--orbit-radius, 175px)) rotate(-72deg) !important; }
-  .orbit-node[data-index="2"] { transform: rotate(144deg) translateX(var(--orbit-radius, 175px)) rotate(-144deg) !important; }
-  .orbit-node[data-index="3"] { transform: rotate(216deg) translateX(var(--orbit-radius, 175px)) rotate(-216deg) !important; }
-  .orbit-node[data-index="4"] { transform: rotate(288deg) translateX(var(--orbit-radius, 175px)) rotate(-288deg) !important; }
+  .orbit-node[data-index="0"] { transform: rotate(0deg) translateX(var(--orbit-radius, 125px)) rotate(0deg) !important; }
+  .orbit-node[data-index="1"] { transform: rotate(180deg) translateX(var(--orbit-radius, 125px)) rotate(-180deg) !important; }
+  .orbit-node[data-index="2"] { transform: rotate(40deg) translateX(var(--orbit-radius, 175px)) rotate(-40deg) !important; }
+  .orbit-node[data-index="3"] { transform: rotate(160deg) translateX(var(--orbit-radius, 175px)) rotate(-160deg) !important; }
+  .orbit-node[data-index="4"] { transform: rotate(280deg) translateX(var(--orbit-radius, 175px)) rotate(-280deg) !important; }
 
-  .orbit-system-wrapper.mini .orbit-node[data-index="0"] { transform: rotate(0deg) translateX(42px) rotate(0deg) !important; }
-  .orbit-system-wrapper.mini .orbit-node[data-index="1"] { transform: rotate(72deg) translateX(42px) rotate(-72deg) !important; }
-  .orbit-system-wrapper.mini .orbit-node[data-index="2"] { transform: rotate(144deg) translateX(42px) rotate(-144deg) !important; }
-  .orbit-system-wrapper.mini .orbit-node[data-index="3"] { transform: rotate(216deg) translateX(42px) rotate(-216deg) !important; }
-  .orbit-system-wrapper.mini .orbit-node[data-index="4"] { transform: rotate(288deg) translateX(42px) rotate(-288deg) !important; }
+  .orbit-system-wrapper.mini .orbit-node[data-index="0"] { transform: rotate(0deg) translateX(var(--orbit-radius, 63px)) rotate(0deg) !important; }
+  .orbit-system-wrapper.mini .orbit-node[data-index="1"] { transform: rotate(180deg) translateX(var(--orbit-radius, 63px)) rotate(-180deg) !important; }
+  .orbit-system-wrapper.mini .orbit-node[data-index="2"] { transform: rotate(30deg) translateX(var(--orbit-radius, 88px)) rotate(-30deg) !important; }
+  .orbit-system-wrapper.mini .orbit-node[data-index="3"] { transform: rotate(150deg) translateX(var(--orbit-radius, 88px)) rotate(-150deg) !important; }
+  .orbit-system-wrapper.mini .orbit-node[data-index="4"] { transform: rotate(270deg) translateX(var(--orbit-radius, 88px)) rotate(-270deg) !important; }
 
-  /* Pattern 2: Stationary plane appears at destination on hover without path-tracing */
+  /* Pattern 2: Stationary plane at destination with static dashed trail */
   .route-plane {
     animation: none !important;
-    transition: opacity 0.2s ease !important;
     offset-distance: 100% !important;
-  }
-  .card-route:hover .route-plane,
-  .card-route:focus-within .route-plane {
     opacity: 1 !important;
+  }
+  .route-arc-dashed {
+    animation: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+  .route-station.destination .airport-code {
+    animation: none !important;
   }
 
   /* Pattern 3: Freeze micro-demos (radar beacon & telemetry equalizer) */
@@ -2466,8 +2594,8 @@ button, a {
 /* --- 15B. HOMEPAGE COMPACT ORBITING ICONS COMPONENT --- */
 .orbit-system-wrapper.mini {
   position: relative;
-  width: 116px;
-  height: 116px;
+  width: 196px;
+  height: 196px;
   max-width: 100%;
   margin: 4px auto;
   display: flex;
@@ -2476,54 +2604,78 @@ button, a {
 }
 
 .orbit-system-wrapper.mini .orbit-center-avatar {
-  width: 52px;
-  height: 52px;
-  padding: 2px;
-  border-width: 2px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  width: 88px;
+  height: 88px;
+  padding: 4px;
+  border-width: 2.5px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+}
+
+.orbit-system-wrapper.mini .orbit-avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 20%;
 }
 
 .orbit-system-wrapper.mini .orbit-concentric-ring.inner {
-  width: 68px;
-  height: 68px;
-  opacity: 0.3;
+  width: 126px;
+  height: 126px;
+  opacity: 0.4;
 }
 
 .orbit-system-wrapper.mini .orbit-concentric-ring.outer {
-  width: 88px;
-  height: 88px;
-  opacity: 0.45;
+  width: 176px;
+  height: 176px;
+  opacity: 0.6;
 }
 
 .orbit-system-wrapper.mini .orbit-track {
-  width: 88px;
-  height: 88px;
-  margin-top: -44px;
-  margin-left: -44px;
+  width: 176px;
+  height: 176px;
+  margin-top: -88px;
+  margin-left: -88px;
 }
 
 .orbit-system-wrapper.mini .orbit-node {
-  width: 24px;
-  height: 24px;
-  margin-top: -12px;
-  margin-left: -12px;
-  --orbit-radius: 42px !important;
+  width: 30px;
+  height: 30px;
+  margin-top: -15px;
+  margin-left: -15px;
 }
 
 .orbit-system-wrapper.mini .orbit-chip {
-  width: 24px;
-  height: 24px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  width: 30px;
+  height: 30px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
 }
 
 .orbit-system-wrapper.mini .orbit-chip svg {
-  width: 13px;
-  height: 13px;
+  width: 15px;
+  height: 15px;
+}
+
+.orbit-system-wrapper.mini .orbit-chip img,
+.orbit-icon-img {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  object-fit: contain;
+  display: block;
+}
+
+.orbit-chip .orbit-icon-img-large {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  object-fit: contain;
+  display: block;
 }
 
 .orbit-system-wrapper.mini .orbit-tooltip {
-  font-size: 10.5px;
-  padding: 2px 7px;
+  font-size: 11px;
+  padding: 3px 8px;
   bottom: calc(100% + 6px);
 }
 
@@ -2693,7 +2845,8 @@ button, a {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 220px;
+  min-height: 290px;
+  padding: 24px 22px;
   height: auto;
   overflow: hidden !important;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease;
@@ -2712,7 +2865,7 @@ button, a {
 }
 
 .avatar-link-arrow {
-  font-size: 15px;
+  font-size: 16px;
   color: var(--text-tertiary);
   transition: transform 0.2s ease, color 0.2s ease;
 }
@@ -2729,17 +2882,18 @@ button, a {
 }
 
 .avatar-hover-teaser {
-  font-size: 11.5px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--accent);
   text-align: center;
   letter-spacing: 0.02em;
-  opacity: 0.85;
-  transition: opacity 0.2s ease;
+  opacity: 0.9;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .card-avatar:hover .avatar-hover-teaser {
   opacity: 1;
+  transform: translateX(2px);
 }
 
 /* Route card micro-interaction */
@@ -2786,8 +2940,22 @@ button, a {
     width: 110px;
     height: 110px;
   }
-  .about-hero-card .orbit-node {
+  .about-hero-card .orbit-node[data-index="0"],
+  .about-hero-card .orbit-node[data-index="1"] {
+    --orbit-radius: 95px !important;
+  }
+  .about-hero-card .orbit-node[data-index="2"],
+  .about-hero-card .orbit-node[data-index="3"],
+  .about-hero-card .orbit-node[data-index="4"] {
     --orbit-radius: 135px !important;
+  }
+  .about-hero-card .orbit-chip {
+    width: 44px;
+    height: 44px;
+  }
+  .about-hero-card .orbit-chip .orbit-icon-img-large {
+    width: 24px;
+    height: 24px;
   }
   
   .capabilities-grid {
@@ -3126,7 +3294,9 @@ button, a {
   gap: 6px;
 }
 
-.form-group.full-width {
+.form-group.full-width,
+.form-submit-row,
+.full-width {
   grid-column: 1 / -1;
 }
 
@@ -3166,14 +3336,98 @@ button, a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  margin-top: 24px;
+  gap: 18px;
+  margin-top: 28px;
+  padding-top: 4px;
   flex-wrap: wrap;
 }
 
 .form-privacy-note {
-  font-size: 12.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
   color: var(--text-tertiary);
+  line-height: 1.4;
+}
+
+.form-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 13px 28px;
+  border-radius: var(--radius-pill);
+  background: var(--text-primary);
+  color: var(--surface);
+  border: 1px solid transparent;
+  font-family: var(--font-main, inherit);
+  font-size: 14.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .form-submit-btn {
+  background: #FFFFFF;
+  color: #0A0D12;
+  box-shadow: 0 4px 18px rgba(255, 255, 255, 0.16);
+}
+
+.form-submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .form-submit-btn:hover:not(:disabled) {
+  box-shadow: 0 8px 28px rgba(255, 255, 255, 0.28);
+}
+
+.form-submit-btn:active:not(:disabled) {
+  transform: translateY(0) scale(0.98);
+}
+
+.form-submit-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.form-submit-btn svg {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+}
+
+.form-submit-btn:hover:not(:disabled) svg {
+  transform: translateX(3px) translateY(-2px);
+}
+
+@media (max-width: 640px) {
+  .contact-form-card {
+    padding: 28px 20px;
+  }
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .form-submit-row {
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 14px;
+    margin-top: 20px;
+  }
+  .form-submit-btn {
+    width: 100%;
+    padding: 14px 24px;
+  }
+  .form-privacy-note {
+    text-align: center;
+    justify-content: center;
+    font-size: 12px;
+  }
 }
 
 /* --- 19. RESUME PAGE STYLES --- */
@@ -3392,5 +3646,434 @@ button, a {
   }
 }
 
+/* --- 22. BANK PORTFOLIO PRESENTATION & OTP MODAL STYLES --- */
+.offering-badge.badge-secure {
+  background: rgba(245, 158, 11, 0.12);
+  color: #D97706;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
 
+[data-theme="dark"] .offering-badge.badge-secure {
+  background: rgba(251, 191, 36, 0.14);
+  color: #FBBF24;
+  border-color: rgba(251, 191, 36, 0.3);
+}
 
+.card-bank-deck-offering {
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.card-bank-deck-offering:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+
+.btn-secure-action {
+  background: var(--text-primary);
+  color: var(--surface);
+  border: 1px solid transparent;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+}
+
+[data-theme="dark"] .btn-secure-action {
+  background: #FFFFFF;
+  color: #0A0D12;
+}
+
+.btn-secure-action:hover {
+  transform: translateY(-1px) scale(1.02);
+  background: var(--text-primary);
+}
+
+.bank-deck-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(10, 13, 18, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s;
+}
+
+.bank-deck-modal-backdrop.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.bank-deck-modal-card {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 28px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35);
+  padding: 40px 36px 36px 36px;
+  transform: scale(0.95) translateY(12px);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.bank-deck-modal-backdrop.is-open .bank-deck-modal-card {
+  transform: scale(1) translateY(0);
+}
+
+.bank-deck-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+  z-index: 2;
+}
+
+.bank-deck-modal-close:hover {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+  transform: scale(1.08);
+}
+
+.bank-modal-shield {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  border-radius: 20px;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.28);
+  color: #D97706;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+[data-theme="dark"] .bank-modal-shield {
+  background: rgba(251, 191, 36, 0.14);
+  color: #FBBF24;
+  border-color: rgba(251, 191, 36, 0.32);
+}
+
+.bank-modal-shield.otp-shield {
+  background: rgba(59, 130, 246, 0.12);
+  color: #2563EB;
+  border-color: rgba(59, 130, 246, 0.28);
+}
+
+[data-theme="dark"] .bank-modal-shield.otp-shield {
+  color: #60A5FA;
+}
+
+.bank-modal-shield.success-shield {
+  background: rgba(16, 185, 129, 0.14);
+  color: #059669;
+  border-color: rgba(16, 185, 129, 0.32);
+}
+
+[data-theme="dark"] .bank-modal-shield.success-shield {
+  color: #34D399;
+}
+
+.bank-modal-tag {
+  display: inline-block;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #D97706;
+  margin-bottom: 6px;
+}
+
+[data-theme="dark"] .bank-modal-tag {
+  color: #FBBF24;
+}
+
+.bank-modal-tag.success-tag {
+  color: #059669;
+}
+
+[data-theme="dark"] .bank-modal-tag.success-tag {
+  color: #34D399;
+}
+
+.bank-modal-title {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.bank-modal-desc {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.bank-modal-subdesc {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--text-tertiary);
+  margin-bottom: 22px;
+}
+
+.bank-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.bank-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bank-input-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.bank-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.bank-input-wrapper .input-icon {
+  position: absolute;
+  left: 14px;
+  color: var(--text-tertiary);
+  pointer-events: none;
+}
+
+.bank-text-input {
+  width: 100%;
+  padding: 13px 16px 13px 44px;
+  border-radius: 14px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-strong);
+  color: var(--text-primary);
+  font-family: var(--font-main);
+  font-size: 14.5px;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.bank-text-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: var(--surface);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.bank-btn-primary {
+  width: 100%;
+  padding: 14px 24px;
+  border-radius: var(--radius-pill);
+  background: var(--text-primary);
+  color: var(--surface);
+  border: 1px solid transparent;
+  font-family: var(--font-main);
+  font-size: 15px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.14);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s, box-shadow 0.2s, opacity 0.2s;
+  text-decoration: none;
+}
+
+[data-theme="dark"] .bank-btn-primary {
+  background: #FFFFFF;
+  color: #0A0D12;
+  box-shadow: 0 4px 18px rgba(255, 255, 255, 0.16);
+}
+
+.bank-btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.bank-btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.bank-error-msg {
+  font-size: 13px;
+  color: #EF4444;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 10px;
+  padding: 8px 12px;
+}
+
+.bank-security-notice {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  line-height: 1.45;
+  text-align: center;
+  display: block;
+  margin-top: 14px;
+}
+
+/* 6-digit OTP Inputs Grid */
+.otp-inputs-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  margin: 6px 0 10px 0;
+}
+
+.otp-digit {
+  width: 100%;
+  height: 54px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  font-family: monospace;
+  color: var(--text-primary);
+  background: var(--bg-subtle);
+  border: 1.5px solid var(--border-strong);
+  border-radius: 12px;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s, transform 0.15s;
+}
+
+.otp-digit:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: var(--surface);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+  transform: scale(1.04);
+}
+
+.otp-digit.filled {
+  border-color: var(--accent);
+}
+
+.bank-otp-nav-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+  font-size: 13px;
+}
+
+.bank-link-btn {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.bank-link-btn:hover {
+  opacity: 0.8;
+}
+
+.bank-link-btn:disabled {
+  color: var(--text-tertiary);
+  cursor: not-allowed;
+  text-decoration: none;
+}
+
+.bank-dev-banner {
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px dashed rgba(59, 130, 246, 0.35);
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 13px;
+  color: #2563EB;
+  margin-bottom: 12px;
+  text-align: center;
+  font-weight: 600;
+}
+
+[data-theme="dark"] .bank-dev-banner {
+  color: #60A5FA;
+}
+
+/* Success Step */
+.bank-deck-launch-box {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.deck-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.deck-label {
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-tertiary);
+}
+
+.deck-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+@media (max-width: 520px) {
+  .bank-deck-modal-card {
+    padding: 30px 20px 24px 20px;
+  }
+  .otp-digit {
+    height: 48px;
+    font-size: 20px;
+  }
+  .otp-inputs-grid {
+    gap: 6px;
+  }
+}
+@media (max-width: 380px) {
+  .split-cards-row {
+    grid-template-columns: 1fr !important;
+  }
+  .card-avatar,
+  .card-route {
+    min-height: 250px !important;
+  }
+}

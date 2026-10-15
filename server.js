@@ -19,7 +19,8 @@ const MIME_TYPES = {
   '.ico': 'image/x-icon',
   '.woff': 'font/woff',
   '.woff2': 'font/woff2',
-  '.ttf': 'font/ttf'
+  '.ttf': 'font/ttf',
+  '.pdf': 'application/pdf'
 };
 
 const server = http.createServer((req, res) => {
@@ -32,6 +33,70 @@ const server = http.createServer((req, res) => {
     }
     res.writeHead(200, { 'Content-Type': 'text/plain' });
     res.end('ok');
+    return;
+  }
+
+  // Handle API Endpoints for OTP verification & records
+  if (req.url.startsWith('/api/')) {
+    const apiPath = req.url.split('?')[0];
+
+    const sendJson = (status, obj) => {
+      res.writeHead(status, {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type'
+      });
+      res.end(JSON.stringify(obj));
+    };
+
+    if (req.method === 'OPTIONS') {
+      res.writeHead(200, {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type'
+      });
+      return res.end();
+    }
+
+    let bodyData = '';
+    req.on('data', chunk => { bodyData += chunk; });
+    req.on('end', async () => {
+      let body = {};
+      try { body = bodyData ? JSON.parse(bodyData) : {}; } catch (e) {}
+
+      const mockReq = {
+        method: req.method,
+        body,
+        headers: req.headers,
+        socket: req.socket
+      };
+      const mockRes = {
+        setHeader: (k, v) => res.setHeader(k, v),
+        status: (s) => ({
+          json: (d) => sendJson(s, d),
+          end: () => res.end()
+        })
+      };
+
+      try {
+        if (apiPath === '/api/send-otp') {
+          const handler = require('./api/send-otp');
+          return await handler(mockReq, mockRes);
+        } else if (apiPath === '/api/verify-otp') {
+          const handler = require('./api/verify-otp');
+          return await handler(mockReq, mockRes);
+        } else if (apiPath === '/api/otp-records') {
+          const handler = require('./api/otp-records');
+          return await handler(mockReq, mockRes);
+        } else {
+          return sendJson(404, { error: 'API endpoint not found' });
+        }
+      } catch (err) {
+        console.error('Server API error:', err);
+        return sendJson(500, { error: 'Internal server error' });
+      }
+    });
     return;
   }
 
@@ -62,7 +127,10 @@ const server = http.createServer((req, res) => {
 
     res.writeHead(200, {
       'Content-Type': contentType,
-      'Access-Control-Allow-Origin': '*'
+      'Access-Control-Allow-Origin': '*',
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'Pragma': 'no-cache',
+      'Expires': '0'
     });
 
     const stream = fs.createReadStream(filePath);

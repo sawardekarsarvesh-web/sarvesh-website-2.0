@@ -128,12 +128,12 @@ const CASE_STUDIES = [
     image: 'assets/images/card-intelli.jpg',
     intro: 'Transforming digital transaction banking and corporate cash management experiences through a unified, multi-brand, multi-tenant design system. Engineered to empower product and development teams to ship compliant, accessible financial interfaces at scale.',
     product: 'Enterprise Banking Design System',
-    role: 'Design Lead',
-    timeline: '2024 - Present',
+    role: 'UI/UX Design Lead',
+    timeline: '2024 - 2025',
     skills: 'Design Tokens, Multi-tenant Architecture, WCAG 2.1 AA, Banking Governance',
     team: 'Sarvesh Sawardekar (Design Lead), Intellect Design Arena Global Core Banking Team',
     problemTitle: 'Problem: Siloed Banking Portals & Fragmented Design Debt',
-    problemBody: 'Corporate banking applications across multiple international client banks (National Bank of Kuwait, Riyad Bank, National Bank of Fujairah, ANZ Bank) were built on disparate legacy frameworks, leading to high maintenance overhead and inconsistent user experiences.',
+    problemBody: 'Corporate banking applications across multiple international client banks (National Bank of Fujairah, National Bank of Kuwait, ADIB, ANZ Bank, Riyad Bank) were built on disparate legacy frameworks, leading to high maintenance overhead and inconsistent user experiences.',
     problemBullets: [
       'Duplicated engineering efforts across treasury, liquidity, trade finance, and payments modules.',
       'Accessibility non-compliance across complex data tables and transaction audit logs.',
@@ -244,6 +244,14 @@ function setTheme(theme) {
       themeSwitchDark.classList.remove('active');
     }
   }
+
+  // Dynamic Theme Label:
+  // On light mode it displays "Dark mode"
+  // On dark mode it displays "Light mode"
+  const themeLabels = document.querySelectorAll('.theme-toggle-label');
+  themeLabels.forEach(label => {
+    label.textContent = (theme === 'dark') ? 'Light mode' : 'Dark mode';
+  });
 
   if (navThemeToggle) {
     if (theme === 'dark') {
@@ -520,23 +528,23 @@ if (cursorFollower && window.matchMedia('(pointer: fine)').matches) {
   requestAnimationFrame(renderDubaiClock);
 })();
 
-// --- 8. INTERACTIVE CAREER RULER DIAL (LOCKED STRICTLY TO 8 YEARS) ---
+// --- 8. INTERACTIVE CAREER RULER DIAL (LOCKED STRICTLY TO 8+ YEARS) ---
 const RESTING_MILESTONE = {
-  company: 'Intellect Design Arena',
-  role: 'Design Lead',
-  years: 8,
+  company: 'Birbal AI UAE',
+  role: 'UI/UX Designer (TAMM Ecosystem)',
+  years: '8+',
   year: '2026'
 };
 
 const CAREER_MILESTONES = {
-  0: { company: 'UX Design Journey Starts', role: 'Product Design Foundation', years: 0, year: '2018' },
-  1: { company: 'Powerweave Software', role: 'Junior UI/UX Designer', years: 1, year: '2019' },
-  2: { company: 'Fluidscapes', role: 'UI/UX Designer', years: 2, year: '2020' },
-  3: { company: 'Fluidscapes', role: 'UI/UX Designer', years: 3, year: '2021' },
-  4: { company: 'ImpactGuru', role: 'Product Designer', years: 4, year: '2022' },
-  5: { company: 'ImpactGuru', role: 'Senior Product Designer', years: 5, year: '2023' },
-  6: { company: 'Clover Infotech', role: 'Senior UI/UX Designer', years: 6, year: '2024' },
-  7: { company: 'Intellect Design Arena', role: 'Senior Product Designer', years: 7, year: '2025' },
+  0: { company: 'UX Design Journey Starts', role: 'Design Foundation', years: 0, year: '2018' },
+  1: { company: 'Powerweave Software', role: 'UI/UX Designer', years: 1, year: '2019' },
+  2: { company: 'Fluidscapes Consultants', role: 'UI/UX Designer', years: 2, year: '2020' },
+  3: { company: 'Fluidscapes Consultants', role: 'UI/UX Designer', years: 3, year: '2021' },
+  4: { company: 'ImpactGuru', role: 'UI/UX Designer', years: 4, year: '2022' },
+  5: { company: 'ImpactGuru', role: 'UI/UX Designer', years: 5, year: '2023' },
+  6: { company: 'Clover Infotech (ICICI Lombard)', role: 'Senior UI/UX Designer', years: 6, year: '2024' },
+  7: { company: 'Intellect Design Arena', role: 'UI/UX Design Lead', years: 7, year: '2025' },
   8: RESTING_MILESTONE
 };
 
@@ -738,6 +746,13 @@ function initRecruiterAnalytics() {
     });
   });
 
+  // Track phone clicks
+  document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+    link.addEventListener('click', () => {
+      trackEvent('phone_click', { action: 'tel_link', phone: link.href.replace('tel:', '') });
+    });
+  });
+
   // Track Project Card Clicks
   document.querySelectorAll('.project-card[data-project-id]').forEach(card => {
     card.addEventListener('click', () => {
@@ -775,22 +790,92 @@ function initRecruiterAnalytics() {
       }, { once: true });
     });
 
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       trackEvent('contact_form_submit');
-      const submitBtn = contactForm.querySelector('button[type="submit"]');
+
+      const submitBtn = document.getElementById('formSubmitBtn') || contactForm.querySelector('button[type="submit"]');
+      const submitText = document.getElementById('formSubmitText');
+      const submitIcon = document.getElementById('formSubmitIcon');
+
+      const nameInput = contactForm.querySelector('[name="name"]');
+      const emailInput = contactForm.querySelector('[name="email"]');
+      const subjectInput = contactForm.querySelector('[name="subject"]');
+      const messageInput = contactForm.querySelector('[name="message"]');
+
+      const name = nameInput ? nameInput.value.trim() : '';
+      const email = emailInput ? emailInput.value.trim() : '';
+      const subject = subjectInput ? subjectInput.value.trim() : '';
+      const message = messageInput ? messageInput.value.trim() : '';
+
+      if (!name || !email || !message) {
+        showToast('Please fill out all required fields.');
+        return;
+      }
+
+      // Update hidden subject field for form submit
+      const hiddenSub = document.getElementById('formSubjectHidden');
+      if (hiddenSub) {
+        hiddenSub.value = `Portfolio Inquiry from ${name}${subject ? ': ' + subject : ''}`;
+      }
+
       if (submitBtn) {
         submitBtn.disabled = true;
-        submitBtn.textContent = 'Sending...';
-        setTimeout(() => {
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Message Sent! ✓';
+        if (submitText) submitText.textContent = 'Sending...';
+        if (submitIcon) submitIcon.style.opacity = '0.3';
+      }
+
+      try {
+        const payload = {
+          name: name,
+          email: email,
+          _subject: `Portfolio Message from ${name}${subject ? ': ' + subject : ''}`,
+          message: message,
+          _replyto: email,
+          _template: 'table',
+          _captcha: 'false'
+        };
+
+        const response = await fetch('https://formsubmit.co/ajax/sawardekarsarvesh@gmail.com', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+
+        if (response.ok && (data.success === 'true' || data.success === true || (data.message && data.message.toLowerCase().includes('success')))) {
+          if (submitText) submitText.textContent = 'Message Sent! ✓';
           contactForm.reset();
           showToast('Thank you! Your message has been sent to Sarvesh.');
-          setTimeout(() => {
-            submitBtn.textContent = 'Send Message →';
-          }, 3500);
-        }, 800);
+        } else if (data.message && data.message.includes('Activation')) {
+          if (submitText) submitText.textContent = 'Sent! Check Email';
+          contactForm.reset();
+          showToast('Form activation email sent to Sarvesh. Please confirm it once.');
+        } else {
+          throw new Error(data.message || 'Submission failed');
+        }
+      } catch (err) {
+        console.warn('FormSubmit AJAX notice:', err);
+        // Fallback: If network, CORS, or adblocker interrupts AJAX, offer direct mailto fallback
+        if (submitText) submitText.textContent = 'Opening Mail...';
+        showToast('Directing to email client so your message is delivered directly...');
+        const mailtoBody = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+        const mailtoUrl = `mailto:sawardekarsarvesh@gmail.com?subject=${encodeURIComponent(subject || 'Portfolio Inquiry from ' + name)}&body=${encodeURIComponent(mailtoBody)}`;
+        setTimeout(() => {
+          window.location.href = mailtoUrl;
+        }, 600);
+      } finally {
+        setTimeout(() => {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            if (submitText) submitText.textContent = 'Send Message';
+            if (submitIcon) submitIcon.style.opacity = '1';
+          }
+        }, 4000);
       }
     });
   }
@@ -820,36 +905,497 @@ function initScrollObserver() {
   });
 }
 
-// --- 13. ROUTE CARD (BOM -> DXB) TOUCH & CLICK FLIGHT MOTION ---
+// --- 13. ROUTE CARD (BOM -> DXB) HOVER & TOUCH FLIGHT MOTION ---
 function initRouteFlightInteraction() {
   const routeCard = document.querySelector('.card-route');
   if (!routeCard) return;
 
+  const arcPath = routeCard.querySelector('#routeFlightPath') || routeCard.querySelector('.route-arc-dashed');
+  const planeNode = routeCard.querySelector('#routePlaneNode') || routeCard.querySelector('.route-plane-node');
+  if (!arcPath || !planeNode) return;
+
+  let totalLength = 100;
+  try {
+    totalLength = arcPath.getTotalLength();
+  } catch (e) {
+    totalLength = 100;
+  }
+
+  // Set dasharray to totalLength for smooth dashoffset tracing
+  arcPath.style.strokeDasharray = `${totalLength}`;
+
+  // Helper to place plane at a given distance (0 to totalLength)
+  function setFlightPosition(dist) {
+    const clamped = Math.max(0, Math.min(totalLength, dist));
+    const pt = arcPath.getPointAtLength(clamped);
+    // Calculate tangent angle smoothly
+    const step = 0.8;
+    const ptAhead = arcPath.getPointAtLength(Math.min(totalLength, clamped + step));
+    const ptBehind = arcPath.getPointAtLength(Math.max(0, clamped - step));
+    const dx = ptAhead.x - ptBehind.x;
+    const dy = ptAhead.y - ptBehind.y;
+    const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+
+    planeNode.setAttribute('transform', `translate(${pt.x.toFixed(2)}, ${pt.y.toFixed(2)}) rotate(${angle.toFixed(2)})`);
+  }
+
+  // By default, park plane at destination DXB (totalLength) with dashed trail fully visible
+  setFlightPosition(totalLength);
+  arcPath.style.strokeDashoffset = '0';
+
+  let animFrameId = null;
   let isFlying = false;
-  const launchFlight = () => {
+
+  function triggerFlight() {
     if (isFlying) return;
     isFlying = true;
 
-    routeCard.classList.remove('is-flying');
-    void routeCard.offsetWidth; // Force reflow to retrigger animation
-    routeCard.classList.add('is-flying');
+    if (animFrameId) cancelAnimationFrame(animFrameId);
 
-    if (typeof trackEvent === 'function') {
-      trackEvent('flight_route_tap', { from: 'BOM', to: 'DXB' });
+    const duration = 1350; // ms: Apple-smooth easing
+    const startTime = performance.now();
+
+    // Smooth cubic ease-out
+    function easeOutCubic(t) {
+      return 1 - Math.pow(1 - t, 3);
     }
 
-    setTimeout(() => {
-      isFlying = false;
-    }, 1500);
-  };
+    function frame(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(1, elapsed / duration);
+      const eased = easeOutCubic(progress);
 
-  routeCard.addEventListener('click', launchFlight);
+      const currentDist = eased * totalLength;
+      setFlightPosition(currentDist);
+
+      // Dash offset reveals the line trailing smoothly behind the plane
+      arcPath.style.strokeDashoffset = `${totalLength * (1 - eased)}`;
+
+      if (progress < 1) {
+        animFrameId = requestAnimationFrame(frame);
+      } else {
+        setFlightPosition(totalLength);
+        arcPath.style.strokeDashoffset = '0';
+        isFlying = false;
+        if (typeof trackEvent === 'function') {
+          trackEvent('flight_route_interaction', { from: 'BOM', to: 'DXB' });
+        }
+      }
+    }
+
+    animFrameId = requestAnimationFrame(frame);
+  }
+
+  // Trigger on hover (mouseenter) - NOT in an infinite loop
+  routeCard.addEventListener('mouseenter', triggerFlight);
+  // Also support click / tap for touch/mobile devices
+  routeCard.addEventListener('click', triggerFlight);
   routeCard.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
-      launchFlight();
+      triggerFlight();
     }
   });
+}
+
+// --- 14. BANK PORTFOLIO PRESENTATION OTP AUTHENTICATION ---
+function initBankDeckAuth() {
+  const bankDeckCard = document.getElementById('bankDeckCard');
+  const openBankDeckBtn = document.getElementById('openBankDeckBtn');
+  const bankDeckModal = document.getElementById('bankDeckModal');
+  const closeBankModalBtn = document.getElementById('closeBankModalBtn');
+
+  if (!bankDeckModal) return;
+
+  const bankStepEmail = document.getElementById('bankStepEmail');
+  const bankStepOtp = document.getElementById('bankStepOtp');
+  const bankStepSuccess = document.getElementById('bankStepSuccess');
+
+  const bankEmailForm = document.getElementById('bankEmailForm');
+  const bankUserEmail = document.getElementById('bankUserEmail');
+  const sendOtpBtn = document.getElementById('sendOtpBtn');
+  const sendOtpText = document.getElementById('sendOtpText');
+  const sendOtpIcon = document.getElementById('sendOtpIcon');
+  const bankEmailError = document.getElementById('bankEmailError');
+
+  const displayTargetEmail = document.getElementById('displayTargetEmail');
+  const devOtpBanner = document.getElementById('devOtpBanner');
+  const bankOtpForm = document.getElementById('bankOtpForm');
+  const otpDigits = document.querySelectorAll('.otp-digit');
+  const verifyOtpBtn = document.getElementById('verifyOtpBtn');
+  const verifyOtpText = document.getElementById('verifyOtpText');
+  const verifyOtpIcon = document.getElementById('verifyOtpIcon');
+  const bankOtpError = document.getElementById('bankOtpError');
+
+  const resendOtpBtn = document.getElementById('resendOtpBtn');
+  const changeEmailBtn = document.getElementById('changeEmailBtn');
+  const deckDirectLink = document.getElementById('deckDirectLink');
+
+  let currentTargetEmail = '';
+  let resendCountdown = 0;
+  let resendInterval = null;
+
+  const FIGMA_DECK_DEFAULT = 'https://www.figma.com/deck/A0NRN98GqyeKguCKP742LO/Sarvesh_Sawardekar_Bank_Portfolio?node-id=0-20&t=V1WK0JkyoDSVvel7-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1';
+
+  function openModal() {
+    const isAlreadyVerified = sessionStorage.getItem('bank_deck_access') === 'true';
+
+    if (isAlreadyVerified) {
+      bankStepEmail.style.display = 'none';
+      bankStepOtp.style.display = 'none';
+      bankStepSuccess.style.display = 'block';
+    } else {
+      bankStepEmail.style.display = 'block';
+      bankStepOtp.style.display = 'none';
+      bankStepSuccess.style.display = 'none';
+      if (bankEmailError) bankEmailError.style.display = 'none';
+      if (bankOtpError) bankOtpError.style.display = 'none';
+      setTimeout(() => {
+        bankUserEmail?.focus();
+      }, 150);
+    }
+
+    bankDeckModal.classList.add('is-open');
+    bankDeckModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+
+    if (typeof trackEvent === 'function') {
+      trackEvent('bank_deck_modal_open', { verified: isAlreadyVerified });
+    }
+  }
+
+  function closeModal() {
+    bankDeckModal.classList.remove('is-open');
+    bankDeckModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (resendInterval) {
+      clearInterval(resendInterval);
+      resendInterval = null;
+    }
+  }
+
+  // Trigger modal
+  if (bankDeckCard) {
+    bankDeckCard.addEventListener('click', (e) => {
+      openModal();
+    });
+    bankDeckCard.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openModal();
+      }
+    });
+  }
+
+  if (openBankDeckBtn) {
+    openBankDeckBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openModal();
+    });
+  }
+
+  if (closeBankModalBtn) {
+    closeBankModalBtn.addEventListener('click', closeModal);
+  }
+
+  bankDeckModal.addEventListener('click', (e) => {
+    if (e.target === bankDeckModal) {
+      closeModal();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && bankDeckModal.classList.contains('is-open')) {
+      closeModal();
+    }
+  });
+
+  // Resend Countdown Timer
+  function startResendTimer() {
+    if (resendInterval) clearInterval(resendInterval);
+    resendCountdown = 60;
+    if (resendOtpBtn) {
+      resendOtpBtn.disabled = true;
+      resendOtpBtn.textContent = `Resend in ${resendCountdown}s`;
+    }
+    resendInterval = setInterval(() => {
+      resendCountdown--;
+      if (resendCountdown <= 0) {
+        clearInterval(resendInterval);
+        resendInterval = null;
+        if (resendOtpBtn) {
+          resendOtpBtn.disabled = false;
+          resendOtpBtn.textContent = 'Resend code';
+        }
+      } else {
+        if (resendOtpBtn) {
+          resendOtpBtn.textContent = `Resend in ${resendCountdown}s`;
+        }
+      }
+    }, 1000);
+  }
+
+  // Step 1: Send OTP
+  if (bankEmailForm) {
+    bankEmailForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = bankUserEmail.value.trim().toLowerCase();
+      if (!email) return;
+
+      if (bankEmailError) bankEmailError.style.display = 'none';
+      if (sendOtpBtn) {
+        sendOtpBtn.disabled = true;
+        if (sendOtpText) sendOtpText.textContent = 'Sending Code...';
+        if (sendOtpIcon) sendOtpIcon.style.opacity = '0.3';
+      }
+
+      try {
+        const response = await fetch('/api/send-otp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          currentTargetEmail = email;
+          if (displayTargetEmail) displayTargetEmail.textContent = email;
+
+          // Handle development hint if present
+          if (devOtpBanner) {
+            if (data.devHint) {
+              devOtpBanner.textContent = `Development Preview: Your code is ${data.devHint.match(/\d{6}/)?.[0] || '123456'}`;
+              devOtpBanner.style.display = 'block';
+            } else {
+              devOtpBanner.style.display = 'none';
+            }
+          }
+
+          // Transition to OTP step
+          bankStepEmail.style.display = 'none';
+          bankStepOtp.style.display = 'block';
+
+          // Clear inputs
+          otpDigits.forEach(input => {
+            input.value = '';
+            input.classList.remove('filled');
+          });
+
+          setTimeout(() => {
+            otpDigits[0]?.focus();
+          }, 150);
+
+          startResendTimer();
+          if (typeof showToast === 'function') {
+            showToast(`Verification code sent to ${email}`);
+          }
+        } else {
+          if (bankEmailError) {
+            bankEmailError.textContent = data.error || 'Failed to send code. Please try again.';
+            bankEmailError.style.display = 'block';
+          }
+        }
+      } catch (err) {
+        console.error('Send OTP error:', err);
+        if (bankEmailError) {
+          bankEmailError.textContent = 'Network error contacting verification server. Please try again.';
+          bankEmailError.style.display = 'block';
+        }
+      } finally {
+        if (sendOtpBtn) {
+          sendOtpBtn.disabled = false;
+          if (sendOtpText) sendOtpText.textContent = 'Send Verification Code';
+          if (sendOtpIcon) sendOtpIcon.style.opacity = '1';
+        }
+      }
+    });
+  }
+
+  // OTP Digits Navigation & Auto-Submit
+  otpDigits.forEach((digitInput, idx) => {
+    digitInput.addEventListener('input', (e) => {
+      const val = digitInput.value.replace(/\D/g, '');
+      digitInput.value = val ? val[0] : '';
+
+      if (digitInput.value) {
+        digitInput.classList.add('filled');
+        if (idx < otpDigits.length - 1) {
+          otpDigits[idx + 1].focus();
+        }
+      } else {
+        digitInput.classList.remove('filled');
+      }
+
+      // Check if all 6 digits entered
+      const allDigits = Array.from(otpDigits).map(d => d.value).join('');
+      if (allDigits.length === 6) {
+        triggerVerifyOtp(allDigits);
+      }
+    });
+
+    digitInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Backspace' && !digitInput.value && idx > 0) {
+        otpDigits[idx - 1].focus();
+      } else if (e.key === 'ArrowLeft' && idx > 0) {
+        otpDigits[idx - 1].focus();
+      } else if (e.key === 'ArrowRight' && idx < otpDigits.length - 1) {
+        otpDigits[idx + 1].focus();
+      }
+    });
+
+    digitInput.addEventListener('paste', (e) => {
+      e.preventDefault();
+      const pasteData = (e.clipboardData || window.clipboardData).getData('text');
+      const cleanDigits = pasteData.replace(/\D/g, '').slice(0, 6);
+
+      if (cleanDigits) {
+        cleanDigits.split('').forEach((char, i) => {
+          if (otpDigits[i]) {
+            otpDigits[i].value = char;
+            otpDigits[i].classList.add('filled');
+          }
+        });
+
+        const nextFocus = Math.min(cleanDigits.length, otpDigits.length - 1);
+        otpDigits[nextFocus].focus();
+
+        if (cleanDigits.length === 6) {
+          triggerVerifyOtp(cleanDigits);
+        }
+      }
+    });
+  });
+
+  async function triggerVerifyOtp(code) {
+    if (!currentTargetEmail || !code || code.length !== 6) return;
+
+    if (bankOtpError) bankOtpError.style.display = 'none';
+    if (verifyOtpBtn) {
+      verifyOtpBtn.disabled = true;
+      if (verifyOtpText) verifyOtpText.textContent = 'Verifying Code...';
+      if (verifyOtpIcon) verifyOtpIcon.style.opacity = '0.3';
+    }
+
+    try {
+      const response = await fetch('/api/verify-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: currentTargetEmail, otp: code })
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        const deckUrl = data.deckUrl || FIGMA_DECK_DEFAULT;
+        sessionStorage.setItem('bank_deck_access', 'true');
+        sessionStorage.setItem('bank_deck_email', currentTargetEmail);
+
+        if (deckDirectLink) {
+          deckDirectLink.href = deckUrl;
+        }
+
+        // Show success screen
+        bankStepOtp.style.display = 'none';
+        bankStepSuccess.style.display = 'block';
+
+        if (typeof showToast === 'function') {
+          showToast('Access granted! Opening Bank Portfolio Presentation...');
+        }
+
+        if (typeof trackEvent === 'function') {
+          trackEvent('bank_deck_verified', { email: currentTargetEmail });
+        }
+
+        // Automatically open the presentation
+        setTimeout(() => {
+          window.open(deckUrl, '_blank');
+        }, 600);
+      } else {
+        if (bankOtpError) {
+          bankOtpError.textContent = data.error || 'Invalid or expired verification code.';
+          bankOtpError.style.display = 'block';
+        }
+        // Shake animation on OTP digits
+        otpDigits.forEach(d => {
+          d.style.borderColor = '#EF4444';
+          setTimeout(() => { d.style.borderColor = ''; }, 1200);
+        });
+      }
+    } catch (err) {
+      console.error('Verify OTP error:', err);
+      if (bankOtpError) {
+        bankOtpError.textContent = 'Network error verifying code. Please try again.';
+        bankOtpError.style.display = 'block';
+      }
+    } finally {
+      if (verifyOtpBtn) {
+        verifyOtpBtn.disabled = false;
+        if (verifyOtpText) verifyOtpText.textContent = 'Verify & Open Presentation';
+        if (verifyOtpIcon) verifyOtpIcon.style.opacity = '1';
+      }
+    }
+  }
+
+  if (bankOtpForm) {
+    bankOtpForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const code = Array.from(otpDigits).map(d => d.value).join('');
+      triggerVerifyOtp(code);
+    });
+  }
+
+  // Change Email Action
+  if (changeEmailBtn) {
+    changeEmailBtn.addEventListener('click', () => {
+      bankStepOtp.style.display = 'none';
+      bankStepEmail.style.display = 'block';
+      if (bankEmailError) bankEmailError.style.display = 'none';
+      setTimeout(() => {
+        bankUserEmail?.focus();
+        bankUserEmail?.select();
+      }, 100);
+    });
+  }
+
+  // Resend OTP Action
+  if (resendOtpBtn) {
+    resendOtpBtn.addEventListener('click', async () => {
+      if (!currentTargetEmail || resendCountdown > 0) return;
+
+      resendOtpBtn.disabled = true;
+      resendOtpBtn.textContent = 'Resending...';
+
+      try {
+        const response = await fetch('/api/send-otp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: currentTargetEmail })
+        });
+        const data = await response.json();
+        if (response.ok && data.success) {
+          if (devOtpBanner && data.devHint) {
+            devOtpBanner.textContent = `Development Preview: New code is ${data.devHint.match(/\d{6}/)?.[0] || '123456'}`;
+            devOtpBanner.style.display = 'block';
+          }
+          if (typeof showToast === 'function') {
+            showToast(`New verification code sent to ${currentTargetEmail}`);
+          }
+          startResendTimer();
+        } else {
+          if (bankOtpError) {
+            bankOtpError.textContent = data.error || 'Failed to resend code.';
+            bankOtpError.style.display = 'block';
+          }
+          resendOtpBtn.disabled = false;
+          resendOtpBtn.textContent = 'Resend code';
+        }
+      } catch (err) {
+        resendOtpBtn.disabled = false;
+        resendOtpBtn.textContent = 'Resend code';
+      }
+    });
+  }
 }
 
 // Initialize on DOM ready
@@ -860,6 +1406,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initRecruiterAnalytics();
   initRouteFlightInteraction();
   resetToRestingMilestone();
+  initBankDeckAuth();
 });
+
 
 

@@ -9,6 +9,7 @@
     "build": "node build.js"
   },
   "dependencies": {
-    "@vercel/speed-insights": "^2.0.0"
+    "@vercel/speed-insights": "^2.0.0",
+    "nodemailer": "^10.1.1"
   }
 }

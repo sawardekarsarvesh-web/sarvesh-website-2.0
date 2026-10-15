@@ -1,0 +1,35 @@
+[
+  {
+    "id": "otp_1791984125019_7f2aht",
+    "email": "test.recruiter@emiratesnbd.com",
+    "otp": "339383",
+    "createdAt": "2026-10-14T13:22:05.019Z",
+    "expiresAt": "2026-10-14T13:32:05.019Z",
+    "verified": true,
+    "verifiedAt": "2026-10-14T13:23:23.530Z",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Microsoft Windows 10.0.26300; en-US) PowerShell/7.6.6"
+  },
+  {
+    "id": "otp_1791984405055_bud9a9",
+    "email": "recruiter@emiratesnbd.com",
+    "otp": "212982",
+    "createdAt": "2026-10-14T13:26:45.055Z",
+    "expiresAt": "2026-10-14T13:36:45.055Z",
+    "verified": true,
+    "verifiedAt": "2026-10-14T13:27:18.681Z",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+  },
+  {
+    "id": "otp_1791986443329_edyahi",
+    "email": "sawardekarsarvesh@gmail.com",
+    "otp": "698173",
+    "createdAt": "2026-10-14T14:00:43.329Z",
+    "expiresAt": "2026-10-14T14:10:43.329Z",
+    "verified": true,
+    "verifiedAt": "2026-10-14T14:00:48.962Z",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+  }
+]
