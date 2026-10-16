@@ -22,8 +22,8 @@ module.exports = async function handler(req, res) {
     }
     body = body || {};
 
-    const { email, otp } = body;
-    const result = verifyUserOtp(email, otp);
+    const { email, otp, token } = body;
+    const result = verifyUserOtp(email, otp, token);
 
     if (!result.success) {
       return res.status(400).json(result);

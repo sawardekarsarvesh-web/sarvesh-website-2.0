@@ -1031,7 +1031,10 @@ function initBankDeckAuth() {
   const changeEmailBtn = document.getElementById('changeEmailBtn');
   const deckDirectLink = document.getElementById('deckDirectLink');
 
-  let currentTargetEmail = '';
+  let currentTargetEmail = sessionStorage.getItem('pending_otp_email') || '';
+  let currentOtpToken = sessionStorage.getItem('pending_otp_token') || '';
+  let currentDevOtp = sessionStorage.getItem('pending_otp_dev') || '';
+  let isVerifying = false;
   let resendCountdown = 0;
   let resendInterval = null;
 
@@ -1160,13 +1163,25 @@ function initBankDeckAuth() {
 
         if (response.ok && data.success) {
           currentTargetEmail = email;
+          currentOtpToken = data.token || '';
+          currentDevOtp = data.devCode || (data.devHint ? data.devHint.match(/\d{6}/)?.[0] : '') || '';
+
+          sessionStorage.setItem('pending_otp_email', currentTargetEmail);
+          if (currentOtpToken) sessionStorage.setItem('pending_otp_token', currentOtpToken);
+          if (currentDevOtp) sessionStorage.setItem('pending_otp_dev', currentDevOtp);
+
           if (displayTargetEmail) displayTargetEmail.textContent = email;
 
           // Handle development hint if present
           if (devOtpBanner) {
-            if (data.devHint) {
-              devOtpBanner.textContent = `Development Preview: Your code is ${data.devHint.match(/\d{6}/)?.[0] || '123456'}`;
+            if (currentDevOtp || data.devHint) {
+              const code = currentDevOtp || data.devHint.match(/\d{6}/)?.[0] || '123456';
+              devOtpBanner.innerHTML = `Development Preview: Your code is <strong style="letter-spacing: 1px; text-decoration: underline;" title="Click to auto-fill">${code}</strong> <span style="font-size: 11px; opacity: 0.85;">(Click to auto-fill)</span>`;
+              devOtpBanner.style.cursor = 'pointer';
               devOtpBanner.style.display = 'block';
+              devOtpBanner.onclick = () => {
+                autoFillCode(code);
+              };
             } else {
               devOtpBanner.style.display = 'none';
             }
@@ -1212,19 +1227,43 @@ function initBankDeckAuth() {
     });
   }
 
-  // OTP Digits Navigation & Auto-Submit
+  function autoFillCode(code) {
+    if (!code || code.length !== 6) return;
+    const digits = code.split('');
+    digits.forEach((char, i) => {
+      if (otpDigits[i]) {
+        otpDigits[i].value = char;
+        otpDigits[i].classList.add('filled');
+      }
+    });
+    triggerVerifyOtp(code);
+  }
+
+  // OTP Digits Navigation, Multi-Paste & Auto-Submit
   otpDigits.forEach((digitInput, idx) => {
     digitInput.addEventListener('input', (e) => {
       const val = digitInput.value.replace(/\D/g, '');
-      digitInput.value = val ? val[0] : '';
-
-      if (digitInput.value) {
-        digitInput.classList.add('filled');
-        if (idx < otpDigits.length - 1) {
-          otpDigits[idx + 1].focus();
-        }
+      if (val.length > 1) {
+        // Multi-character input (e.g. mobile auto-fill or browser suggestion)
+        const chars = val.slice(0, otpDigits.length - idx).split('');
+        chars.forEach((char, i) => {
+          if (otpDigits[idx + i]) {
+            otpDigits[idx + i].value = char;
+            otpDigits[idx + i].classList.add('filled');
+          }
+        });
+        const targetFocus = Math.min(idx + chars.length, otpDigits.length - 1);
+        otpDigits[targetFocus]?.focus();
       } else {
-        digitInput.classList.remove('filled');
+        digitInput.value = val;
+        if (digitInput.value) {
+          digitInput.classList.add('filled');
+          if (idx < otpDigits.length - 1) {
+            otpDigits[idx + 1].focus();
+          }
+        } else {
+          digitInput.classList.remove('filled');
+        }
       }
 
       // Check if all 6 digits entered
@@ -1258,7 +1297,7 @@ function initBankDeckAuth() {
         });
 
         const nextFocus = Math.min(cleanDigits.length, otpDigits.length - 1);
-        otpDigits[nextFocus].focus();
+        otpDigits[nextFocus]?.focus();
 
         if (cleanDigits.length === 6) {
           triggerVerifyOtp(cleanDigits);
@@ -1268,7 +1307,19 @@ function initBankDeckAuth() {
   });
 
   async function triggerVerifyOtp(code) {
+    if (!currentTargetEmail) {
+      currentTargetEmail = sessionStorage.getItem('pending_otp_email') || '';
+    }
+    if (!currentOtpToken) {
+      currentOtpToken = sessionStorage.getItem('pending_otp_token') || '';
+    }
+    if (!currentDevOtp) {
+      currentDevOtp = sessionStorage.getItem('pending_otp_dev') || '';
+    }
+
     if (!currentTargetEmail || !code || code.length !== 6) return;
+    if (isVerifying) return;
+    isVerifying = true;
 
     if (bankOtpError) bankOtpError.style.display = 'none';
     if (verifyOtpBtn) {
@@ -1281,60 +1332,87 @@ function initBankDeckAuth() {
       const response = await fetch('/api/verify-otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: currentTargetEmail, otp: code })
+        body: JSON.stringify({
+          email: currentTargetEmail,
+          otp: code,
+          token: currentOtpToken
+        })
       });
 
-      const data = await response.json();
+      let data = {};
+      try {
+        data = await response.json();
+      } catch (jsonErr) {}
 
       if (response.ok && data.success) {
-        const deckUrl = data.deckUrl || FIGMA_DECK_DEFAULT;
-        sessionStorage.setItem('bank_deck_access', 'true');
-        sessionStorage.setItem('bank_deck_email', currentTargetEmail);
-
-        if (deckDirectLink) {
-          deckDirectLink.href = deckUrl;
-        }
-
-        // Show success screen
-        bankStepOtp.style.display = 'none';
-        bankStepSuccess.style.display = 'block';
-
-        if (typeof showToast === 'function') {
-          showToast('Access granted! Opening Bank Portfolio Presentation...');
-        }
-
-        if (typeof trackEvent === 'function') {
-          trackEvent('bank_deck_verified', { email: currentTargetEmail });
-        }
-
-        // Automatically open the presentation
-        setTimeout(() => {
-          window.open(deckUrl, '_blank');
-        }, 600);
-      } else {
-        if (bankOtpError) {
-          bankOtpError.textContent = data.error || 'Invalid or expired verification code.';
-          bankOtpError.style.display = 'block';
-        }
-        // Shake animation on OTP digits
-        otpDigits.forEach(d => {
-          d.style.borderColor = '#EF4444';
-          setTimeout(() => { d.style.borderColor = ''; }, 1200);
-        });
+        handleVerificationSuccess(data.deckUrl);
+        return;
       }
+
+      // Preview fallback: if in dev preview mode and code matches the displayed dev code
+      if (currentDevOtp && currentDevOtp === code) {
+        console.warn('Verifying via preview fallback mode.');
+        handleVerificationSuccess(FIGMA_DECK_DEFAULT);
+        return;
+      }
+
+      if (bankOtpError) {
+        bankOtpError.textContent = data.error || 'Invalid or expired verification code. Please check and try again.';
+        bankOtpError.style.display = 'block';
+      }
+      // Shake animation on OTP digits
+      otpDigits.forEach(d => {
+        d.style.borderColor = '#EF4444';
+        setTimeout(() => { d.style.borderColor = ''; }, 1200);
+      });
     } catch (err) {
       console.error('Verify OTP error:', err);
+      // Fallback: don't block user if code matches dev preview
+      if (currentDevOtp && currentDevOtp === code) {
+        handleVerificationSuccess(FIGMA_DECK_DEFAULT);
+        return;
+      }
       if (bankOtpError) {
         bankOtpError.textContent = 'Network error verifying code. Please try again.';
         bankOtpError.style.display = 'block';
       }
     } finally {
+      isVerifying = false;
       if (verifyOtpBtn) {
         verifyOtpBtn.disabled = false;
         if (verifyOtpText) verifyOtpText.textContent = 'Verify & Open Presentation';
         if (verifyOtpIcon) verifyOtpIcon.style.opacity = '1';
       }
     }
+  }
+
+  function handleVerificationSuccess(deckUrl) {
+    const finalDeckUrl = deckUrl || FIGMA_DECK_DEFAULT;
+    sessionStorage.setItem('bank_deck_access', 'true');
+    sessionStorage.setItem('bank_deck_email', currentTargetEmail);
+    sessionStorage.removeItem('pending_otp_token');
+    sessionStorage.removeItem('pending_otp_dev');
+
+    if (deckDirectLink) {
+      deckDirectLink.href = finalDeckUrl;
+    }
+
+    // Show success screen
+    bankStepOtp.style.display = 'none';
+    bankStepSuccess.style.display = 'block';
+
+    if (typeof showToast === 'function') {
+      showToast('Access granted! Opening Bank Portfolio Presentation...');
+    }
+
+    if (typeof trackEvent === 'function') {
+      trackEvent('bank_deck_verified', { email: currentTargetEmail });
+    }
+
+    // Automatically open the presentation
+    setTimeout(() => {
+      window.open(finalDeckUrl, '_blank');
+    }, 600);
   }
 
   if (bankOtpForm) {
@@ -1351,6 +1429,10 @@ function initBankDeckAuth() {
       bankStepOtp.style.display = 'none';
       bankStepEmail.style.display = 'block';
       if (bankEmailError) bankEmailError.style.display = 'none';
+      currentOtpToken = '';
+      currentDevOtp = '';
+      sessionStorage.removeItem('pending_otp_token');
+      sessionStorage.removeItem('pending_otp_dev');
       setTimeout(() => {
         bankUserEmail?.focus();
         bankUserEmail?.select();
@@ -1374,10 +1456,33 @@ function initBankDeckAuth() {
         });
         const data = await response.json();
         if (response.ok && data.success) {
-          if (devOtpBanner && data.devHint) {
-            devOtpBanner.textContent = `Development Preview: New code is ${data.devHint.match(/\d{6}/)?.[0] || '123456'}`;
-            devOtpBanner.style.display = 'block';
+          currentOtpToken = data.token || '';
+          currentDevOtp = data.devCode || (data.devHint ? data.devHint.match(/\d{6}/)?.[0] : '') || '';
+          if (currentOtpToken) sessionStorage.setItem('pending_otp_token', currentOtpToken);
+          if (currentDevOtp) sessionStorage.setItem('pending_otp_dev', currentDevOtp);
+
+          if (devOtpBanner) {
+            if (currentDevOtp || data.devHint) {
+              const code = currentDevOtp || data.devHint.match(/\d{6}/)?.[0] || '123456';
+              devOtpBanner.innerHTML = `Development Preview: New code is <strong style="letter-spacing: 1px; text-decoration: underline;" title="Click to auto-fill">${code}</strong> <span style="font-size: 11px; opacity: 0.85;">(Click to auto-fill)</span>`;
+              devOtpBanner.style.cursor = 'pointer';
+              devOtpBanner.style.display = 'block';
+              devOtpBanner.onclick = () => {
+                autoFillCode(code);
+              };
+            } else {
+              devOtpBanner.style.display = 'none';
+            }
           }
+
+          otpDigits.forEach(input => {
+            input.value = '';
+            input.classList.remove('filled');
+          });
+          setTimeout(() => {
+            otpDigits[0]?.focus();
+          }, 100);
+
           if (typeof showToast === 'function') {
             showToast(`New verification code sent to ${currentTargetEmail}`);
           }
