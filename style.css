@@ -1,8 +1,3 @@
-/* ==========================================================================
-   dousanmiao.com Structure Replication System for uxsarvesh.in
-   Aesthetics: Modern Bento Grid, Open Runde, Glassmorphism, Micro-interactions
-   ========================================================================== */
-
 /* --- 1. FONTS & DESIGN TOKENS --- */
 @import url('https://cdn.jsdelivr.net/npm/@fontsource/open-runde@5.1.0/index.css');
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
@@ -17,38 +12,38 @@
   --text-primary: #10141A;
   --text-secondary: #576071;
   --text-tertiary: #8993A4;
-  
+
   --border-subtle: rgba(0, 0, 0, 0.05);
   --border-strong: rgba(0, 0, 0, 0.1);
   --border-card: rgba(0, 0, 0, 0.04);
-  
+
   --card-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.04), 0 12px 32px -4px rgba(0, 0, 0, 0.03);
   --card-shadow-hover: 0 16px 40px -8px rgba(0, 0, 0, 0.08);
-  
+
   --accent: #E55826;
   --accent-soft: rgba(229, 88, 38, 0.1);
   --green-status: #10B981;
   --green-status-bg: rgba(16, 185, 129, 0.12);
   --blue-status: #3B82F6;
   --blue-status-bg: rgba(59, 130, 246, 0.12);
-  
+
   --btn-bg: #FFFFFF;
   --btn-border: rgba(0, 0, 0, 0.08);
   --btn-text: #10141A;
   --btn-shadow: 0 2px 6px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  
+
   --glass-bg: rgba(255, 255, 255, 0.72);
   --glass-blur: blur(20px);
   --glass-border: rgba(255, 255, 255, 0.5);
   --glass-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.05), inset 0 1px 1px 0 rgba(255, 255, 255, 0.75);
-  
+
   --radius-card: 30px;
   --radius-inner: 20px;
   --radius-pill: 9999px;
-  
+
   --font-main: 'Open Runde', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
-  
+
   --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-fast: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -63,14 +58,14 @@
   --text-primary: #F4F6F9;
   --text-secondary: #9AA3B4;
   --text-tertiary: #60697B;
-  
+
   --border-subtle: rgba(255, 255, 255, 0.06);
   --border-strong: rgba(255, 255, 255, 0.14);
   --border-card: rgba(255, 255, 255, 0.07);
-  
+
   --card-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.6), 0 16px 40px -6px rgba(0, 0, 0, 0.5);
   --card-shadow-hover: 0 20px 48px -6px rgba(0, 0, 0, 0.8);
-  
+
   --btn-bg: #1F242D;
   --btn-border: rgba(255, 255, 255, 0.12);
   --btn-text: #F4F6F9;
@@ -83,7 +78,9 @@
 }
 
 /* --- 2. BASE RESETS & SETUP --- */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -97,7 +94,7 @@ html {
 
 body {
   background-color: var(--bg);
-  background-image: 
+  background-image:
     radial-gradient(at 10% 12%, rgba(229, 88, 38, 0.04) 0px, transparent 48%),
     radial-gradient(at 90% 88%, rgba(59, 130, 246, 0.04) 0px, transparent 48%);
   background-attachment: fixed;
@@ -112,7 +109,7 @@ body {
 }
 
 [data-theme="dark"] body {
-  background-image: 
+  background-image:
     radial-gradient(at 15% 10%, rgba(229, 88, 38, 0.06) 0px, transparent 48%),
     radial-gradient(at 85% 90%, rgba(37, 99, 235, 0.06) 0px, transparent 48%);
 }
@@ -123,7 +120,8 @@ img {
   display: block;
 }
 
-button, a {
+button,
+a {
   font-family: inherit;
   color: inherit;
   text-decoration: none;
@@ -341,6 +339,101 @@ button, a {
   padding: 0;
 }
 
+/* Card 6: Document Retrieval AI Chatbot (FDF) */
+.card-fdf {
+  min-height: 520px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.card-fdf .card-media-wrapper {
+  height: 400px;
+  background: radial-gradient(circle at 50% 28%, rgba(179, 161, 106, 0.18), rgba(179, 161, 106, 0.04) 65%, transparent 85%), #f8fafc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 16px 14px 46px 14px;
+}
+
+[data-theme="dark"] .card-fdf .card-media-wrapper {
+  background: radial-gradient(circle at 50% 28%, rgba(179, 161, 106, 0.15), rgba(179, 161, 106, 0.02) 65%, transparent 85%), #0d121a;
+}
+
+.card-fdf .card-media-wrapper img {
+  width: auto;
+  max-width: 100%;
+  height: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 28px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.14), 0 2px 6px rgba(0, 0, 0, 0.04);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease;
+}
+
+[data-theme="dark"] .card-fdf .card-media-wrapper img {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 18px 40px -8px rgba(0, 0, 0, 0.5);
+}
+
+.card-fdf:hover .card-media-wrapper img {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 22px 42px -6px rgba(179, 161, 106, 0.28);
+}
+
+/* Micro-badge for Document Retrieval AI Chatbot */
+.card-ai-badge {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 14px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(179, 161, 106, 0.35);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #003C71;
+  text-transform: uppercase;
+  z-index: 5;
+  pointer-events: none;
+  white-space: nowrap;
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme="dark"] .card-ai-badge {
+  background: rgba(18, 22, 28, 0.92);
+  border-color: rgba(179, 161, 106, 0.4);
+  color: #D4C38E;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.card-ai-badge .ai-sparkle {
+  color: #B3A16A;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+  animation: none !important;
+}
+
 /* Live Radar Beacon Micro-Demo (Pattern 3: HalaPark 2.0) */
 .map-radar-beacon {
   position: absolute;
@@ -388,9 +481,11 @@ button, a {
     transform: scale(0.3);
     opacity: 0.85;
   }
+
   80% {
     opacity: 0.15;
   }
+
   100% {
     transform: scale(1.75);
     opacity: 0;
@@ -481,10 +576,12 @@ button, a {
     height: 25%;
     opacity: 0.6;
   }
+
   50% {
     height: 95%;
     opacity: 1;
   }
+
   100% {
     height: 45%;
     opacity: 0.75;
@@ -540,11 +637,14 @@ button, a {
 }
 
 @keyframes pulse-dot {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
     transform: scale(1);
     box-shadow: 0 0 8px currentColor;
   }
+
   50% {
     opacity: 0.45;
     transform: scale(0.8);
@@ -927,6 +1027,7 @@ button, a {
 [data-theme="dark"] .offering-badge.green {
   color: #34D399;
 }
+
 [data-theme="dark"] .offering-badge.blue {
   color: #60A5FA;
 }
@@ -1682,7 +1783,7 @@ button, a {
     flex-direction: column !important;
     gap: 20px !important;
   }
-  
+
   .bento-col {
     display: contents !important;
   }
@@ -1747,13 +1848,23 @@ button, a {
     order: 11 !important;
   }
 
-  .card-aura-gold, .card-invusprop, .card-halapark, .card-icici, .card-intelli {
+  .card-fdf {
+    order: 3 !important;
+  }
+
+  .card-aura-gold,
+  .card-invusprop,
+  .card-halapark,
+  .card-icici,
+  .card-intelli,
+  .card-fdf {
     min-height: auto;
   }
 
   .card-aura-gold .card-media-wrapper,
-  .card-invusprop .card-media-wrapper {
-    height: 320px;
+  .card-invusprop .card-media-wrapper,
+  .card-fdf .card-media-wrapper {
+    height: 340px;
   }
 
   .card-halapark .card-media-wrapper,
@@ -1809,7 +1920,7 @@ button, a {
     font-size: 13px !important;
   }
 
-  .hero-affiliation-row > span:first-child {
+  .hero-affiliation-row>span:first-child {
     font-weight: 600 !important;
     color: var(--text-tertiary) !important;
     font-size: 12px !important;
@@ -2016,25 +2127,25 @@ button, a {
   .card-intelli .card-media-wrapper {
     height: 220px;
   }
-  
+
   .modal-scrollable-body {
     padding: 20px;
     gap: 24px;
   }
-  
+
   .modal-meta-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
-  
+
   .modal-header-bar {
     padding: 16px 20px;
   }
-  
+
   .modal-floating-nav {
     display: none;
   }
-  
+
   .modal-cta-box {
     flex-direction: column;
     align-items: flex-start;
@@ -2052,6 +2163,7 @@ button, a {
     opacity: 0;
     transform: translateY(24px) scale(0.98);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -2078,40 +2190,75 @@ button, a {
 
 /* Accessible Reduced Motion (WCAG & MOTION-SKILL Compliance) */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+
   .stagger-in,
   .reveal-on-scroll {
     opacity: 1 !important;
     transform: none !important;
     animation: none !important;
   }
+
   .project-card .card-media-wrapper img,
   .project-card:hover,
   .bento-card:hover {
     transform: none !important;
   }
+
   /* Pattern 1: Freeze orbiting icons in balanced static layout */
   .orbit-track,
   .orbit-node,
   .orbit-chip {
     animation: none !important;
   }
-  .orbit-node[data-index="0"] { transform: rotate(0deg) translateX(var(--orbit-radius, 125px)) rotate(0deg) !important; }
-  .orbit-node[data-index="1"] { transform: rotate(180deg) translateX(var(--orbit-radius, 125px)) rotate(-180deg) !important; }
-  .orbit-node[data-index="2"] { transform: rotate(40deg) translateX(var(--orbit-radius, 175px)) rotate(-40deg) !important; }
-  .orbit-node[data-index="3"] { transform: rotate(160deg) translateX(var(--orbit-radius, 175px)) rotate(-160deg) !important; }
-  .orbit-node[data-index="4"] { transform: rotate(280deg) translateX(var(--orbit-radius, 175px)) rotate(-280deg) !important; }
 
-  .orbit-system-wrapper.mini .orbit-node[data-index="0"] { transform: rotate(0deg) translateX(var(--orbit-radius, 63px)) rotate(0deg) !important; }
-  .orbit-system-wrapper.mini .orbit-node[data-index="1"] { transform: rotate(180deg) translateX(var(--orbit-radius, 63px)) rotate(-180deg) !important; }
-  .orbit-system-wrapper.mini .orbit-node[data-index="2"] { transform: rotate(30deg) translateX(var(--orbit-radius, 88px)) rotate(-30deg) !important; }
-  .orbit-system-wrapper.mini .orbit-node[data-index="3"] { transform: rotate(150deg) translateX(var(--orbit-radius, 88px)) rotate(-150deg) !important; }
-  .orbit-system-wrapper.mini .orbit-node[data-index="4"] { transform: rotate(270deg) translateX(var(--orbit-radius, 88px)) rotate(-270deg) !important; }
+  .orbit-node[data-index="0"] {
+    transform: rotate(0deg) translateX(var(--orbit-radius, 125px)) rotate(0deg) !important;
+  }
+
+  .orbit-node[data-index="1"] {
+    transform: rotate(180deg) translateX(var(--orbit-radius, 125px)) rotate(-180deg) !important;
+  }
+
+  .orbit-node[data-index="2"] {
+    transform: rotate(40deg) translateX(var(--orbit-radius, 175px)) rotate(-40deg) !important;
+  }
+
+  .orbit-node[data-index="3"] {
+    transform: rotate(160deg) translateX(var(--orbit-radius, 175px)) rotate(-160deg) !important;
+  }
+
+  .orbit-node[data-index="4"] {
+    transform: rotate(280deg) translateX(var(--orbit-radius, 175px)) rotate(-280deg) !important;
+  }
+
+  .orbit-system-wrapper.mini .orbit-node[data-index="0"] {
+    transform: rotate(0deg) translateX(var(--orbit-radius, 63px)) rotate(0deg) !important;
+  }
+
+  .orbit-system-wrapper.mini .orbit-node[data-index="1"] {
+    transform: rotate(180deg) translateX(var(--orbit-radius, 63px)) rotate(-180deg) !important;
+  }
+
+  .orbit-system-wrapper.mini .orbit-node[data-index="2"] {
+    transform: rotate(30deg) translateX(var(--orbit-radius, 88px)) rotate(-30deg) !important;
+  }
+
+  .orbit-system-wrapper.mini .orbit-node[data-index="3"] {
+    transform: rotate(150deg) translateX(var(--orbit-radius, 88px)) rotate(-150deg) !important;
+  }
+
+  .orbit-system-wrapper.mini .orbit-node[data-index="4"] {
+    transform: rotate(270deg) translateX(var(--orbit-radius, 88px)) rotate(-270deg) !important;
+  }
 
   /* Pattern 2: Stationary plane at destination with static dashed trail */
   .route-plane {
@@ -2119,10 +2266,12 @@ button, a {
     offset-distance: 100% !important;
     opacity: 1 !important;
   }
+
   .route-arc-dashed {
     animation: none !important;
     stroke-dashoffset: 0 !important;
   }
+
   .route-station.destination .airport-code {
     animation: none !important;
   }
@@ -2133,13 +2282,26 @@ button, a {
     opacity: 0.4 !important;
     transform: scale(1) !important;
   }
+
   .eq-bar {
     animation: none !important;
   }
-  .eq-bar.bar-1 { height: 40% !important; }
-  .eq-bar.bar-2 { height: 80% !important; }
-  .eq-bar.bar-3 { height: 60% !important; }
-  .eq-bar.bar-4 { height: 75% !important; }
+
+  .eq-bar.bar-1 {
+    height: 40% !important;
+  }
+
+  .eq-bar.bar-2 {
+    height: 80% !important;
+  }
+
+  .eq-bar.bar-3 {
+    height: 60% !important;
+  }
+
+  .eq-bar.bar-4 {
+    height: 75% !important;
+  }
 
   /* Pattern 4: Static status badge dot without breathing pulse */
   .status-badge .dot {
@@ -2523,6 +2685,7 @@ button, a {
   from {
     transform: rotate(var(--start-angle, 0deg)) translateX(var(--orbit-radius, 175px)) rotate(calc(-1 * var(--start-angle, 0deg)));
   }
+
   to {
     transform: rotate(calc(var(--start-angle, 0deg) + 360deg)) translateX(var(--orbit-radius, 175px)) rotate(calc(-1 * (var(--start-angle, 0deg) + 360deg)));
   }
@@ -2921,10 +3084,12 @@ button, a {
     padding: 32px 24px;
     gap: 28px;
   }
+
   .about-hero-card .orbit-system-wrapper {
     max-width: 340px;
     height: 340px;
   }
+
   .about-hero-card .orbit-track,
   .about-hero-card .orbit-concentric-ring.outer {
     width: 270px;
@@ -2932,35 +3097,42 @@ button, a {
     margin-top: -135px;
     margin-left: -135px;
   }
+
   .about-hero-card .orbit-concentric-ring.inner {
     width: 190px;
     height: 190px;
   }
+
   .about-hero-card .orbit-center-avatar {
     width: 110px;
     height: 110px;
   }
+
   .about-hero-card .orbit-node[data-index="0"],
   .about-hero-card .orbit-node[data-index="1"] {
     --orbit-radius: 95px !important;
   }
+
   .about-hero-card .orbit-node[data-index="2"],
   .about-hero-card .orbit-node[data-index="3"],
   .about-hero-card .orbit-node[data-index="4"] {
     --orbit-radius: 135px !important;
   }
+
   .about-hero-card .orbit-chip {
     width: 44px;
     height: 44px;
   }
+
   .about-hero-card .orbit-chip .orbit-icon-img-large {
     width: 24px;
     height: 24px;
   }
-  
+
   .capabilities-grid {
     grid-template-columns: 1fr;
   }
+
   .about-contact-banner {
     flex-direction: column;
     align-items: flex-start;
@@ -2973,12 +3145,15 @@ button, a {
     top: 8px;
     margin-bottom: 16px;
   }
+
   .nav-brand-text {
     display: none;
   }
+
   .nav-header-inner {
     padding: 6px 12px;
   }
+
   .about-hero-title {
     font-size: 30px;
   }
@@ -3409,20 +3584,24 @@ button, a {
   .contact-form-card {
     padding: 28px 20px;
   }
+
   .form-grid {
     grid-template-columns: 1fr;
     gap: 14px;
   }
+
   .form-submit-row {
     flex-direction: column-reverse;
     align-items: stretch;
     gap: 14px;
     margin-top: 20px;
   }
+
   .form-submit-btn {
     width: 100%;
     padding: 14px 24px;
   }
+
   .form-privacy-note {
     text-align: center;
     justify-content: center;
@@ -3585,19 +3764,24 @@ button, a {
 
 /* --- 20. RESPONSIVE ADJUSTMENTS (TABLET & MOBILE) --- */
 @media (max-width: 768px) {
+
   .nav-menu,
   .nav-resume-btn {
     display: none !important;
   }
+
   .nav-mobile-toggle {
     display: flex !important;
   }
+
   .contact-layout-grid {
     grid-template-columns: 1fr;
   }
+
   .form-grid {
     grid-template-columns: 1fr;
   }
+
   .contact-hero-card,
   .contact-form-card,
   .contact-details-card,
@@ -3614,6 +3798,7 @@ button, a {
     color: #10141A !important;
     padding: 0 !important;
   }
+
   .site-nav-header,
   .site-footer,
   .nav-theme-btn,
@@ -3625,11 +3810,13 @@ button, a {
   #projectModalBackdrop {
     display: none !important;
   }
+
   .page-container {
     max-width: 100% !important;
     padding: 0 !important;
     margin: 0 !important;
   }
+
   .bento-card {
     border: 1px solid #E2E4E8 !important;
     box-shadow: none !important;
@@ -3638,10 +3825,15 @@ button, a {
     background: #FFFFFF !important;
     color: #10141A !important;
   }
-  .resume-exp-title, .resume-header-title, .resume-exp-company {
+
+  .resume-exp-title,
+  .resume-header-title,
+  .resume-exp-company {
     color: #10141A !important;
   }
-  .resume-exp-desc, .resume-exp-bullets {
+
+  .resume-exp-desc,
+  .resume-exp-bullets {
     color: #4A5568 !important;
   }
 }
@@ -4060,18 +4252,22 @@ button, a {
   .bank-deck-modal-card {
     padding: 30px 20px 24px 20px;
   }
+
   .otp-digit {
     height: 48px;
     font-size: 20px;
   }
+
   .otp-inputs-grid {
     gap: 6px;
   }
 }
+
 @media (max-width: 380px) {
   .split-cards-row {
     grid-template-columns: 1fr !important;
   }
+
   .card-avatar,
   .card-route {
     min-height: 250px !important;

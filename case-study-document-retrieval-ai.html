@@ -1,0 +1,1614 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document Retrieval AI Chatbot — FDF Intranet AI Assistant Case Study | Sarvesh Sawardekar</title>
+
+  <meta name="description"
+    content="Designing conversational access to approved organizational knowledge. A source-evidenced English and Arabic UX case study for the FDF Intranet AI Assistant." />
+  <meta property="og:title" content="Document Retrieval AI Chatbot — FDF Intranet Assistant | Sarvesh Sawardekar" />
+  <meta property="og:description"
+    content="Original sketches, wireframes, and bilingual UI with conceptual AI interaction lifecycle and cited SharePoint document discovery." />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="assets/images/card-fdf.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Document Retrieval AI Chatbot — UX Case Study | Sarvesh Sawardekar" />
+  <meta name="twitter:description"
+    content="Enterprise AI assistant for Family Development Foundation (FDF) with cited source inspection and English/Arabic RTL parity." />
+  <meta name="twitter:image" content="assets/images/card-fdf.jpg" />
+  <link rel="canonical" href="https://uxsarvesh.in/case-study-document-retrieval-ai.html" />
+
+  <!-- Fonts & Stylesheets -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="style.css?v=18" />
+  <link rel="stylesheet" href="css/case-study-fdf.css?v=1" />
+
+  <!-- Vercel Telemetry: Speed Insights & Web Analytics -->
+  <script>
+    window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/speed-insights/script.js" data-sdkn="@vercel/speed-insights" data-sdkv="2.0.0"
+    data-route="/case-study-document-retrieval-ai"></script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
+
+<body class="fdf-case-page">
+
+  <!-- ==================== UNIVERSAL FLOATING TOP BAR ==================== -->
+  <header class="fdf-top-nav-bar" role="banner">
+    <div class="fdf-nav-left">
+      <a href="index.html#work" class="btn-pill"
+        style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-size: 13px; font-weight: 600;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+          stroke-linecap="round">
+          <path d="M19 12H5M12 19l-7-7 7-7" />
+        </svg>
+        <span>Back to Portfolio</span>
+      </a>
+      <span style="font-size: 13px; font-weight: 600; color: var(--fdf-text-tertiary); display: none;"
+        class="desktop-only-meta">
+        Sarvesh Sawardekar / UX Case Study
+      </span>
+    </div>
+
+    <div class="fdf-nav-right">
+      <button id="themeToggleBtn" class="modal-action-btn" aria-label="Toggle theme" style="width: 36px; height: 36px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="5" />
+          <line x1="12" y1="1" x2="12" y2="3" />
+          <line x1="12" y1="21" x2="12" y2="23" />
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+          <line x1="1" y1="12" x2="3" y2="12" />
+          <line x1="21" y1="12" x2="23" y2="12" />
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="fdf-case">
+
+    <!-- ==================== CHAPTER SIDEBAR (RAIL & PANEL) ==================== -->
+    <aside class="case-chapters" id="caseChapters" data-collapsed="false" data-open="false">
+      <!-- 56px Rail -->
+      <div class="chapter-rail">
+        <button id="chapterDesktopToggle" class="chapter-desktop-toggle" aria-label="Toggle chapter navigation"
+          title="Toggle chapter navigation">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+            <path d="M9 3v18"></path>
+            <path d="m16 15-3-3 3-3"></path>
+          </svg>
+        </button>
+        <button id="chapterMobileToggle" class="chapter-mobile-toggle" aria-label="Open chapters" title="Open chapters">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+            <path d="M9 3v18"></path>
+            <path d="m14 9 3 3-3 3"></path>
+          </svg>
+        </button>
+        <span class="chapter-rail-label">Case study</span>
+        <span class="chapter-rail-count" id="activeChapterRailNum">01</span>
+      </div>
+
+      <!-- 204px Expandable Navigation Panel -->
+      <nav class="chapter-panel" id="caseChapterLinks" aria-label="Case study chapters">
+        <div class="chapter-panel-heading">
+          <strong>FDF AI Assistant</strong>
+          <span>Case study / 13 chapters</span>
+        </div>
+
+        <div class="chapter-group">
+          <h2>The brief</h2>
+          <a href="#hero" class="chapter-link active" data-chapter="1"><span
+              class="chapter-number">01</span><span>Overview</span></a>
+          <a href="#context" class="chapter-link" data-chapter="2"><span
+              class="chapter-number">02</span><span>Context</span></a>
+          <a href="#challenge" class="chapter-link" data-chapter="3"><span class="chapter-number">03</span><span>Design
+              challenge</span></a>
+        </div>
+
+        <div class="chapter-group">
+          <h2>Design process</h2>
+          <a href="#evolution" class="chapter-link" data-chapter="4"><span class="chapter-number">04</span><span>Design
+              evolution</span></a>
+          <a href="#ia" class="chapter-link" data-chapter="5"><span
+              class="chapter-number">05</span><span>Architecture</span></a>
+          <a href="#flows" class="chapter-link" data-chapter="6"><span class="chapter-number">06</span><span>User
+              journeys</span></a>
+        </div>
+
+        <div class="chapter-group">
+          <h2>AI experience</h2>
+          <a href="#lifecycle" class="chapter-link" data-chapter="7"><span class="chapter-number">07</span><span>AI
+              lifecycle</span></a>
+          <a href="#governance" class="chapter-link" data-chapter="8"><span
+              class="chapter-number">08</span><span>Knowledge &amp; governance</span></a>
+          <a href="#responses" class="chapter-link" data-chapter="9"><span class="chapter-number">09</span><span>Reply
+              anatomy</span></a>
+          <a href="#feedback" class="chapter-link" data-chapter="10"><span
+              class="chapter-number">10</span><span>Feedback</span></a>
+        </div>
+
+        <div class="chapter-group">
+          <h2>The work</h2>
+          <a href="#languages" class="chapter-link" data-chapter="11"><span
+              class="chapter-number">11</span><span>English &amp; Arabic</span></a>
+          <a href="#system" class="chapter-link" data-chapter="12"><span class="chapter-number">12</span><span>Design
+              system</span></a>
+          <a href="#outcomes" class="chapter-link" data-chapter="13"><span class="chapter-number">13</span><span>Next
+              steps</span></a>
+        </div>
+
+        <div class="chapter-progress">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span id="progressText">01 / 13</span>
+            <span style="font-size: 10px; color: var(--fdf-gold-dark); font-weight: 600;">READING</span>
+          </div>
+          <progress id="caseProgressBar" max="13" value="1"></progress>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- ==================== MAIN CASE CONTENT ==================== -->
+    <div class="case-content">
+
+      <!-- ==================== 01 HERO / OVERVIEW ==================== -->
+      <section id="hero" class="case-hero case-wrap">
+        <span class="case-kicker">01 / Family Development Foundation · UX Case Study</span>
+        <h1>FDF Intranet AI Assistant</h1>
+        <p class="hero-sub">Designing conversational access to approved organizational knowledge.</p>
+        <p class="hero-intro">
+          I designed an internal AI assistant to help Family Development Foundation (FDF) employees discover relevant
+          documents, understand AI-generated answers, and inspect their underlying sources. A new implementation—not a
+          visual redesign of the existing E-Chat service.
+        </p>
+
+        <!-- Hero Evidence Dual Mockups -->
+        <div class="hero-evidence">
+          <figure>
+            <img src="assets/fdf/fdf-final-en-main.png" alt="English AI Assistant welcome screen with suggested queries"
+              fetchpriority="high" />
+          </figure>
+          <figure>
+            <img src="assets/fdf/fdf-final-ar-long-answer.png" alt="Arabic AI answer with expanded source documents"
+              lang="ar" dir="rtl" fetchpriority="high" />
+          </figure>
+        </div>
+
+        <!-- Project Facts Grid -->
+        <dl class="project-facts">
+          <div>
+            <dt>Role</dt>
+            <dd>UI/UX Designer</dd>
+          </div>
+          <div>
+            <dt>Timeline</dt>
+            <dd>2 Months</dd>
+          </div>
+          <div>
+            <dt>Organization</dt>
+            <dd>Family Development Foundation (FDF)</dd>
+          </div>
+          <div>
+            <dt>Platform</dt>
+            <dd>Web-based AI Chatbot</dd>
+          </div>
+          <div>
+            <dt>Languages</dt>
+            <dd>English &amp; Arabic (RTL)</dd>
+          </div>
+          <div>
+            <dt>Team</dt>
+            <dd>Design &amp; Engineering Squad</dd>
+          </div>
+        </dl>
+      </section>
+
+      <!-- ==================== 02 CONTEXT ==================== -->
+      <section id="context" class="case-section case-wrap">
+        <div class="section-heading">
+          <span class="section-number">02</span>
+          <div>
+            <h2>Two different jobs. Two different conversations.</h2>
+            <p>E-Chat provides historical context for service interaction at FDF. The new intranet assistant addresses a
+              different need: discovering and understanding approved organizational documents.</p>
+          </div>
+        </div>
+
+        <div class="prose-grid">
+          <div>
+            <h3>Existing E-Chat / Service information</h3>
+            <p>The source shows numbered service choices, direct question entry and routing to a live representative. It
+              is not a menu-only experience, and it is not an earlier version of the new AI Assistant.</p>
+          </div>
+          <div>
+            <h3>New AI Assistant / Document discovery</h3>
+            <p>The new interface centers on natural-language questions, answers, Key Points and cited documents. Its
+              design makes evidence visible alongside the answer, with source-level Preview and Download actions.</p>
+          </div>
+        </div>
+
+        <div class="evidence-grid phone-pair">
+          <figure>
+            <button type="button" class="exhibit-button" data-img="assets/fdf/fdf-legacy-echat.png"
+              data-title="Historical context · 2023 E-Chat" aria-label="Enlarge Historical context · 2023 E-Chat">
+              <img src="assets/fdf/fdf-legacy-echat.png" alt="Historical context · 2023 E-Chat" loading="lazy" />
+              <span class="expand-mark">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round">
+                  <path d="m15 15 6 6m0-6v6h-6M9 9 3 3m0 6V3h6" />
+                </svg>
+              </span>
+            </button>
+            <figcaption>
+              <h3>Historical context · 2023 E-Chat</h3>
+              <p>Actual visible E-Chat viewport extracted from board A. Service choices and direct entry are preserved.
+              </p>
+            </figcaption>
+          </figure>
+
+          <figure>
+            <button type="button" class="exhibit-button" data-img="assets/fdf/fdf-final-en-results.png"
+              data-title="New implementation · AI Assistant" aria-label="Enlarge New implementation · AI Assistant">
+              <img src="assets/fdf/fdf-final-en-results.png" alt="New implementation · AI Assistant" loading="lazy" />
+              <span class="expand-mark">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round">
+                  <path d="m15 15 6 6m0-6v6h-6M9 9 3 3m0 6V3h6" />
+                </svg>
+              </span>
+            </button>
+            <figcaption>
+              <h3>New implementation · AI Assistant</h3>
+              <p>Actual final answer state. This is a distinct product approach, not a before/after version migration.
+              </p>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- ==================== 03 DESIGN CHALLENGE ==================== -->
+      <section id="challenge" class="case-section case-wrap">
+        <div class="section-heading">
+          <span class="section-number">03</span>
+          <div>
+            <h2>Finding a document is only part of the task.</h2>
+            <p>The design materials describe requirements, not proven research findings. An employee must be able to
+              ask, understand, verify, and take the next available action.</p>
+          </div>
+        </div>
+
+        <div class="editorial-list">
+          <div>
+            <h3>Natural-language discovery</h3>
+            <p>Allow a topic-based question without requiring an exact filename or folder. Suggested queries provide
+              examples of possible requests.</p>
+          </div>
+          <div>
+            <h3>Readable answers</h3>
+            <p>Separate a direct answer from Key Points and expanded detail so a long response remains scannable.</p>
+          </div>
+          <div>
+            <h3>Evidence inspection</h3>
+            <p>Present sources near the response and make document-level metadata, Preview, and Download visible.</p>
+          </div>
+          <div>
+            <h3>Refinement &amp; historical records</h3>
+            <p>Date ranges and document filters appear in wireframes and flows. Final source cards include dates; a
+              final chronological sorting control is not established.</p>
+          </div>
+          <div>
+            <h3>Recovery states</h3>
+            <p>Provide distinct loading, no-result, connection-error, and restricted-access messages, rather than
+              treating all failures as empty results.</p>
+          </div>
+          <div>
+            <h3>Bilingual access</h3>
+            <p>Preserve English and Arabic interface coverage, including native Arabic reading direction and
+              corresponding interaction states.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 04 DESIGN EVOLUTION ==================== -->
+      <section id="evolution" class="case-section case-wrap">
+        <div class="section-heading">
+          <span class="section-number">04</span>
+          <div>
+            <h2>From a sketch sheet to a source-grounded interface.</h2>
+            <p>The supplied evidence supports this stage sequence: original hand-drawn sketches → grayscale wireframes →
+              final UI. It does not establish the research or rationale behind every change.</p>
+          </div>
+        </div>
+
+        <!-- Stage 1 -->
+        <h3 class="stage-title"><span>01</span> One original sketch sheet</h3>
+        <div class="evidence-grid single">
+          <figure>
+            <button type="button" class="exhibit-button" data-img="assets/fdf/fdf-sketch-sheet.png"
+              data-title="Hand-drawn sketches · full landscape sheet"
+              aria-label="Enlarge Hand-drawn sketches · full landscape sheet">
+              <img src="assets/fdf/fdf-sketch-sheet.png" alt="Hand-drawn sketches · full landscape sheet"
+                loading="lazy" />
+              <span class="expand-mark">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round">
+                  <path d="m15 15 6 6m0-6v6h-6M9 9 3 3m0 6V3h6" />
+                </svg>
+              </span>
+            </button>
+            <figcaption>
+              <h3>Hand-drawn sketches · full landscape sheet</h3>
+              <p>Login, assistant home, results, history, document list, preview, and Help &amp; Support appear
+                together. The original sheet is preserved as drawn.</p>
+            </figcaption>
+          </figure>
+        </div>
+
+        <!-- Stage 2 -->
+        <h3 class="stage-title"><span>02</span> Grayscale wireframes</h3>
+        <p class="note">The source section is named "Hi-Fi Wireframes," but its supplied screens are grayscale. These
+          are original design-stage artifacts, not filters applied to the final UI.</p>
+
+        <div class="evidence-grid wireframes">
+          <figure>
+            <button type="button" class="exhibit-button" data-img="assets/fdf/fdf-wireframe-login.png"
+              data-title="Entry / Login wireframe">
+              <img src="assets/fdf/fdf-wireframe-login.png" alt="Entry / Login wireframe" loading="lazy" />
+              <span class="expand-mark"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.2">
+                  <path d="m15 15 6 6m0-6v6h-6M9 9 3 3m0 6V3h6" />
+                </svg></span>
+            </button>
+            <figcaption>
+              <h3>Entry / Login</h3>
+              <p>Entry fields appear at the wireframe stage.</p>
+            </figcaption>
+          </figure>
+
+          <figure>
+            <button type="button" class="exhibit-button" data-img="assets/fdf/fdf-wireframe-home.png"
+              data-title="Suggested-query home wireframe">
+              <img src="assets/fdf/fdf-wireframe-home.png" alt="Suggested-query home wireframe" loading="lazy" />
+              <span class="expand-mark"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.2">
+                  <path d="m15 15 6 6m0-6v6h-6M9 9 3 3m0 6V3h6" />
+                </svg></span>
+            </button>
+            <figcaption>
+              <h3>Suggested-query home</h3>
+              <p>Example requests and quick actions organize the starting screen.</p>
+            </figcaption>
+          </figure>
+
+          <figure>
+            <button type="button" class="exhibit-button" data-img="assets/fdf/fdf-wireframe-results.png"
+              data-title="Search results wireframe">
+              <img src="assets/fdf/fdf-wireframe-results.png" alt="Search results wireframe" loading="lazy" />
+              <span class="expand-mark"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.2">
+                  <path d="m15 15 6 6m0-6v6h-6M9 9 3 3m0 6V3h6" />
+                </svg></span>
+            </button>
+            <figcaption>
+              <h3>Search results</h3>
+              <p>Document cards expose Preview and Download.</p>
+            </figcaption>
+          </figure>
+
+          <figure>
+            <button type="button" class="exhibit-button" data-img="assets/fdf/fdf-wireframe-filters.png"
+              data-title="Extended home / Filters wireframe">
+              <img src="assets/fdf/fdf-wireframe-filters.png" alt="Extended home / Filters wireframe" loading="lazy" />
+              <span class="expand-mark"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.2">
+                  <path d="m15 15 6 6m0-6v6h-6M9 9 3 3m0 6V3h6" />
+                </svg></span>
+            </button>
+            <figcaption>
+              <h3>Extended home / Filters</h3>
+              <p>Category choices and recent searches are visible in this longer frame.</p>
+            </figcaption>
+          </figure>
+
+          <figure>
+            <button type="button" class="exhibit-button" data-img="assets/fdf/fdf-wireframe-history.png"
+              data-title="Search history wireframe">
+              <img src="assets/fdf/fdf-wireframe-history.png" alt="Search history wireframe" loading="lazy" />
+              <span class="expand-mark"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.2">
+                  <path d="m15 15 6 6m0-6v6h-6M9 9 3 3m0 6V3h6" />
+                </svg></span>
+            </button>
+            <figcaption>
+              <h3>Search history</h3>
+              <p>Time-grouped entries support returning to previous requests.</p>
+            </figcaption>
+          </figure>
+
+          <figure>
+            <button type="button" class="exhibit-button" data-img="assets/fdf/fdf-wireframe-documents.png"
+              data-title="Document list wireframe">
+              <img src="assets/fdf/fdf-wireframe-documents.png" alt="Document list wireframe" loading="lazy" />
+              <span class="expand-mark"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.2">
+                  <path d="m15 15 6 6m0-6v6h-6M9 9 3 3m0 6V3h6" />
+                </svg></span>
+            </button>
+            <figcaption>
+              <h3>Document list</h3>
+              <p>Filtering and document-level actions are explored in the wireframe.</p>
+            </figcaption>
+          </figure>
+        </div>
+
+        <!-- Stage 3 -->
+        <h3 class="stage-title"><span>03</span> Final UI / Answer and evidence</h3>
+        <div class="evidence-grid phone-pair">
+          <figure>
+            <button type="button" class="exhibit-button" data-img="assets/fdf/fdf-final-en-long-answer.png"
+              data-title="English · Answer &amp; source documents">
+              <img src="assets/fdf/fdf-final-en-long-answer.png" alt="English · Answer &amp; source documents"
+                loading="lazy" />
+              <span class="expand-mark"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.2">
+                  <path d="m15 15 6 6m0-6v6h-6M9 9 3 3m0 6V3h6" />
+                </svg></span>
+            </button>
+            <figcaption>
+              <h3>English · Answer &amp; source documents</h3>
+              <p>An answer and expandable sources occupy a single conversational surface.</p>
+            </figcaption>
+          </figure>
+
+          <figure>
+            <button type="button" class="exhibit-button" data-img="assets/fdf/fdf-final-ar-results.png"
+              data-title="Arabic · Corresponding answer" lang="ar" dir="rtl">
+              <img src="assets/fdf/fdf-final-ar-results.png" alt="Arabic · Corresponding answer" loading="lazy" />
+              <span class="expand-mark"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.2">
+                  <path d="m15 15 6 6m0-6v6h-6M9 9 3 3m0 6V3h6" />
+                </svg></span>
+            </button>
+            <figcaption>
+              <h3>Arabic · Corresponding answer</h3>
+              <p>Arabic text, alignment and source placement are preserved from the original artwork.</p>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- ==================== 05 ARCHITECTURE ==================== -->
+      <section id="ia" class="case-section case-wrap">
+        <div class="section-heading">
+          <span class="section-number">05</span>
+          <div>
+            <h2>A proposed structure, grounded in visible artifacts.</h2>
+            <p>Reconstructed from available design artifacts; requires validation against the original information
+              architecture.</p>
+          </div>
+        </div>
+
+        <div class="evidence-grid single">
+          <figure>
+            <button type="button" class="exhibit-button" data-img="assets/fdf/fdf-ia-reconstructed.png"
+              data-title="Reconstructed information architecture · Board C">
+              <img src="assets/fdf/fdf-ia-reconstructed.png" alt="Reconstructed information architecture · Board C"
+                loading="lazy" />
+              <span class="expand-mark"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.2">
+                  <path d="m15 15 6 6m0-6v6h-6M9 9 3 3m0 6V3h6" />
+                </svg></span>
+            </button>
+            <figcaption>
+              <h3>Reconstructed information architecture · Board C</h3>
+              <p>All hierarchy connections are proposed. Solid nodes indicate observed screens or content, not confirmed
+                implemented navigation.</p>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="prose-grid" style="margin-top: 28px;">
+          <div>
+            <h3>Discovery at the center</h3>
+            <p>The proposed structure links assistant home, suggested queries, conversation, answers, sources, and
+              document actions. History and settings support continuity and preference management.</p>
+          </div>
+          <div>
+            <h3>Evidence boundaries</h3>
+            <p>Entry/login appears in sketches and wireframes, not supplied final UI. Help &amp; Support is sketch-only.
+              English settings is observed; a final Arabic settings counterpart was not found.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 06 USER JOURNEYS ==================== -->
+      <section id="flows" class="case-section case-wrap">
+        <div class="section-heading">
+          <span class="section-number">06</span>
+          <div>
+            <h2>The path through search, evidence, and recovery.</h2>
+            <p>Editable web diagrams preserve the source flow sequence and branch logic. They document designed
+              journeys, not verified production behavior.</p>
+          </div>
+        </div>
+
+        <!-- Diagram 1 -->
+        <div class="diagram-block">
+          <h3>01 / End-to-end retrieval</h3>
+          <p>Source 2026:34935 · Nine steps in the original sequence. The source labels interpretation as Copilot;
+            actual configuration is unconfirmed.</p>
+          <ol class="diagram-sequence">
+            <li class="diagram-node entry"><span class="node-owner">User / Entry</span><span>Login via SSO</span></li>
+            <li class="diagram-node"><span class="node-owner">System</span><span>Home &amp; Suggestions</span></li>
+            <li class="diagram-node"><span class="node-owner">User</span><span>Enter Query</span></li>
+            <li class="diagram-node"><span class="node-owner">System</span><span>Understand Query</span></li>
+            <li class="diagram-node"><span class="node-owner">System</span><span>Return Results</span></li>
+            <li class="diagram-node"><span class="node-owner">User</span><span>Apply Date Range</span></li>
+            <li class="diagram-node"><span class="node-owner">System</span><span>Filtered Results</span></li>
+            <li class="diagram-node"><span class="node-owner">User</span><span>Preview Document</span></li>
+            <li class="diagram-node success"><span class="node-owner">User</span><span>Download</span></li>
+          </ol>
+        </div>
+
+        <!-- Diagram 2 -->
+        <div class="diagram-block">
+          <h3>02 / Results decision</h3>
+          <p>Source 2026:34953 · YES and NO branches preserved. No automatic retry loop has been added to the original
+            flow.</p>
+          <div class="decision-diagram">
+            <ol class="diagram-sequence">
+              <li class="diagram-node entry"><span class="node-owner">User / Entry</span><span>Login</span></li>
+              <li class="diagram-node"><span class="node-owner">System</span><span>Assistant Home</span></li>
+              <li class="diagram-node"><span class="node-owner">User</span><span>Enter Query</span></li>
+              <li class="diagram-node"><span class="node-owner">System</span><span>Interpret Intent</span></li>
+              <li class="diagram-node"><span class="node-owner">System</span><span>Search Repository</span></li>
+            </ol>
+            <div class="decision-junction">
+              <div class="diagram-node decision" style="max-width: 200px;">
+                <span class="node-owner">Decision</span>Results found?
+              </div>
+            </div>
+            <div class="decision-branches">
+              <div>
+                <h4>YES · Results available</h4>
+                <ol class="diagram-sequence">
+                  <li class="diagram-node"><span class="node-owner">Stage</span><span>Results List</span></li>
+                  <li class="diagram-node"><span class="node-owner">User</span><span>Optional Filters</span></li>
+                  <li class="diagram-node"><span class="node-owner">Stage</span><span>Filtered Results</span></li>
+                  <li class="diagram-node"><span class="node-owner">User</span><span>Preview</span></li>
+                  <li class="diagram-node success"><span class="node-owner">Success</span><span>Download</span></li>
+                </ol>
+              </div>
+              <div>
+                <h4>NO · No matching results</h4>
+                <ol class="diagram-sequence">
+                  <li class="diagram-node fail"><span class="node-owner">System</span><span>Show Suggestions</span></li>
+                  <li class="diagram-node"><span class="node-owner">Action</span><span>Refine Search</span></li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Diagram 3 -->
+        <div class="diagram-block">
+          <h3>03 / Restricted access — reconstructed</h3>
+          <p>Reconstructed for this case study. The document-owner direction is visible in UI.</p>
+          <ol class="diagram-sequence">
+            <li class="diagram-node entry"><span class="node-owner">User</span><span>Search Query</span></li>
+            <li class="diagram-node fail"><span class="node-owner">System</span><span>Restricted Access</span></li>
+            <li class="diagram-node"><span class="node-owner">Design Principle</span><span>Hide Restricted
+                Content</span></li>
+            <li class="diagram-node"><span class="node-owner">User</span><span>Permitted Next Step</span></li>
+            <li class="diagram-node"><span class="node-owner">Observed</span><span>Contact Document Owner</span></li>
+          </ol>
+        </div>
+
+        <p class="note"><strong>Privacy principle:</strong> Do not expose restricted titles, snippets, or confidential
+          content. Only a clear explanation and permitted next actions should be shown.</p>
+      </section>
+
+      <!-- ==================== 07 AI LIFECYCLE ==================== -->
+      <section id="lifecycle" class="case-section case-wrap">
+        <div class="section-heading">
+          <span class="section-number">07</span>
+          <div>
+            <h2>An answer is an interaction, not a single output.</h2>
+            <p>This conceptual UX lifecycle describes how the assistant interaction is intended to work. It does not
+              specify backend models or proprietary retrieval algorithms.</p>
+          </div>
+        </div>
+
+        <div class="diagram-block">
+          <h3>Conceptual AI interaction lifecycle</h3>
+          <p>Conceptual model / not a verified technical architecture</p>
+          <ol class="diagram-sequence">
+            <li class="diagram-node entry"><span class="node-owner">01 · Input</span><span>User Asks</span></li>
+            <li class="diagram-node"><span class="node-owner">02 · Intent</span><span>Query Interpretation</span></li>
+            <li class="diagram-node"><span class="node-owner">03 · Retrieval</span><span>Approved-Source
+                Retrieval</span></li>
+            <li class="diagram-node"><span class="node-owner">04 · Generation</span><span>Answer Generation</span></li>
+            <li class="diagram-node"><span class="node-owner">05 · Grounding</span><span>Source Grounding &amp;
+                Presentation</span></li>
+            <li class="diagram-node success"><span class="node-owner">06 · Interaction</span><span>User Follow-up</span>
+            </li>
+          </ol>
+        </div>
+
+        <div class="editorial-list" style="margin-top: 24px;">
+          <div>
+            <h3>01 / User input</h3>
+            <p>A person asks in natural language or selects a suggested query. The visible text and voice controls are
+              interface evidence.</p>
+          </div>
+          <div>
+            <h3>02 / Query interpretation</h3>
+            <p>The intended system identifies the user's intent and useful search terms. Ambiguous questions offer
+              suggestions.</p>
+          </div>
+          <div>
+            <h3>03 / Knowledge retrieval</h3>
+            <p>Relevant content is sought from approved intranet knowledge sources (SharePoint) within permission
+              capabilities.</p>
+          </div>
+          <div>
+            <h3>04 / Answer generation</h3>
+            <p>The assistant composes a response from available information, maintaining enterprise tone and
+              scannability.</p>
+          </div>
+          <div>
+            <h3>05 / Grounding &amp; evidence</h3>
+            <p>The supplied answer UI exposes Key Points and cited Sources. Users can inspect evidence rather than
+              relying solely on generated text.</p>
+          </div>
+          <div>
+            <h3>06 / User follow-up</h3>
+            <p>The user can refine the question, expand the answer, inspect source documents, or preview/download files.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 08 KNOWLEDGE & GOVERNANCE ==================== -->
+      <section id="governance" class="case-section case-wrap">
+        <div class="section-heading">
+          <span class="section-number">08</span>
+          <div>
+            <h2>How the assistant’s knowledge and responses are managed</h2>
+            <p>A document-oriented interface is not evidence that a model was trained on organizational files. These
+              mechanisms must be distinguished before describing the implementation.</p>
+          </div>
+        </div>
+
+        <div class="editorial-list">
+          <div>
+            <h3>Model training vs fine-tuning</h3>
+            <p>Training changes learned model parameters. The supplied materials do not establish whether FDF used a
+              foundation model, fine-tuning, or retrieval-augmented generation (RAG).</p>
+          </div>
+          <div>
+            <h3>Knowledge preparation &amp; retrieval</h3>
+            <p>Preparing approved documents for lookup is separate from model training. Document selection, indexing,
+              freshness, and removal policies are critical.</p>
+          </div>
+          <div>
+            <h3>Prompt &amp; response configuration</h3>
+            <p>Instructions shape tone, answer structure, uncertainty, and restrictions without changing base weights.
+            </p>
+          </div>
+          <div>
+            <h3>Grounded answer generation</h3>
+            <p>Where supported by implementation, retrieved evidence informs a response with source citations.</p>
+          </div>
+          <div>
+            <h3>Evaluation &amp; QA</h3>
+            <p>Factual accuracy, attribution, bilingual quality, and restricted-content safety require explicit tests.
+            </p>
+          </div>
+          <div>
+            <h3>Governance standards</h3>
+            <p>Auditing compliance, tracking revisions, and enforcing retention rules across organizational documents.
+            </p>
+          </div>
+        </div>
+
+        <h3 class="stage-title"><span>Table</span> Implementation details to confirm</h3>
+        <div class="case-table-wrap">
+          <table class="case-table">
+            <thead>
+              <tr>
+                <th>Open Question</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Existing foundation model, fine-tuning, or RAG architecture?</td>
+                <td>Implementation detail to confirm</td>
+              </tr>
+              <tr>
+                <td>How are approved documents indexed, retrieved, updated, and removed?</td>
+                <td>Implementation detail to confirm</td>
+              </tr>
+              <tr>
+                <td>How are permissions enforced during retrieval, preview, and download?</td>
+                <td>Implementation detail to confirm</td>
+              </tr>
+              <tr>
+                <td>How are citations associated with specific answer claims?</td>
+                <td>Implementation detail to confirm</td>
+              </tr>
+              <tr>
+                <td>Is conversation history retained, and for how long?</td>
+                <td>Implementation detail to confirm</td>
+              </tr>
+              <tr>
+                <td>Is human review or user feedback part of the operating workflow?</td>
+                <td>Implementation detail to confirm</td>
+              </tr>
+              <tr>
+                <td>How are English and Arabic responses evaluated?</td>
+                <td>Implementation detail to confirm</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ==================== 09 REPLY ANATOMY ==================== -->
+      <section id="responses" class="case-section case-wrap">
+        <div class="section-heading">
+          <span class="section-number">09</span>
+          <div>
+            <h2>Designing a reply that can be read—and checked.</h2>
+            <p>The actual answer UI separates explanation, summary, and supporting evidence. Annotations describe
+              visible elements, while response-quality statements are evaluation criteria.</p>
+          </div>
+        </div>
+
+        <div class="response-anatomy">
+          <figure>
+            <button type="button" class="exhibit-button" data-img="assets/fdf/fdf-final-en-results.png"
+              data-title="Response anatomy · English answer">
+              <img src="assets/fdf/fdf-final-en-results.png" alt="Response anatomy · English answer" loading="lazy" />
+              <span class="expand-mark"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.2">
+                  <path d="m15 15 6 6m0-6v6h-6M9 9 3 3m0 6V3h6" />
+                </svg></span>
+            </button>
+            <figcaption>
+              <h3>Response anatomy · English answer</h3>
+              <p>Answer text, Key Points, expansion, action icons, and Sources card.</p>
+            </figcaption>
+          </figure>
+
+          <div class="editorial-list" style="margin-top: 0;">
+            <div>
+              <h3>01 / Direct answer</h3>
+              <p>The opening response addresses the request before the user reaches supporting detail.</p>
+            </div>
+            <div>
+              <h3>02 / Key Points</h3>
+              <p>A concise list supports scanning, preserving important conditions and exceptions.</p>
+            </div>
+            <div>
+              <h3>03 / More detail</h3>
+              <p>Show more / View less controls distinguish concise and expanded response states.</p>
+            </div>
+            <div>
+              <h3>04 / Sources</h3>
+              <p>The Sources card stays associated with the answer, exposing dates, Preview, and Download.</p>
+            </div>
+            <div>
+              <h3>05 / Response actions</h3>
+              <p>Small action icons (copy, thumbs up/down, share) enable immediate feedback.</p>
+            </div>
+            <div>
+              <h3>06 / Follow-up input</h3>
+              <p>The bottom input remains available to refine the query or ask follow-up questions.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="quality-line">
+          <strong>Response-quality criteria:</strong> relevance to query · clarity and scannability · faithfulness to
+          approved evidence · transparent attribution · appropriate uncertainty · safe handling of inaccessible content.
+        </div>
+      </section>
+
+      <!-- ==================== 10 FEEDBACK ==================== -->
+      <section id="feedback" class="case-section case-wrap">
+        <div class="section-heading">
+          <span class="section-number">10</span>
+          <div>
+            <h2>A follow-up is not automatic model training.</h2>
+            <p>Interacting with a response helps the user complete a task. It does not establish that the model learns
+              from each conversation in real time.</p>
+          </div>
+        </div>
+
+        <div class="editorial-list">
+          <div>
+            <h3>Initial query &amp; clarification</h3>
+            <p>The initial question sets the context. Narrowing wording is part of the intended conversational flow.</p>
+          </div>
+          <div>
+            <h3>Refined searches</h3>
+            <p>The wireframes explore document filters; no-result states supply wording suggestions.</p>
+          </div>
+          <div>
+            <h3>Expanded answers &amp; sources</h3>
+            <p>Expansion lets a user inspect detail and evidence with visible Preview and Download actions.</p>
+          </div>
+          <div>
+            <h3>No-result recovery</h3>
+            <p>Suggestion chips provide alternative paths when the query returns no eligible documents.</p>
+          </div>
+          <div>
+            <h3>Service failure &amp; retry</h3>
+            <p>The source error state distinguishes connection failure from zero documents found, providing a Retry
+              action.</p>
+          </div>
+          <div>
+            <h3>Feedback &amp; privacy</h3>
+            <p>Thumbs-up/down controls let users signal response utility, with history and diagnostics preferences.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 11 ENGLISH & ARABIC GALLERY ==================== -->
+      <section id="languages" class="case-section case-wrap">
+        <div class="section-heading">
+          <span class="section-number">11</span>
+          <div>
+            <h2>English and Arabic, preserved as designed.</h2>
+            <p>Nineteen actual final states: ten English and nine Arabic. These are individual source extracts, not
+              translated mockups.</p>
+          </div>
+        </div>
+
+        <!-- Interactive Gallery Component -->
+        <div class="gallery-wrapper">
+          <!-- Language Selector -->
+          <div class="gallery-language" role="group" aria-label="Gallery language selection">
+            <button type="button" class="gallery-lang-btn active" id="langBtnEn" aria-pressed="true">English · 10
+              screens</button>
+            <button type="button" class="gallery-lang-btn" id="langBtnAr" aria-pressed="false">العربية · 9
+              screens</button>
+          </div>
+
+          <!-- State Selection Buttons -->
+          <div class="gallery-controls" id="galleryControls" role="group" aria-label="Interface state selection">
+            <!-- Dynamically populated / scripted buttons -->
+          </div>
+
+          <div class="gallery-counter" id="galleryCounter">01 / 10 · English source</div>
+
+          <div class="gallery-description" id="galleryDesc">
+            <strong>User need:</strong> Start a document search without knowing the exact filename.<br />
+            <strong>Observed decision:</strong> A welcome message, example queries and a bottom question input provide
+            an entry point.<br />
+            <strong>Intended benefit:</strong> Make the initial request easier to formulate.
+          </div>
+
+          <!-- Active Screen Display -->
+          <div class="gallery-stage-display">
+            <figure>
+              <button type="button" class="exhibit-button" id="galleryExhibitBtn"
+                data-img="assets/fdf/fdf-final-en-main.png" data-title="Welcome &amp; suggested queries">
+                <img id="galleryScreenImg" src="assets/fdf/fdf-final-en-main.png"
+                  alt="Active AI Assistant Screen Preview" />
+                <span class="expand-mark"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.2">
+                    <path d="m15 15 6 6m0-6v6h-6M9 9 3 3m0 6V3h6" />
+                  </svg></span>
+              </button>
+              <figcaption id="galleryScreenCaption">
+                <h3 id="galleryCaptionTitle">Welcome &amp; suggested queries — English</h3>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <!-- Date Types Table -->
+        <h3 class="stage-title"><span>Table</span> Historical-document discovery verification</h3>
+        <div class="case-table-wrap">
+          <table class="case-table">
+            <thead>
+              <tr>
+                <th>Date Type</th>
+                <th>Meaning</th>
+                <th>Verification Need</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Created</td>
+                <td>When the file was first authored.</td>
+                <td>Not necessarily when the policy took official effect.</td>
+              </tr>
+              <tr>
+                <td>Modified</td>
+                <td>When the file was last edited.</td>
+                <td>May reflect a minor typographical fix, not a policy shift.</td>
+              </tr>
+              <tr>
+                <td>Uploaded</td>
+                <td>When added to the intranet portal.</td>
+                <td>An archive document may have been uploaded recently.</td>
+              </tr>
+              <tr>
+                <td>Effective</td>
+                <td>When the policy actively applies.</td>
+                <td>Verify through document headers, version tables, and metadata.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ==================== 12 DESIGN SYSTEM ==================== -->
+      <section id="system" class="case-section case-wrap">
+        <div class="section-heading">
+          <span class="section-number">12</span>
+          <div>
+            <h2>A reusable system, with an honest accessibility review.</h2>
+            <p>Original source documentation and source-defined component specimens from board G. Recommendations are
+              separated from source observations; this is not a complete WCAG audit.</p>
+          </div>
+        </div>
+
+        <!-- Design System Sheets -->
+        <div class="evidence-grid system-images">
+          <figure>
+            <button type="button" class="exhibit-button" data-img="assets/fdf/fdf-source-color-styles.png"
+              data-title="Color styles · Original documentation">
+              <img src="assets/fdf/fdf-source-color-styles.png" alt="Color styles · Original documentation"
+                loading="lazy" />
+              <span class="expand-mark"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.2">
+                  <path d="m15 15 6 6m0-6v6h-6M9 9 3 3m0 6V3h6" />
+                </svg></span>
+            </button>
+            <figcaption>
+              <h3>Color styles · Original documentation</h3>
+            </figcaption>
+          </figure>
+
+          <figure>
+            <button type="button" class="exhibit-button" data-img="assets/fdf/fdf-source-typography.png"
+              data-title="Typography · Original documentation">
+              <img src="assets/fdf/fdf-source-typography.png" alt="Typography · Original documentation"
+                loading="lazy" />
+              <span class="expand-mark"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.2">
+                  <path d="m15 15 6 6m0-6v6h-6M9 9 3 3m0 6V3h6" />
+                </svg></span>
+            </button>
+            <figcaption>
+              <h3>Typography · Original documentation</h3>
+            </figcaption>
+          </figure>
+        </div>
+
+        <!-- Token List Swatches -->
+        <div class="token-list">
+          <div class="token-item">
+            <div class="token-swatch" style="background: #B3A16A;"></div>
+            <strong>Primary Gold</strong>
+            <code>--color-primary</code>
+            <span>#B3A16A</span>
+          </div>
+          <div class="token-item">
+            <div class="token-swatch" style="background: #9A8955;"></div>
+            <strong>Gold Dark</strong>
+            <code>--color-primary-dark</code>
+            <span>#9A8955</span>
+          </div>
+          <div class="token-item">
+            <div class="token-swatch" style="background: #2B2116;"></div>
+            <strong>Text Primary</strong>
+            <code>--color-text-primary</code>
+            <span>#2B2116</span>
+          </div>
+          <div class="token-item">
+            <div class="token-swatch" style="background: #6B6357;"></div>
+            <strong>Text Secondary</strong>
+            <code>--color-text-secondary</code>
+            <span>#6B6357</span>
+          </div>
+          <div class="token-item">
+            <div class="token-swatch" style="background: #F5F1E4;"></div>
+            <strong>Surface Warm</strong>
+            <code>--color-surface-warm</code>
+            <span>#F5F1E4</span>
+          </div>
+          <div class="token-item">
+            <div class="token-swatch" style="background: #003C71;"></div>
+            <strong>Dark Navy</strong>
+            <code>--color-navy</code>
+            <span>#003C71</span>
+          </div>
+          <div class="token-item">
+            <div class="token-swatch" style="background: #E0E2E4;"></div>
+            <strong>Border Medium</strong>
+            <code>--color-border-medium</code>
+            <span>#E0E2E4</span>
+          </div>
+          <div class="token-item">
+            <div class="token-swatch" style="background: #E1D9BF;"></div>
+            <strong>Gold Border</strong>
+            <code>--color-border-gold</code>
+            <span>#E1D9BF</span>
+          </div>
+        </div>
+
+        <!-- Components Breakdown -->
+        <h3 class="stage-title"><span>02</span> Component Specimens &amp; States</h3>
+        <div class="evidence-grid wireframes">
+          <figure>
+            <button type="button" class="exhibit-button" data-img="assets/fdf/fdf-component-actions.png"
+              data-title="Buttons, chips, header, input &amp; warning">
+              <img src="assets/fdf/fdf-component-actions.png" alt="Buttons, chips, header, input &amp; warning"
+                loading="lazy" />
+              <span class="expand-mark"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.2">
+                  <path d="m15 15 6 6m0-6v6h-6M9 9 3 3m0 6V3h6" />
+                </svg></span>
+            </button>
+            <figcaption>
+              <h3>Buttons, chips &amp; inputs</h3>
+            </figcaption>
+          </figure>
+
+          <figure>
+            <button type="button" class="exhibit-button" data-img="assets/fdf/fdf-component-sources.png"
+              data-title="Sources / Collapsed &amp; expanded">
+              <img src="assets/fdf/fdf-component-sources.png" alt="Sources / Collapsed &amp; expanded" loading="lazy" />
+              <span class="expand-mark"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.2">
+                  <path d="m15 15 6 6m0-6v6h-6M9 9 3 3m0 6V3h6" />
+                </svg></span>
+            </button>
+            <figcaption>
+              <h3>Sources component</h3>
+            </figcaption>
+          </figure>
+
+          <figure>
+            <button type="button" class="exhibit-button" data-img="assets/fdf/fdf-component-interactions.png"
+              data-title="Switches &amp; icon actions">
+              <img src="assets/fdf/fdf-component-interactions.png" alt="Switches &amp; icon actions" loading="lazy" />
+              <span class="expand-mark"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.2">
+                  <path d="m15 15 6 6m0-6v6h-6M9 9 3 3m0 6V3h6" />
+                </svg></span>
+            </button>
+            <figcaption>
+              <h3>Switches &amp; feedback</h3>
+            </figcaption>
+          </figure>
+        </div>
+
+        <!-- Scoped Contrast Findings -->
+        <h3 class="stage-title"><span>Audit</span> Scoped Contrast Findings</h3>
+        <div class="case-table-wrap">
+          <table class="case-table">
+            <thead>
+              <tr>
+                <th>Solid Color Pair</th>
+                <th>Reported Ratio</th>
+                <th>Recommendation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Primary Gold / White</td>
+                <td>2.55:1</td>
+                <td>Avoid white normal-size text on gold controls.</td>
+              </tr>
+              <tr>
+                <td>Gold Dark / White</td>
+                <td>3.45:1</td>
+                <td>Use dark text or increase weight above 18pt for AA compliance.</td>
+              </tr>
+              <tr>
+                <td>Dark Navy / White</td>
+                <td>11.14:1</td>
+                <td>Exemplary contrast across headline &amp; button pairings.</td>
+              </tr>
+              <tr>
+                <td>Text Primary / Warm Surface</td>
+                <td>11.8:1</td>
+                <td>Comfortable readability across long body paragraphs.</td>
+              </tr>
+              <tr>
+                <td>Muted Text / Warm Surface</td>
+                <td>4.03:1</td>
+                <td>Review fine caption text sizes on warm card surfaces.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ==================== 13 NEXT STEPS & OUTCOMES ==================== -->
+      <section id="outcomes" class="case-section case-wrap" style="border-bottom: none;">
+        <div class="section-heading">
+          <span class="section-number">13</span>
+          <div>
+            <h2>Design evidence is complete. Product outcomes are still open.</h2>
+            <p>The project is in implementation. This case study documents supplied design work, not deployment,
+              adoption, AI accuracy, or measured productivity gains.</p>
+          </div>
+        </div>
+
+        <div class="prose-grid">
+          <div>
+            <h3>Verified design evidence</h3>
+            <p>Original sketch sheet; six grayscale wireframes; ten English and nine Arabic final UI states;
+              source-derived end-to-end and decision flows; explicitly reconstructed IA; documented colors, typography,
+              components, and interaction states.</p>
+          </div>
+          <div>
+            <h3>Limits of the evidence</h3>
+            <p>Team composition, implementation architecture, model configuration, permission enforcement, retention,
+              evaluation, and operating workflow remain unconfirmed. Usability findings and production telemetry are
+              actively tracked.</p>
+          </div>
+        </div>
+
+        <h3 class="stage-title"><span>Framework</span> Proposed Measurement Framework</h3>
+        <div class="case-table-wrap">
+          <table class="case-table">
+            <thead>
+              <tr>
+                <th>Measurement Framework</th>
+                <th>What to Observe</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Time to retrieve</td>
+                <td>Query to correct document retrieval</td>
+                <td>Baseline needed</td>
+              </tr>
+              <tr>
+                <td>First-query success</td>
+                <td>Correct result from the initial question</td>
+                <td>Baseline needed</td>
+              </tr>
+              <tr>
+                <td>No-result rate</td>
+                <td>Queries without eligible relevant results</td>
+                <td>Baseline needed</td>
+              </tr>
+              <tr>
+                <td>Preview-to-download</td>
+                <td>Downloads following document previews</td>
+                <td>Baseline needed</td>
+              </tr>
+              <tr>
+                <td>Weekly active employees</td>
+                <td>Unique employees using the assistant each week</td>
+                <td>Baseline needed</td>
+              </tr>
+              <tr>
+                <td>Answer helpfulness</td>
+                <td>Useful responses assessed through feedback ratings</td>
+                <td>Baseline needed</td>
+              </tr>
+              <tr>
+                <td>Source coverage</td>
+                <td>Answers with valid supporting evidence citations</td>
+                <td>Baseline needed</td>
+              </tr>
+              <tr>
+                <td>Arabic vs English parity</td>
+                <td>Comparable task completion by language interface</td>
+                <td>Baseline needed</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="note" style="margin-top: 36px;">
+          <strong>Reflection:</strong> A useful enterprise AI experience makes knowledge discoverable and evidence
+          inspectable. Historical search, recoverable errors, and native Arabic RTL deserve the same design attention as
+          the first answer. The next step is to validate those intentions against real organizational workflows.
+        </div>
+      </section>
+
+      <!-- ==================== FOOTER ==================== -->
+      <footer class="case-wrap site-footer"
+        style="margin-top: 48px; border-top: 1px solid var(--fdf-border); padding: 40px 0;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+          <div>
+            <strong style="color: var(--fdf-navy); font-size: 15px;">Sarvesh Sawardekar</strong>
+            <p style="font-size: 13px; color: var(--fdf-text-secondary); margin-top: 4px;">Product Designer &amp; UI/UX
+              Designer · Dubai, UAE</p>
+          </div>
+          <div style="display: flex; gap: 16px; align-items: center;">
+            <a href="index.html#work" class="btn-pill" style="font-size: 13px; font-weight: 600;">← Back to
+              Portfolio</a>
+            <a href="#hero" class="btn-pill" style="font-size: 13px;">Back to Top ↑</a>
+          </div>
+        </div>
+        <p class="footer-copy" style="margin-top: 24px;">© 2026 Sarvesh Sawardekar. Family Development Foundation UX
+          Case Study.</p>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- ==================== LIGHTBOX EXHIBIT DIALOG ==================== -->
+  <div id="lightboxModal" class="lightbox-modal" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle">
+    <div class="lightbox-card">
+      <div class="lightbox-header">
+        <h3 id="lightboxTitle">Exhibit View</h3>
+        <button id="lightboxCloseBtn" class="lightbox-close-btn" aria-label="Close enlarged view">✕</button>
+      </div>
+      <div class="lightbox-body">
+        <img id="lightboxImg" src="" alt="Enlarged design artifact" />
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== CONTROLLER SCRIPT ==================== -->
+  <script>
+    // --- GALLERY DATA STORE ---
+    const GALLERY_STATES = [
+      {
+        id: 'main',
+        title: 'Welcome & suggested queries',
+        enSource: '159:2225',
+        arSource: '195:3798',
+        need: 'Start a document search without knowing the exact filename.',
+        decision: 'A welcome message, example queries and a bottom question input provide an entry point.',
+        benefit: 'Make the initial request easier to formulate.'
+      },
+      {
+        id: 'loading',
+        title: 'Search & loading',
+        enSource: '170:4201',
+        arSource: '195:3600',
+        need: 'Understand that a response is in progress.',
+        decision: 'A searching message and skeleton answer communicate activity.',
+        benefit: 'Reduce uncertainty while waiting; timing remains an implementation question.'
+      },
+      {
+        id: 'results',
+        title: 'Answer & key points',
+        enSource: '159:1897',
+        arSource: '195:3644',
+        need: 'Understand the response before opening a document.',
+        decision: 'An answer, concise Key Points and collapsed Sources appear together.',
+        benefit: 'Support scanning and evidence inspection without leaving the conversation.'
+      },
+      {
+        id: 'long-answer',
+        title: 'Long answer & sources',
+        enSource: '170:4618',
+        arSource: '195:3798',
+        need: 'Inspect more detail and the supporting documents.',
+        decision: 'Expansion controls and source cards include document metadata, Preview and Download.',
+        benefit: 'Connect the answer to evidence and an available next action.'
+      },
+      {
+        id: 'no-results',
+        title: 'No-result guidance',
+        enSource: '170:4250',
+        arSource: '195:3700',
+        need: 'Recover when the query finds no relevant source.',
+        decision: 'A clear no-result message offers alternative query chips.',
+        benefit: 'Provide a useful direction instead of presenting unsupported information.'
+      },
+      {
+        id: 'restricted',
+        title: 'Restricted access',
+        enSource: '170:4296',
+        arSource: '195:3750',
+        need: 'Understand why content cannot be opened.',
+        decision: 'The supplied state explains the restriction and directs the user to the document owner.',
+        benefit: 'Offer a permitted next step; permission enforcement must still be verified.'
+      },
+      {
+        id: 'service-error',
+        title: 'Service failure & retry',
+        enSource: '170:4350',
+        arSource: '195:3800',
+        need: 'Distinguish service failure from no matching documents.',
+        decision: 'The interface names the connection problem and presents Retry.',
+        benefit: 'Make recovery explicit without implying that the document does not exist.'
+      },
+      {
+        id: 'menu',
+        title: 'Side menu over home',
+        enSource: '170:4400',
+        arSource: '195:3850',
+        need: 'Access conversation navigation.',
+        decision: 'The menu overlays the assistant home while preserving the underlying context.',
+        benefit: 'Keep navigation associated with the current conversation.'
+      },
+      {
+        id: 'menu-alternate',
+        title: 'History & alternate side menu',
+        enSource: '170:4450',
+        arSource: '195:3900',
+        need: 'Return to earlier conversations or begin a new one.',
+        decision: 'Grouped conversation entries and New Chat are visible in the menu.',
+        benefit: 'Support continuity; actual history retention is unconfirmed.'
+      },
+      {
+        id: 'settings',
+        title: 'Settings · English only',
+        enSource: '170:4500',
+        arSource: 'N/A',
+        need: 'Control language, notifications and privacy preferences.',
+        decision: 'The supplied English screen separates application and voice-input language and includes history and diagnostics controls.',
+        benefit: 'Make preference choices visible; their storage and behavior require confirmation.'
+      }
+    ];
+
+    let currentLang = 'en';
+    let currentStateIdx = 0;
+
+    // Initialize gallery buttons
+    const galleryControls = document.getElementById('galleryControls');
+    const galleryScreenImg = document.getElementById('galleryScreenImg');
+    const galleryExhibitBtn = document.getElementById('galleryExhibitBtn');
+    const galleryCounter = document.getElementById('galleryCounter');
+    const galleryDesc = document.getElementById('galleryDesc');
+    const galleryCaptionTitle = document.getElementById('galleryCaptionTitle');
+    const galleryCaptionSource = document.getElementById('galleryCaptionSource');
+
+    function renderGallery() {
+      if (!galleryControls) return;
+      galleryControls.innerHTML = '';
+
+      const availableStates = (currentLang === 'ar')
+        ? GALLERY_STATES.slice(0, 9)
+        : GALLERY_STATES;
+
+      if (currentStateIdx >= availableStates.length) {
+        currentStateIdx = 0;
+      }
+
+      availableStates.forEach((st, idx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = `gallery-state-btn ${idx === currentStateIdx ? 'active' : ''}`;
+        btn.setAttribute('aria-pressed', idx === currentStateIdx ? 'true' : 'false');
+        btn.textContent = st.title;
+        btn.addEventListener('click', () => {
+          currentStateIdx = idx;
+          updateGalleryDisplay();
+        });
+        galleryControls.appendChild(btn);
+      });
+
+      updateGalleryDisplay();
+    }
+
+    function updateGalleryDisplay() {
+      const state = GALLERY_STATES[currentStateIdx];
+      const isArabic = (currentLang === 'ar');
+      const filename = `assets/fdf/fdf-final-${currentLang}-${state.id}.png`;
+
+      if (galleryScreenImg) {
+        galleryScreenImg.src = filename;
+        galleryScreenImg.alt = `${state.title} (${isArabic ? 'Arabic' : 'English'})`;
+        if (isArabic) {
+          galleryScreenImg.setAttribute('dir', 'rtl');
+          galleryScreenImg.setAttribute('lang', 'ar');
+        } else {
+          galleryScreenImg.removeAttribute('dir');
+          galleryScreenImg.removeAttribute('lang');
+        }
+      }
+
+      if (galleryExhibitBtn) {
+        galleryExhibitBtn.setAttribute('data-img', filename);
+        galleryExhibitBtn.setAttribute('data-title', `${state.title} (${isArabic ? 'Arabic' : 'English'})`);
+      }
+
+      const total = isArabic ? 9 : 10;
+      const numStr = (currentStateIdx + 1).toString().padStart(2, '0');
+      if (galleryCounter) {
+        galleryCounter.textContent = `${numStr} / ${total} · ${isArabic ? 'Arabic source' : 'English source'}`;
+      }
+
+      if (galleryDesc) {
+        galleryDesc.innerHTML = `
+          <strong>User need:</strong> ${state.need}<br/>
+          <strong>Observed decision:</strong> ${state.decision}<br/>
+          <strong>Intended benefit:</strong> ${state.benefit}
+        `;
+      }
+
+      if (galleryCaptionTitle) {
+        galleryCaptionTitle.textContent = `${state.title} — ${isArabic ? 'Arabic' : 'English'}`;
+      }
+
+      if (galleryCaptionSource) {
+        const srcCode = isArabic ? state.arSource : state.enSource;
+        galleryCaptionSource.textContent = `Source ${srcCode} · PDF extract`;
+      }
+
+      // Update active button state
+      const btns = galleryControls.querySelectorAll('.gallery-state-btn');
+      btns.forEach((b, idx) => {
+        b.classList.toggle('active', idx === currentStateIdx);
+        b.setAttribute('aria-pressed', idx === currentStateIdx ? 'true' : 'false');
+      });
+    }
+
+    const langBtnEn = document.getElementById('langBtnEn');
+    const langBtnAr = document.getElementById('langBtnAr');
+
+    if (langBtnEn && langBtnAr) {
+      langBtnEn.addEventListener('click', () => {
+        currentLang = 'en';
+        langBtnEn.classList.add('active');
+        langBtnEn.setAttribute('aria-pressed', 'true');
+        langBtnAr.classList.remove('active');
+        langBtnAr.setAttribute('aria-pressed', 'false');
+        renderGallery();
+      });
+
+      langBtnAr.addEventListener('click', () => {
+        currentLang = 'ar';
+        langBtnAr.classList.add('active');
+        langBtnAr.setAttribute('aria-pressed', 'true');
+        langBtnEn.classList.remove('active');
+        langBtnEn.setAttribute('aria-pressed', 'false');
+        renderGallery();
+      });
+    }
+
+    renderGallery();
+
+    // --- CHAPTER RAIL TOGGLE & MOBILE DRAWER ---
+    const caseChapters = document.getElementById('caseChapters');
+    const chapterDesktopToggle = document.getElementById('chapterDesktopToggle');
+    const chapterMobileToggle = document.getElementById('chapterMobileToggle');
+
+    if (chapterDesktopToggle && caseChapters) {
+      chapterDesktopToggle.addEventListener('click', () => {
+        const isCollapsed = caseChapters.getAttribute('data-collapsed') === 'true';
+        caseChapters.setAttribute('data-collapsed', isCollapsed ? 'false' : 'true');
+      });
+    }
+
+    if (chapterMobileToggle && caseChapters) {
+      chapterMobileToggle.addEventListener('click', () => {
+        const isOpen = caseChapters.getAttribute('data-open') === 'true';
+        caseChapters.setAttribute('data-open', isOpen ? 'false' : 'true');
+      });
+    }
+
+    // Close drawer when clicking chapter link
+    document.querySelectorAll('.chapter-link').forEach(link => {
+      link.addEventListener('click', () => {
+        if (caseChapters && window.innerWidth <= 1100) {
+          caseChapters.setAttribute('data-open', 'false');
+        }
+      });
+    });
+
+    // --- SCROLLSPY & PROGRESS BAR ---
+    const chapters = document.querySelectorAll('.case-section, .case-hero');
+    const navLinks = document.querySelectorAll('.chapter-link');
+    const activeRailNum = document.getElementById('activeChapterRailNum');
+    const progressText = document.getElementById('progressText');
+    const progressBar = document.getElementById('caseProgressBar');
+
+    function updateActiveChapter() {
+      let currentId = 'hero';
+      let currentIdx = 1;
+      const scrollPos = window.scrollY + 120;
+
+      chapters.forEach((sec, idx) => {
+        const top = sec.offsetTop;
+        const height = sec.offsetHeight;
+        if (scrollPos >= top && scrollPos < top + height) {
+          currentId = sec.getAttribute('id');
+          currentIdx = idx + 1;
+        }
+      });
+
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href').replace('#', '');
+        const isActive = (href === currentId);
+        link.classList.toggle('active', isActive);
+        if (isActive) {
+          link.setAttribute('aria-current', 'location');
+        } else {
+          link.removeAttribute('aria-current');
+        }
+      });
+
+      const numStr = currentIdx.toString().padStart(2, '0');
+      if (activeRailNum) activeRailNum.textContent = numStr;
+      if (progressText) progressText.textContent = `${numStr} / 13`;
+      if (progressBar) progressBar.value = currentIdx;
+    }
+
+    window.addEventListener('scroll', updateActiveChapter, { passive: true });
+    updateActiveChapter();
+
+    // --- EXHIBIT LIGHTBOX DIALOG ---
+    const lightboxModal = document.getElementById('lightboxModal');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxTitle = document.getElementById('lightboxTitle');
+    const lightboxCloseBtn = document.getElementById('lightboxCloseBtn');
+
+    function openLightbox(src, title) {
+      if (!lightboxModal || !lightboxImg) return;
+      lightboxImg.src = src;
+      lightboxImg.alt = title || 'Design Artifact';
+      if (lightboxTitle) lightboxTitle.textContent = title || 'Exhibit View';
+      lightboxModal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      if (!lightboxModal) return;
+      lightboxModal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.exhibit-button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const src = btn.getAttribute('data-img') || btn.querySelector('img')?.src;
+        const title = btn.getAttribute('data-title') || btn.querySelector('img')?.alt;
+        if (src) openLightbox(src, title);
+      });
+    });
+
+    if (lightboxCloseBtn) lightboxCloseBtn.addEventListener('click', closeLightbox);
+    if (lightboxModal) {
+      lightboxModal.addEventListener('click', (e) => {
+        if (e.target === lightboxModal) closeLightbox();
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightboxModal && lightboxModal.classList.contains('open')) {
+        closeLightbox();
+      }
+    });
+
+    // --- THEME SYNC ENGINE ---
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    function applySavedTheme() {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    }
+
+    if (themeToggleBtn) {
+      themeToggleBtn.addEventListener('click', () => {
+        const cur = document.documentElement.getAttribute('data-theme') || 'light';
+        const next = (cur === 'dark') ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+      });
+    }
+
+    applySavedTheme();
+  </script>
+</body>
+
+</html>

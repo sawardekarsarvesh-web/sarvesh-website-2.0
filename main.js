@@ -301,6 +301,10 @@ if (modalThemeSwitch) {
 
 // --- 5. CASE STUDY MODAL ENGINE ---
 function openCaseStudy(indexOrId) {
+  if (indexOrId === 'document-retrieval-ai' || indexOrId === 'fdf' || indexOrId === 'fdf-ai' || indexOrId === 'fdf-ai-assistant' || indexOrId === 'ai-chatbot') {
+    window.location.href = 'case-study-document-retrieval-ai.html';
+    return;
+  }
   if (!modalBackdrop) return;
   let idx = 0;
   if (typeof indexOrId === 'number') {
@@ -432,6 +436,10 @@ document.querySelectorAll('.project-card[data-project-id]').forEach(card => {
 // URL hash router on page load
 window.addEventListener('load', () => {
   const hash = window.location.hash.replace('#', '');
+  if (hash === 'document-retrieval-ai' || hash === 'fdf' || hash === 'fdf-ai' || hash === 'fdf-ai-assistant' || hash === 'ai-chatbot') {
+    window.location.href = 'case-study-document-retrieval-ai.html';
+    return;
+  }
   if (hash && modalBackdrop) {
     const match = CASE_STUDIES.find(p => p.id === hash);
     if (match) openCaseStudy(match.id);
