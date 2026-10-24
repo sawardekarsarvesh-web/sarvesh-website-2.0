@@ -449,8 +449,47 @@
           </div>
         </div>
 
-        <!-- Live Analog & Digital Dubai Clock Card (Placed Below Architecture) -->
-        <div class="bento-card card-dubai-clock stagger-in reveal-on-scroll" style="--stagger-idx: 5;">
+        <!-- Career Timeline / Experience Ruler Card (Strictly Locked to 8 Years) -->
+        <div class="bento-card card-career-ruler stagger-in reveal-on-scroll" style="--stagger-idx: 5;">
+          <div class="ruler-viewport">
+            <div class="ruler-track" id="rulerTrack">
+              <div class="ruler-tick" data-year="0"><span class="tick-num">0</span><span class="tick-line"></span></div>
+              <div class="ruler-tick intermediate"><span class="tick-line"></span></div>
+              <div class="ruler-tick" data-year="1"><span class="tick-num">1</span><span class="tick-line"></span></div>
+              <div class="ruler-tick intermediate"><span class="tick-line"></span></div>
+              <div class="ruler-tick" data-year="2"><span class="tick-num">2</span><span class="tick-line"></span></div>
+              <div class="ruler-tick intermediate"><span class="tick-line"></span></div>
+              <div class="ruler-tick" data-year="3"><span class="tick-num">3</span><span class="tick-line"></span></div>
+              <div class="ruler-tick intermediate"><span class="tick-line"></span></div>
+              <div class="ruler-tick" data-year="4"><span class="tick-num">4</span><span class="tick-line"></span></div>
+              <div class="ruler-tick intermediate"><span class="tick-line"></span></div>
+              <div class="ruler-tick" data-year="5"><span class="tick-num">5</span><span class="tick-line"></span></div>
+              <div class="ruler-tick intermediate"><span class="tick-line"></span></div>
+              <div class="ruler-tick" data-year="6"><span class="tick-num">6</span><span class="tick-line"></span></div>
+              <div class="ruler-tick intermediate"><span class="tick-line"></span></div>
+              <div class="ruler-tick" data-year="7"><span class="tick-num">7</span><span class="tick-line"></span></div>
+              <div class="ruler-tick intermediate"><span class="tick-line"></span></div>
+              <div class="ruler-tick highlighted" data-year="8" style="position: relative;">
+                <span class="tick-num">8</span>
+                <span class="tick-line"></span>
+                <span class="ruler-indicator-arrow"></span>
+              </div>
+            </div>
+          </div>
+          <div class="career-footer-row">
+            <div class="career-role-info">
+              <span id="rulerCompany" class="career-company">Birbal AI UAE</span>
+              <span id="rulerTitle" class="career-title">UI/UX Designer (TAMM Ecosystem)</span>
+            </div>
+            <div class="career-metric-badge">
+              <div id="rulerYearsVal" class="years">8+<span>yr</span></div>
+              <div id="rulerYearTag" class="year-label">2026</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Analog & Digital Dubai Clock Card (Placed Below Career Ruler) -->
+        <div class="bento-card card-dubai-clock stagger-in reveal-on-scroll" style="--stagger-idx: 6;">
           <div class="clock-analog-wrapper">
             <svg class="clock-analog-svg" viewBox="0 0 100 100">
               <!-- Dial face -->
@@ -525,44 +564,29 @@
           </div>
         </div>
 
-        <!-- Career Timeline / Experience Ruler Card (Strictly Locked to 8 Years) -->
-        <div class="bento-card card-career-ruler stagger-in reveal-on-scroll" style="--stagger-idx: 3;">
-          <div class="ruler-viewport">
-            <div class="ruler-track" id="rulerTrack">
-              <div class="ruler-tick" data-year="0"><span class="tick-num">0</span><span class="tick-line"></span></div>
-              <div class="ruler-tick intermediate"><span class="tick-line"></span></div>
-              <div class="ruler-tick" data-year="1"><span class="tick-num">1</span><span class="tick-line"></span></div>
-              <div class="ruler-tick intermediate"><span class="tick-line"></span></div>
-              <div class="ruler-tick" data-year="2"><span class="tick-num">2</span><span class="tick-line"></span></div>
-              <div class="ruler-tick intermediate"><span class="tick-line"></span></div>
-              <div class="ruler-tick" data-year="3"><span class="tick-num">3</span><span class="tick-line"></span></div>
-              <div class="ruler-tick intermediate"><span class="tick-line"></span></div>
-              <div class="ruler-tick" data-year="4"><span class="tick-num">4</span><span class="tick-line"></span></div>
-              <div class="ruler-tick intermediate"><span class="tick-line"></span></div>
-              <div class="ruler-tick" data-year="5"><span class="tick-num">5</span><span class="tick-line"></span></div>
-              <div class="ruler-tick intermediate"><span class="tick-line"></span></div>
-              <div class="ruler-tick" data-year="6"><span class="tick-num">6</span><span class="tick-line"></span></div>
-              <div class="ruler-tick intermediate"><span class="tick-line"></span></div>
-              <div class="ruler-tick" data-year="7"><span class="tick-num">7</span><span class="tick-line"></span></div>
-              <div class="ruler-tick intermediate"><span class="tick-line"></span></div>
-              <div class="ruler-tick highlighted" data-year="8" style="position: relative;">
-                <span class="tick-num">8</span>
-                <span class="tick-line"></span>
-                <span class="ruler-indicator-arrow"></span>
-              </div>
+        <!-- Project Card: Impactguru Donor App -->
+        <a href="case-study-impactguru.html"
+          class="bento-card project-card card-impactguru stagger-in reveal-on-scroll"
+          style="--stagger-idx: 2; text-decoration: none; color: inherit;"
+          aria-label="View Impactguru Donor App case study">
+          <div class="status-badge shipped"
+            style="background: rgba(14, 165, 126, 0.12); color: #0EA57E; border-color: rgba(14, 165, 126, 0.3);">
+            <span class="dot" style="background: #0EA57E;"></span> Shipped App
+          </div>
+          <div class="card-media-wrapper">
+            <img src="assets/impactguru/conclusion-phones.jpg" alt="Impactguru Donor App Preview" loading="lazy" />
+          </div>
+          <div class="card-info">
+            <span class="card-category-tag">Crowdfunding · Social Impact · Fintech</span>
+            <h2 class="card-title">Impactguru Donor App</h2>
+            <p class="card-desc">India's leading medical crowdfunding platform with seamless donation flows, 80G tax
+              benefits, and gamified GEM rewards.</p>
+            <div class="card-footer-action">
+              <span>Explore case study</span>
+              <span class="action-arrow">↗</span>
             </div>
           </div>
-          <div class="career-footer-row">
-            <div class="career-role-info">
-              <span id="rulerCompany" class="career-company">Birbal AI UAE</span>
-              <span id="rulerTitle" class="career-title">UI/UX Designer (TAMM Ecosystem)</span>
-            </div>
-            <div class="career-metric-badge">
-              <div id="rulerYearsVal" class="years">8+<span>yr</span></div>
-              <div id="rulerYearTag" class="year-label">2026</div>
-            </div>
-          </div>
-        </div>
+        </a>
 
         <!-- Project Card 4: HalaPark 2.0 & Design System -->
         <div class="bento-card project-card card-halapark stagger-in reveal-on-scroll" style="--stagger-idx: 4;"

@@ -434,6 +434,41 @@ a {
   animation: none !important;
 }
 
+/* Card 7: Impactguru Donor App */
+.card-impactguru {
+  min-height: 360px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.card-impactguru .card-media-wrapper {
+  height: 240px;
+  background: radial-gradient(circle at 50% 30%, rgba(14, 165, 126, 0.12), transparent 75%), #f4fbf8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .card-impactguru .card-media-wrapper {
+  background: radial-gradient(circle at 50% 30%, rgba(14, 165, 126, 0.15), transparent 75%), #091612;
+}
+
+.card-impactguru .card-media-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-impactguru:hover .card-media-wrapper img {
+  transform: scale(1.04);
+}
+
 /* Live Radar Beacon Micro-Demo (Pattern 3: HalaPark 2.0) */
 .map-radar-beacon {
   position: absolute;
@@ -1824,28 +1859,36 @@ a {
     order: 5 !important;
   }
 
-  .card-aura-gold {
+  .card-impactguru {
     order: 6 !important;
   }
 
-  .card-halapark {
+  .card-aura-gold {
     order: 7 !important;
   }
 
-  .card-invusprop {
+  .card-halapark {
     order: 8 !important;
   }
 
-  .card-architecture-showcase {
+  .card-invusprop {
     order: 9 !important;
   }
 
-  .card-dubai-clock {
+  .card-architecture-showcase {
     order: 10 !important;
   }
 
-  .card-theme-toggle {
+  .card-career-ruler {
     order: 11 !important;
+  }
+
+  .card-dubai-clock {
+    order: 12 !important;
+  }
+
+  .card-theme-toggle {
+    order: 13 !important;
   }
 
   .card-fdf {
@@ -1857,6 +1900,7 @@ a {
   .card-halapark,
   .card-icici,
   .card-intelli,
+  .card-impactguru,
   .card-fdf {
     min-height: auto;
   }
@@ -1869,7 +1913,8 @@ a {
 
   .card-halapark .card-media-wrapper,
   .card-icici .card-media-wrapper,
-  .card-intelli .card-media-wrapper {
+  .card-intelli .card-media-wrapper,
+  .card-impactguru .card-media-wrapper {
     height: 240px;
   }
 
@@ -2124,7 +2169,8 @@ a {
 
   .card-halapark .card-media-wrapper,
   .card-icici .card-media-wrapper,
-  .card-intelli .card-media-wrapper {
+  .card-intelli .card-media-wrapper,
+  .card-impactguru .card-media-wrapper {
     height: 220px;
   }
 

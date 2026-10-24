@@ -305,6 +305,10 @@ function openCaseStudy(indexOrId) {
     window.location.href = 'case-study-document-retrieval-ai.html';
     return;
   }
+  if (indexOrId === 'impactguru' || indexOrId === 'impactguru-donor-app' || indexOrId === 'donor-app') {
+    window.location.href = 'case-study-impactguru.html';
+    return;
+  }
   if (!modalBackdrop) return;
   let idx = 0;
   if (typeof indexOrId === 'number') {
@@ -438,6 +442,10 @@ window.addEventListener('load', () => {
   const hash = window.location.hash.replace('#', '');
   if (hash === 'document-retrieval-ai' || hash === 'fdf' || hash === 'fdf-ai' || hash === 'fdf-ai-assistant' || hash === 'ai-chatbot') {
     window.location.href = 'case-study-document-retrieval-ai.html';
+    return;
+  }
+  if (hash === 'impactguru' || hash === 'impactguru-donor-app' || hash === 'donor-app') {
+    window.location.href = 'case-study-impactguru.html';
     return;
   }
   if (hash && modalBackdrop) {
