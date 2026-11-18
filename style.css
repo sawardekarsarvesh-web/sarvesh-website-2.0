@@ -708,40 +708,76 @@ a {
 
 /* --- 6. CENTER COLUMN HERO & WIDGETS --- */
 
-/* Split Row: Avatar + Route Cards */
-/* Split Row: Avatar + Route Cards */
-/* Split Row: Avatar + (Route + Dark Mode Stack) */
-.split-cards-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  align-items: stretch;
-}
-
-/* Right Stack Column: Route Card on Top, Dark Mode Card on Bottom */
-.split-cards-col {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  height: 100%;
-}
-
-/* Avatar Card */
+/* Horizontal About Me Bento Showcase Card */
 .card-avatar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  min-height: 224px;
+  padding: 24px 26px;
+  position: relative;
+  overflow: hidden !important;
+  touch-action: manipulation;
+}
+
+.avatar-card-content {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 240px;
-  padding: 24px 22px;
-  position: relative;
-  overflow: hidden !important;
+  align-items: flex-start;
+  align-self: stretch;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
 }
 
 .card-avatar .label {
   font-size: 16px;
   font-weight: 700;
   color: var(--text-primary);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
+}
+
+.avatar-location-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--green-status-bg);
+  color: #059669;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .avatar-location-pill {
+  background: rgba(16, 185, 129, 0.14);
+  color: #34D399;
+}
+
+.avatar-location-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.avatar-card-summary {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  margin: auto 0;
+  max-width: 29ch;
+}
+
+.card-avatar .orbit-system-wrapper.mini {
+  flex-shrink: 0;
+  margin: 0;
 }
 
 /* Relocation Card (Apple-style Flight Trajectory Indicator) */
@@ -1163,46 +1199,62 @@ a {
 
 /* --- 7. RIGHT COLUMN WIDGETS --- */
 
-/* Theme Toggle Card */
+/* Theme Toggle Utility Card */
 .card-theme-toggle {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 18px;
+  gap: 16px;
+  padding: 12px 24px;
   height: 64px;
   min-height: 64px;
   flex-shrink: 0;
 }
 
+.theme-toggle-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  min-width: 0;
+}
+
 .theme-toggle-label {
   font-size: 15px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-weight: 700;
+  letter-spacing: -0.015em;
   color: var(--text-primary);
+}
+
+.theme-toggle-hint {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--text-secondary);
 }
 
 .theme-segmented-switch {
   display: inline-flex;
   align-items: center;
-  padding: 3px;
-  background: var(--glass-bg);
+  padding: 4px;
+  background: var(--bg-subtle);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   border-radius: var(--radius-pill);
-  border: 1px solid var(--glass-border);
+  border: 1px solid var(--border-subtle);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
   position: relative;
-  gap: 2px;
+  gap: 4px;
+  flex-shrink: 0;
 }
 
 .theme-switch-btn {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-tertiary);
+  color: var(--text-secondary);
+  touch-action: manipulation;
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease, color 0.2s ease;
   position: relative;
   z-index: 2;
@@ -1226,6 +1278,12 @@ a {
   background: var(--surface);
   color: var(--text-primary);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="dark"] .theme-switch-btn.active {
+  background: var(--surface-elevated);
+  color: var(--text-primary);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 /* Career Timeline / Ruler Card */
@@ -1410,6 +1468,7 @@ a {
   font-weight: 700;
   letter-spacing: -0.02em;
   font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
   color: var(--text-primary);
   margin-top: 4px;
 }
@@ -1840,26 +1899,23 @@ a {
     order: 1 !important;
   }
 
-  .split-cards-row {
+  .card-avatar {
     order: 2 !important;
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 16px !important;
   }
 
-  .card-career-ruler {
+  .card-fdf {
     order: 3 !important;
   }
 
-  .card-bank-deck-offering {
+  .card-impactguru {
     order: 4 !important;
   }
 
-  .card-icici {
+  .card-bank-deck-offering {
     order: 5 !important;
   }
 
-  .card-impactguru {
+  .card-icici {
     order: 6 !important;
   }
 
@@ -1889,10 +1945,6 @@ a {
 
   .card-theme-toggle {
     order: 13 !important;
-  }
-
-  .card-fdf {
-    order: 3 !important;
   }
 
   .card-aura-gold,
@@ -1999,51 +2051,41 @@ a {
     transition: transform 0.12s ease !important;
   }
 
-  /* 2. TWIN APPLE COMPANION WIDGETS (ABOUT ME + BOM->DXB) */
-  .split-cards-row {
-    order: 2 !important;
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 12px !important;
-    width: 100% !important;
-  }
-
+  /* 2. FULL-WIDTH ABOUT ME IDENTITY CARD */
   .card-avatar {
-    min-height: 220px !important;
+    order: 2 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 16px !important;
+    min-height: 184px !important;
     height: auto !important;
-    padding: 18px 16px !important;
+    padding: 20px !important;
     border-radius: 24px !important;
     user-select: none !important;
     -webkit-tap-highlight-color: transparent !important;
   }
 
-  .split-cards-col {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 8px !important;
-    height: 100% !important;
+  .avatar-card-summary {
+    font-size: 13.5px !important;
+    line-height: 1.5 !important;
   }
 
-  .split-cards-col .card-route {
-    flex: 1 !important;
-    min-height: 148px !important;
-    height: auto !important;
-    padding: 14px 14px 10px 14px !important;
-    border-radius: 20px !important;
-    user-select: none !important;
-    -webkit-tap-highlight-color: transparent !important;
+  .card-theme-toggle {
+    height: 60px !important;
+    min-height: 60px !important;
+    padding: 10px 18px !important;
+    border-radius: 22px !important;
   }
 
-  .split-cards-col .card-theme-toggle {
-    height: 52px !important;
-    min-height: 52px !important;
-    padding: 6px 14px !important;
-    border-radius: 16px !important;
+  .theme-switch-btn {
+    width: 40px !important;
+    height: 40px !important;
   }
 
-  .card-avatar:active,
-  .card-route:active {
-    transform: scale(0.96) !important;
+  .card-avatar:active {
+    transform: scale(0.985) !important;
     transition: transform 0.15s cubic-bezier(0.2, 0.9, 0.3, 1) !important;
   }
 
@@ -2052,7 +2094,8 @@ a {
     width: 148px !important;
     height: 148px !important;
     max-width: 148px !important;
-    margin: 4px auto !important;
+    margin: 0 !important;
+    flex-shrink: 0 !important;
   }
 
   .orbit-system-wrapper.mini .orbit-center-avatar {
@@ -3052,13 +3095,15 @@ a {
   cursor: pointer;
   text-decoration: none;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
   justify-content: space-between;
-  min-height: 290px;
-  padding: 24px 22px;
+  gap: 20px;
+  min-height: 224px;
+  padding: 24px 26px;
   height: auto;
   overflow: hidden !important;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
 }
 
 .card-avatar:hover {
@@ -3070,12 +3115,13 @@ a {
 .avatar-top-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 10px;
 }
 
 .avatar-link-arrow {
-  font-size: 16px;
-  color: var(--text-tertiary);
+  font-size: 15px;
+  color: currentColor;
   transition: transform 0.2s ease, color 0.2s ease;
 }
 
@@ -3091,12 +3137,14 @@ a {
 }
 
 .avatar-hover-teaser {
-  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
   font-weight: 600;
   color: var(--accent);
-  text-align: center;
-  letter-spacing: 0.02em;
-  opacity: 0.9;
+  letter-spacing: 0.01em;
+  opacity: 0.95;
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
@@ -4309,13 +4357,24 @@ a {
   }
 }
 
-@media (max-width: 380px) {
-  .split-cards-row {
-    grid-template-columns: 1fr !important;
+@media (max-width: 460px) {
+  .card-avatar {
+    flex-direction: column-reverse !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    gap: 16px !important;
+    padding: 20px !important;
   }
 
-  .card-avatar,
-  .card-route {
-    min-height: 250px !important;
+  .card-avatar .orbit-system-wrapper.mini {
+    margin: 0 auto !important;
+  }
+
+  .avatar-card-summary {
+    max-width: none !important;
+  }
+
+  .theme-toggle-hint {
+    display: none;
   }
 }
