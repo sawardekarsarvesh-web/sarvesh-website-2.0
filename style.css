@@ -974,15 +974,66 @@ a {
   transform: none !important;
 }
 
-.hero-brandmark {
-  width: 44px;
-  height: 32px;
-  color: var(--text-primary);
+.hero-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
 }
 
-.hero-brandmark svg {
+.hero-brandmark {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  color: var(--text-primary);
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-brandmark:hover {
+  transform: scale(1.06);
+}
+
+.hero-brandmark .monogram-img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
+  object-fit: contain;
+  transition: opacity 0.22s ease;
+  user-select: none;
+  pointer-events: none;
+}
+
+.hero-brandmark .monogram-light {
+  opacity: 1;
+}
+
+.hero-brandmark .monogram-dark,
+.hero-brandmark .monogram-accent {
+  opacity: 0;
+}
+
+[data-theme="dark"] .hero-brandmark .monogram-light {
+  opacity: 0;
+}
+
+[data-theme="dark"] .hero-brandmark .monogram-dark {
+  opacity: 1;
+}
+
+.hero-brandmark:hover .monogram-light,
+.hero-brandmark:hover .monogram-dark {
+  opacity: 0;
+}
+
+.hero-brandmark:hover .monogram-accent {
+  opacity: 1;
 }
 
 .hero-headline {
@@ -1199,42 +1250,32 @@ a {
 
 /* --- 7. RIGHT COLUMN WIDGETS --- */
 
-/* Theme Toggle Utility Card */
+/* Compact Inline Dark Mode Pill */
 .card-theme-toggle {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding: 12px 24px;
-  height: 64px;
-  min-height: 64px;
+  gap: 14px;
+  padding: 8px 10px 8px 20px;
+  height: auto;
+  min-height: 52px;
+  width: fit-content;
+  border-radius: var(--radius-pill);
   flex-shrink: 0;
 }
 
-.theme-toggle-meta {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  min-width: 0;
-}
-
 .theme-toggle-label {
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: -0.015em;
+  font-size: 14.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
   color: var(--text-primary);
-}
-
-.theme-toggle-hint {
-  font-size: 12.5px;
-  font-weight: 500;
-  color: var(--text-secondary);
+  white-space: nowrap;
 }
 
 .theme-segmented-switch {
   display: inline-flex;
   align-items: center;
-  padding: 4px;
+  padding: 3px;
   background: var(--bg-subtle);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
@@ -1242,13 +1283,13 @@ a {
   border: 1px solid var(--border-subtle);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
   position: relative;
-  gap: 4px;
+  gap: 2px;
   flex-shrink: 0;
 }
 
 .theme-switch-btn {
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1943,10 +1984,6 @@ a {
     order: 12 !important;
   }
 
-  .card-theme-toggle {
-    order: 13 !important;
-  }
-
   .card-aura-gold,
   .card-invusprop,
   .card-halapark,
@@ -1992,9 +2029,9 @@ a {
   }
 
   .hero-brandmark {
-    width: 38px !important;
-    height: 28px !important;
-    margin-bottom: 2px !important;
+    width: 36px !important;
+    height: 36px !important;
+    margin-bottom: 0 !important;
   }
 
   .hero-headline {
@@ -2073,15 +2110,19 @@ a {
   }
 
   .card-theme-toggle {
-    height: 60px !important;
-    min-height: 60px !important;
-    padding: 10px 18px !important;
-    border-radius: 22px !important;
+    min-height: 46px !important;
+    padding: 6px 8px 6px 16px !important;
+    gap: 10px !important;
+    border-radius: var(--radius-pill) !important;
+  }
+
+  .theme-toggle-label {
+    font-size: 13.5px !important;
   }
 
   .theme-switch-btn {
-    width: 40px !important;
-    height: 40px !important;
+    width: 34px !important;
+    height: 34px !important;
   }
 
   .card-avatar:active {
@@ -4372,9 +4413,5 @@ a {
 
   .avatar-card-summary {
     max-width: none !important;
-  }
-
-  .theme-toggle-hint {
-    display: none;
   }
 }
